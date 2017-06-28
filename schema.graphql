@@ -88,6 +88,22 @@ bivariate_continuous
     ('correlation', 'count of non NA data')
   ]
 
+bivariate_scagnostics
+  name = "scagnostics"
+  description = "bivariate metrics for continuous data"
+  fields = [('x', 'CONTINUOUS'), ('y', 'CONTINUOUS')]
+  cog_types = [
+    ('Outlying, 'proportion of the total edge length due to extremely long edges connected to points of single degree')
+    ('Skewed', 'distribution of edge lengths of a minimum spanning tree gives us information about the relative density of points in a scattered configuration')
+    ('Clumpy', 'An extremely skewed distribution of MST edge lengths does not necessarily indicate clustering of points. For this, we turn to another measure based on the MST: the Hartigan and Mo- hanty RUNT statistic [20]. This statistic is most easily un- derstood in terms of the single-linkage hierarchical clustering tree called a dendrogram.')
+    ('Sparse', 'the 90% quantile of the edge lengths of the MST')
+    ('Striated', 'sumation of angles over all adjacent edges of a MST')
+    ('Convex', 'ratio of the area of the alpha hull and the area of the convex hull')
+    ('Skinny', 'ratio of perimeter to area of a polygon measures, roughly, how skinny it is')
+    ('Stringy', 'The stringy measure is based on the π index, which is the ratio of width to length of a network')
+    ('Monotonic', 'squared Spearman corre- lation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)')
+  ]
+
 bivariate_counts
   name = "continuous bivariate metrics"
   description = "bivariate metrics for continuous data"

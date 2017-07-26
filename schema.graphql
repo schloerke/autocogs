@@ -182,39 +182,6 @@ type PlotAutoCogs {
 }
 
 
-Scatterplot
-  name = "scatterplot"
-  example = "qplot(hwy, cty, data = mpg, geom = "point")"
-  cognostics = [
-    univariate_continuous(x)
-    univariate_continuous(y)
-    bivariate_continuous(x,y)
-    bivariate_counts(x,y)
-  ]
-Boxplot
-  name = "boxplot"
-  example = "qplot(hwy, data = mpg, geom = "boxplot")"
-  cognostics = [
-    univariate_continuous(x)
-    univariate_boxpot(x)
-    univariate_counts(x)
-  ]
-
-LinearModel
-  name = "linear model"
-  example = "qplot(hwy, data = mpg, geom = "boxplot")"
-  cognostics = [
-    linear_model(x, y)
-    bivariate_counts(x,y)
-  ]
-
-Barplot
-  name = "Bar plot"
-
-
-
-
-
 Geoms
 
   geom_bar geom_col stat_count
@@ -294,6 +261,7 @@ Geoms
     * univariate_continuous(y)
     * bivariate_continuous(x,y)
     * bivariate_counts(x,y)
+    * bivariate_scagnostics(x,y)
     ** grouped_counts(counts...)
     ** grouped_testing(y...)
 

@@ -8,5 +8,17 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: dplyr,
-    checkmate
+    checkmate,
+    trelliscopejs,
+    MASS,
+    broom
+Remotes:
+    hafen/trelliscopejs
 RoxygenNote: 6.0.1
+Collate: 
+    'known.R'
+    'auto_cogs.R'
+    'plot_fn.R'
+    'calculate.R'
+    'of_type.R'
+    'plot_cogs.R'

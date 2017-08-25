@@ -160,11 +160,11 @@ add_auto_cog(
     hex_info <- StatBinhex$compute_group(dt, NULL, binwidth)
     counts <- hex_info$count
     list(
-      min = cog(min(counts), "minimum count"),
-      max = cog(max(counts), "maximum count"),
-      mean = cog(mean(counts), "mean (expected) count"),
-      median = cog(median(counts), "median count"),
-      var = cog(var(counts), "variance of counts"),
+      count_min = cog(min(counts), "minimum count"),
+      count_max = cog(max(counts), "maximum count"),
+      count_mean = cog(mean(counts), "mean (expected) count"),
+      count_median = cog(median(counts), "median count"),
+      count_var = cog(var(counts), "variance of counts"),
       "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
@@ -192,11 +192,11 @@ add_auto_cog(
     )
     counts <- bin_dt$count
     list(
-      min = cog(min(counts), "minimum count"),
-      max = cog(max(counts), "maximum count"),
-      mean = cog(mean(counts), "mean (expected) count"),
-      median = cog(median(counts), "median count"),
-      var = cog(var(counts), "variance of counts"),
+      count_min = cog(min(counts), "minimum count"),
+      count_max = cog(max(counts), "maximum count"),
+      count_mean = cog(mean(counts), "mean (expected) count"),
+      count_median = cog(median(counts), "median count"),
+      count_var = cog(var(counts), "variance of counts"),
       "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
@@ -204,74 +204,75 @@ add_auto_cog(
 
 
 
-add_auto_cog(
-  "linear_model",
-  bind_rows(
-    field_info("x", "continuous"),
-    field_info("y", "continuous")
-  ),
-  "linear model metrics",
-  fn = function(x, y, ..., intercept = TRUE) {
+# add_auto_cog(
+#   "linear_model",
+#   bind_rows(
+#     field_info("x", "continuous"),
+#     field_info("y", "continuous")
+#   ),
+#   "linear model metrics",
+#   fn = function(x, y, ..., intercept = TRUE) {
+#
+#     dt <- data_frame(x, y)
+#
+#     if (isTRUE(intercept)) {
+#       mod <- lm(y ~ x)
+#     } else {
+#       mod <- lm(y ~ x - 1)
+#     }
+#
+#     coefs <- broom::tidy(mod)
+#     infos <- broom::glance(mod)
+#     dta <- broom::augment(mod)
+#
+#     ret <- list()
+#     if (isTRUE(intercept)) {
+#       ret$intercept <- cog(coefs$estimate[1], "intercept of model")
+#       ret$intercept_p_value <- cog(coefs$p.value[1], "intercept of model")
+#     }
+#     coefs <- filter_(coefs, coefs$term != "(Intercept)")
+#
+#     bc <- MASS::boxcox(mod)
+#     bc_range <- range(bc$x[bc$y > max(bc$y) - 1/2 * qchisq(.95,1)])
+#
+#     ret %>%
+#       append(
+#         list(
+#           beta = cog(coefs$estimate[1], "beta value of coefficient"),
+#           beta_p_value = cog(coefs$p.value[1], "significance of coefficient"),
+#           r2 = cog(infos$r.squared, "fraction of variance explained by the model"),
+#           sigma = cog(infos$sigma, "square root of the estimated residual variance"),
+#           statistic = cog(infos$statistic, "F-statistic of the model"),
+#           p_value = cog(infos$p.value, "p-value form the F test"),
+#           df = cog(infos$p.value, "degrees of freedom used by the coefficients"),
+#           log_lik = cog(infos$logLik, "log-likelihood value under the model"),
+#           aic = cog(infos$AIC, "Akaike's An Information Criterion"),
+#           bic = cog(infos$BIC, "Schwarz's Bayesian criterion"),
+#           deviance = cog(infos$deviance, "quality-of-fit statistic of the model"),
+#           df_residual = cog(infos$df.residual, "residual degrees of freedom"),
+#           n_sig_cooks = cog(
+#             sum(dta$.cooksd > 4 / nrow(dta)),
+#             "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
+#           ),
+#           n_sig_hat = cog(
+#             sum(dta$.hat > (2 * 1 / nrow(dta))),
+#             "number of significant influence points. (sum(hat > 2 * p / n))"
+#           ),
+#           resid_shapiro = cog(
+#             shapiro.test(dta$.resid)$p.value,
+#             "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
+#             (1995) to be adequate for ‘p.value < 0.1’\""
+#           ),
+#           bc_lower = cog(bc_range[1],"lower bound of 95% CI of Box Cox Transformation"),
+#           bc_upper = cog(bc_range[2],"upper bound of 95% CI of Box Cox Transformation")
+#         )
+#       )
+#   }
+# )
 
-    dt <- data_frame(x, y)
 
-    if (isTRUE(intercept)) {
-      mod <- lm(y ~ x)
-    } else {
-      mod <- lm(y ~ x - 1)
-    }
-
-    coefs <- broom::tidy(mod)
-    infos <- broom::glance(mod)
-    dta <- broom::augment(mod)
-
-    ret <- list()
-    if (isTRUE(intercept)) {
-      ret$intercept <- cog(coefs$estimate[1], "intercept of model")
-      ret$intercept_p_value <- cog(coefs$p.value[1], "intercept of model")
-    }
-    coefs <- filter_(coefs, coefs$term != "(Intercept)")
-
-    bc <- MASS::boxcox(mod)
-    bc_range <- range(bc$x[bc$y > max(bc$y) - 1/2 * qchisq(.95,1)])
-
-    ret %>%
-      append(
-        list(
-          beta = cog(coefs$estimate[1], "beta value of coefficient"),
-          beta_p_value = cog(coefs$p.value[1], "significance of coefficient"),
-          r2 = cog(infos$r.squared, "fraction of variance explained by the model"),
-          sigma = cog(infos$sigma, "square root of the estimated residual variance"),
-          statistic = cog(infos$statistic, "F-statistic of the model"),
-          p_value = cog(infos$p.value, "p-value form the F test"),
-          df = cog(infos$p.value, "degrees of freedom used by the coefficients"),
-          log_lik = cog(infos$logLik, "log-likelihood value under the model"),
-          aic = cog(infos$AIC, "Akaike's An Information Criterion"),
-          bic = cog(infos$BIC, "Schwarz's Bayesian criterion"),
-          deviance = cog(infos$deviance, "quality-of-fit statistic of the model"),
-          df_residual = cog(infos$df.residual, "residual degrees of freedom"),
-          n_sig_cooks = cog(
-            sum(dta$.cooksd > 4 / nrow(dta)),
-            "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
-          ),
-          n_sig_hat = cog(
-            sum(dta$.hat > (2 * 1 / nrow(dta))),
-            "number of significant influence points. (sum(hat > 2 * p / n))"
-          ),
-          resid_shapiro = cog(
-            shapiro.test(dta$.resid)$p.value,
-            "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
-            (1995) to be adequate for ‘p.value < 0.1’\""
-          ),
-          bc_lower = cog(bc_range[1],"lower bound of 95% CI of Box Cox Transformation"),
-          bc_upper = cog(bc_range[2],"upper bound of 95% CI of Box Cox Transformation")
-        )
-      )
-  }
-)
-
-
-
+# need to import the BIC function as it's called internally in Mclust()
+#' @importFrom mclust Mclust mclustBIC
 add_auto_cog(
   "density_continuous",
   field_info("x", "continuous"),
@@ -302,17 +303,124 @@ add_auto_cog(
     # x_range <- range(ret$x)
     # mse <- mean((ret$density - 1 / (x_range[2] - x_range[1]))^2)
 
+    # silvermans
+    # reference: https://stats.stackexchange.com/questions/138223/how-to-test-if-my-distribution-is-multimodal
+    # non cran package: https://www.mathematik.uni-marburg.de/~stochastik/R_packages/
+
     max_density <- max(ret$density)
     max_density_location <- ret$x[which(ret$density == max_density)[1]]
 
-    # TODO
-    # silvermans mode of density estimation
+    list(
+      max_density = cog(max_density, "maximum density height"),
+      max_density_location = cog(max_density_location, "location of maximum density height"),
+      # max_density_slope = cog(max_slope, "maximum absolute value density slope"),
+      # uniform_mse = cog(mse, "mean squared error compared to uniform")
+      cluters = cog(
+        mclust::Mclust(dt$x, verbose = FALSE)$G,
+        "optimal number of components found using Model-Based Clustering"
+      ),
+      uni_modal_p_value = cog(
+        diptest::dip.test(dt$x)$p.value,
+        "Hartigans' dip test for unimodality / multimodality. (Low p-value means non-unimodal density)"
+      ),
+      skew = cog(moments::skewness(x, na.rm = TRUE), "skewness of non NA data"),
+      kurt = cog(moments::kurtosis(x, na.rm = TRUE), "kurtosis of non NA data")
+    )
+  }
+)
+
+
+add_auto_cog(
+  "density_2d_continuous",
+  bind_rows(
+    field_info("x", "continuous"),
+    field_info("y", "continuous")
+  ),
+  "2d density plot information. (Displays contour curves)",
+  function(
+    x, y, ...,
+    # StatDensity2d parameters
+    na.rm = FALSE, h = NULL,
+    # contour = TRUE,
+    n = 100, bins = NULL, binwidth = NULL
+  ) {
+
+    n <- length(x)
+    dt <- data.frame(x = x, y = y, group = 1, PANEL = 1)
+
+    scales <- list(
+      x = ScaleContinuous$clone(),
+      y = ScaleContinuous$clone()
+    )
+    scales$x$train(dt$x)
+    scales$y$train(dt$y)
+
+    ret <- StatDensity2d$compute_group(
+      dt, scales,
+      na.rm = na.rm, h = h, contour = FALSE, n = n, bins = bins, binwidth = binwidth
+    )
+
+    max_density <- max(ret$density)
+    max_row <- which(ret$density == max_density)[1]
+    max_density_x <- ret$x[max_row]
+    max_density_y <- ret$y[max_row]
 
     list(
       max_density = cog(max_density, "maximum density height"),
-      max_density_location = cog(max_density_location, "location of maximum density height")
+      max_density_x = cog(max_density_x, "X location of maximum density height"),
+      max_density_y = cog(max_density_y, "Y location of maximum density height"),
       # max_density_slope = cog(max_slope, "maximum absolute value density slope"),
       # uniform_mse = cog(mse, "mean squared error compared to uniform")
+      cluters = cog(
+        mclust::Mclust(dt[,c("x", "y")], verbose = FALSE)$G,
+        "optimal number of components found using Model-Based Clustering"
+      )
+    )
+  }
+)
+
+
+
+add_auto_cog(
+  "histogram_counts",
+  bind_rows(
+    field_info("x", "continuous")
+  ),
+  "histogram count information",
+  function(
+    x, ...,
+    # StatBin parameters
+    binwidth = NULL, bins = 30, center = NULL,
+    boundary = NULL, closed = c("right", "left"), pad = FALSE,
+    breaks = NULL, origin = NULL, right = NULL, drop = NULL,
+    width = NULL
+  ) {
+
+    n <- length(x)
+    dt <- data.frame(x = x, PANEL = 1)
+
+    scales <- list(
+      x = ScaleContinuous$clone()
+    )
+    scales$x$train(dt$x)
+
+    ret <- StatBin$compute_group(
+      dt, scales,
+      binwidth = binwidth, bins = bins, center = center,
+      boundary = boundary, closed = closed, pad = pad,
+      breaks = breaks, origin = origin, right = right, drop = drop,
+      width = width
+    )
+
+    counts <- ret$count
+
+    list(
+      count_min = cog(min(counts), "minimum count"),
+      count_max = cog(max(counts), "maximum count"),
+      count_mean = cog(mean(counts), "mean (expected) count"),
+      count_median = cog(median(counts), "median count"),
+      count_var = cog(var(counts), "variance of counts"),
+      "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
 )
@@ -414,6 +522,245 @@ add_auto_cog(
     )
   }
 )
+
+
+
+
+add_auto_cog(
+  "quantile_quantile",
+  field_info("x", "continuous"),
+  "quantile quantile plot diagnostics",
+  fn = function(
+    x, ...,
+    distribution = stats::qnorm, dparams = list(), na.rm = FALSE
+  ) {
+
+    dt <- data.frame(sample = x)
+    ret <- StatQq$compute_group(
+      dt, NULL,
+      distribution = distribution,
+      dparams = dparams,
+      na.rm = na.rm
+    )
+
+    y_line <- quantile(dt$sample, probs = c(0.25, 0.75), type = 7, na.rm = TRUE)
+    x_line <- distribution(c(0.25, 0.75))
+
+    slope <- diff(y_line) / diff(x_line)
+    int <- y_line[1L] - slope * x_line[1L]
+
+    ret$theo_line <- ret$theoretical * slope + int
+
+    sum_above <- sum((ret$sample - ret$theo_line) > 0)
+    sum_below <- sum((ret$sample - ret$theo_line) < 0)
+
+    ks_ans <- suppressWarnings(
+      ks.test(ret$sample, ret$theoretical)
+    )
+    qq_mse <- mean((ret$sample - ret$theo_line)^2)
+
+    max_deviation <- max(abs(ret$sample - ret$theoretical))
+
+    list(
+      points_above = cog(sum_above, "Sum of sample points above qqline"),
+      points_below = cog(sum_below, "Sum of sample points below qqline"),
+      ks_test = cog(ks_ans$p.value, "Kolmogorov-Smirnov test p value. Low value represents differing distributions"),
+      qq_mse = cog(qq_mse, "Mean Squared Error of sample points to theoretical QQ line"),
+      max_deviation = cog(max_deviation, "Max deviation from the theoretical QQ line")
+    )
+  }
+)
+
+
+add_auto_cog(
+  "smooth_line",
+  bind_rows(
+    field_info("x", "continuous"),
+    field_info("y", "continuous")
+  ),
+  "Smooth curve diagnostics",
+  fn = function(
+    x, y, ...,
+    method = "auto", formula = y ~ x, se = TRUE,
+    n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    method.args = list(), na.rm = FALSE
+  ) {
+
+    dt <- data.frame(
+      x = x,
+      y = y,
+      group = 1,
+      PANEL = 1
+    )
+
+    scales <- list(
+      x = ScaleContinuous$clone(),
+      y = ScaleContinuous$clone()
+    )
+    scales$x$train(dt$x)
+    scales$y$train(dt$y)
+
+    params <- list(method = method, formula = formula, se = se,
+    n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
+    method.args = method.args, na.rm = na.rm)
+
+    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+
+    ret <- do.call(StatSmooth$compute_group, append(list(dt, scales), params))
+
+    dt$y_fit <- approx(ret$x, ret$y, xout = dt$x)$y
+    mse <- mean((dt$y - dt$y_fit)^2)
+    max_deviation <- max(abs(dt$y - dt$y_fit))
+
+    # y_max_out <- approx(ret$x, ret$ymax, xout = dt$x)
+    # outliers_above <- sum(dt$y > y_max_out)
+    #
+    # y_min_out <- approx(ret$x, ret$ymax, xout = dt$x)
+    # outliers_below <- sum(dt$y < y_min_out)
+    #
+    # outliers_n <- outliers_above = outliers_below
+
+    # max_se <- max(ret$se)
+
+    list(
+      mse = cog(mse, "Mean Squared Error of fitted points and y data"),
+      max_deviation = cog(max_deviation, "Max deviation from fitted points")
+    )
+  }
+)
+
+
+add_auto_cog(
+  "linear_model",
+  bind_rows(
+    field_info("x", "continuous"),
+    field_info("y", "continuous")
+  ),
+  "Linear model diagnostics",
+  fn = function(
+    x, y, ...,
+    formula = y ~ x, se = TRUE,
+    n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    method.args = list(), na.rm = FALSE
+  ) {
+    method = "lm"
+    #
+    # dt <- data.frame(
+    #   x = x,
+    #   y = y,
+    #   group = 1,
+    #   PANEL = 1
+    # )
+    #
+    # scales <- list(
+    #   x = ScaleContinuous$clone(),
+    #   y = ScaleContinuous$clone()
+    # )
+    # scales$x$train(dt$x)
+    # scales$y$train(dt$y)
+    #
+    params <- list(method = method, formula = formula, se = se,
+    n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
+    method.args = method.args, na.rm = na.rm)
+
+    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+    #
+    # ret <- do.call(StatSmooth$compute_group, append(list(dt, scales), params))
+
+    mod <- do.call(lm, c(formula, params$method.args))
+
+    coefs <- broom::tidy(mod)
+    infos <- broom::glance(mod)
+    dta <- broom::augment(mod)
+
+    ret <- list()
+    if ("(Intercept)" %in% coefs$term) {
+      ret$intercept <- cog(coefs$estimate[1], "intercept of model")
+      ret$intercept_p_value <- cog(coefs$p.value[1], "intercept of model")
+    }
+    coefs <- coefs[coefs$term != "(Intercept)", ]
+
+    bc <- MASS::boxcox(mod)
+    bc_range <- range(bc$x[bc$y > max(bc$y) - 1/2 * qchisq(.95,1)])
+
+    ret %>%
+      append(list(
+        beta = cog(coefs$estimate[1], "beta value of coefficient"),
+        beta_p_value = cog(coefs$p.value[1], "significance of coefficient"),
+        r2 = cog(infos$r.squared, "fraction of variance explained by the model"),
+        sigma = cog(infos$sigma, "square root of the estimated residual variance"),
+        statistic = cog(infos$statistic, "F-statistic of the model"),
+        p_value = cog(infos$p.value, "p-value form the F test"),
+        df = cog(infos$p.value, "degrees of freedom used by the coefficients"),
+        log_lik = cog(infos$logLik, "log-likelihood value under the model"),
+        aic = cog(infos$AIC, "Akaike's An Information Criterion"),
+        bic = cog(infos$BIC, "Schwarz's Bayesian criterion"),
+        deviance = cog(infos$deviance, "quality-of-fit statistic of the model"),
+        df_residual = cog(infos$df.residual, "residual degrees of freedom"),
+        n_sig_cooks = cog(
+          sum(dta$.cooksd > 4 / nrow(dta)),
+          "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
+        ),
+        n_sig_hat = cog(
+          sum(dta$.hat > (2 * 1 / nrow(dta))),
+          "number of significant influence points. (sum(hat > 2 * p / n))"
+        ),
+        resid_shapiro = cog(
+          shapiro.test(dta$.resid)$p.value,
+          "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
+          (1995) to be adequate for ‘p.value < 0.1’\""
+        ),
+        bc_lower = cog(bc_range[1],"lower bound of 95% CI of Box Cox Transformation"),
+        bc_upper = cog(bc_range[2],"upper bound of 95% CI of Box Cox Transformation")
+      ))
+  }
+)
+
+
+
+add_auto_cog(
+  "loess_model",
+  bind_rows(
+    field_info("x", "continuous"),
+    field_info("y", "continuous")
+  ),
+  "Loess model diagnostics",
+  fn = function(
+    x, y, ...,
+    formula = y ~ x, se = TRUE,
+    n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    method.args = list(), na.rm = FALSE
+  ) {
+    method = "loess"
+
+    params <- list(method = method, formula = formula, se = se,
+    n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
+    method.args = method.args, na.rm = na.rm)
+
+    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+
+    mod <- do.call(loess, c(formula, params$method.args))
+
+    infos <- mod[c(
+      "n", "enp", "s", "trace.hat"
+    )]
+    infos <- append(infos, mod$pars)
+
+    list(
+      enp = cog(infos$enp, "effective number of parameters"),
+      s = cog(infos$s, "sigma of loess model"),
+      trace.hat = cog(infos$trace.hat, "trace of hat matrix"),
+      span = cog(infos$span, "parameter alpha which controls the degree of smoothing"),
+      degree = cog(infos$degree, "polynomial degree used in loess model"),
+      # normalize = cog(infos$normalize, "was data normalized before fit?"),
+      # parametric = cog(infos$parametric, "should any terms be fitted globally rather than locally?"),
+      # drop.square = cog(infos$drop.square, "for fits with more than one predictor and ‘degree = 2’, should the quadratic term be dropped for particular predictors?"),
+      # family = cog(infos$family, "if 'gaussian' fitting is by least-squares, and if 'symmetric' a re-descending M estimator is used with Tukey's biweight function"),
+      iterations = cog(infos$iterations, "number of iterations used to calculate model")
+    )
+  }
+)
+
 
 
 

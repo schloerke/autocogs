@@ -73,6 +73,14 @@ add_plot_cog(
 #     * bivariate_scagnostics(x,y)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
+#   geom_jitter
+#     - Jittered points
+#     * univariate_continuous(x)
+#     * univariate_continuous(y)
+#     * bivariate_continuous(x,y)
+#     * bivariate_counts(x,y)
+#     ** grouped_counts(counts...)
+#     ** grouped_testing(y...)
 add_plot_cog(
   # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris); calculate_auto_cogs(p)
   "geom_point",
@@ -137,8 +145,6 @@ add_plot_cog(
 
 #   geom_density stat_density
 #     - Smoothed density estimates
-#   geom_violin stat_ydensity
-#     - Violin plot
 #     * ('max_density', 'maximum density value')
 #     * univariate_continuous(x)
 #     ** grouped_testing(x...)
@@ -154,8 +160,14 @@ add_plot_cog(
     "univariate_counts", "x", "_n"
   )
 )
+#   geom_violin stat_ydensity
+#     - Violin plot
+#     * ('max_density', 'maximum density value')
+#     * univariate_continuous(x)
+#     ** grouped_testing(x...)
+#     ** grouped_counts(counts...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "density"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(1, cty, data = mpg, geom = "violin"); calculate_auto_cogs(p)
   "geom_violin",
   "density of a single y variable",
   tribble(
@@ -173,39 +185,43 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "density"); calculate_auto_cogs(p)
-  "geom_violin",
-  "density of a single y variable",
+  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "density_2d"); calculate_auto_cogs(p)
+  "geom_density2d",
+  "Contours of a 2d density estimate. Similar to a topographical map",
   tribble(
     ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
-    "density_continuous", "y", "_density",
-    "univariate_counts", "y", "_n"
+    "bivariate_continuous", c("x","y"), "_bivar",
+    "density_continuous", c("x"), "_density_x",
+    "density_continuous", c("y"), "_density_y",
+    "density_2d_continuous", c("x", "y"), "_density2d",
+    "bivariate_counts", c("x","y"), "_n"
   )
 )
 
 
 
-
-
-# Geoms
-#
-#   geom_density stat_density
-#     - Smoothed density estimates
-#   geom_violin stat_ydensity
-#     - Violin plot
-#     * ('max_density', 'maximum density value')
-#     * univariate_continuous(x)
-#     ** grouped_testing(x...)
-#     ** grouped_counts(counts...)
-#
 #   geom_dotplot
 #     - Dot plot
 #     * univariate_continuous(x)
 #     * univariate_counts(x)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-#
+add_plot_cog(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "dot"); calculate_auto_cogs(p)
+  # TODO could be done better
+  "geom_dotplot",
+  "stacked dots where each dot represents an observation.  The width of the dot represents the bin width.",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "density_continuous", c("x"), "_density_x",
+    "univariate_counts", c("x"), "_n"
+  )
+)
+
+
 #   geom_freqpoly geom_histogram stat_bin
 #     - Histograms and frequency polygons
 #     * univariate_continuous(x)
@@ -213,24 +229,78 @@ add_plot_cog(
 #     * univariate_continuous(counts)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-#
-#   geom_jitter
-#     - Jittered points
+add_plot_cog(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "histogram"); calculate_auto_cogs(p)
+  "geom_histogram",
+  "histogram of continuous data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "density_continuous", c("x"), "_density_x",
+    "histogram_counts", c("x"), "_hist_x",
+    "univariate_counts", c("x"), "_n"
+  )
+)
+
+
+#   geom_rug
+#     - Rug plots in the margins
 #     * univariate_continuous(x)
-#     * univariate_continuous(y)
-#     * bivariate_continuous(x,y)
-#     * bivariate_counts(x,y)
+#     * univariate_counts(x)
 #     ** grouped_counts(counts...)
-#     ** grouped_testing(y...)
-#
-#
+#     ** grouped_testing(x...)
+add_plot_cog(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
+  "geom_rug",
+  "Rug plots in the margins",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "density_continuous", c("x"), "_density_x",
+    "univariate_counts", c("x"), "_n"
+  )
+)
+
+
+
+#   geom_spoke
+#     - Line segments parameterised by location, direction and distance
+#     * univariate_continuous(angle) | angle is aes
+#     * univariate_continuous(spoke) | spoke is aes
+#     ** grouped_counts(counts...)
+#     ** grouped_testing(angle...)
+#     ** grouped_testing(spoke...)
+add_plot_cog(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
+  "geom_rug",
+  "Rug plot of continuous data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "density_continuous", c("x"), "_density_x",
+    "univariate_counts", c("x"), "_n"
+  )
+)
+
+
 #   geom_qq stat_qq
 #     - A quantile-quantile plot
 #     * sum of delta^2 | above
 #     * sum of delta^2 | below
 #     * sum of delta^2
 #     * KS test (x, dist)
-#
+add_plot_cog(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
+  "geom_qq",
+  "Quantile-Quantile plot of continuous data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "quantile_quantile", "x", "_qq"
+  )
+)
+
+
 #   geom_quantile stat_quantile
 #     - Quantile regression
 #     ^ contains N points
@@ -243,14 +313,10 @@ add_plot_cog(
 #     ** integral of area in group
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
-#
-#   geom_rug
-#     - Rug plots in the margins
-#     * univariate_continuous(x)
-#     * univariate_counts(x)
-#     ** grouped_counts(counts...)
-#     ** grouped_testing(x...)
-#
+
+
+
+# Geoms
 #   geom_smooth stat_smooth
 #     - Smoothed conditional means
 #     * bivariate_counts(x,y)
@@ -259,14 +325,51 @@ add_plot_cog(
 #     ** group variable significance (intercept)
 #     ** group and x interaction significance (slope)
 #     ** grouped_counts(counts...)
+add_plot_cog(
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth"); calculate_auto_cogs(p)
+  "geom_smooth",
+  "Smooth line plot of continuous x-y data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "smooth_line", c("x", "y"), "_smooth",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+add_plot_cog(
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess"); calculate_auto_cogs(p)
+  "geom_smooth_loess",
+  "Loess plot of continuous x-y data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "smooth_line", c("x", "y"), "_smooth",
+    "loess_model", c("x", "y"), "_loess",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+
+add_plot_cog(
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "lm"); calculate_auto_cogs(p)
+  "geom_smooth_lm",
+  "Smooth line plot of continuous x-y data",
+  tribble(
+    ~ auto_cog, ~ cols, ~ store_name,
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "smooth_line", c("x", "y"), "_smooth",
+    "linear_model", c("x", "y"), "_lm",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+
+
 #
-#   geom_spoke
-#     - Line segments parameterised by location, direction and distance
-#     * univariate_continuous(angle) | angle is aes
-#     * univariate_continuous(spoke) | spoke is aes
-#     ** grouped_counts(counts...)
-#     ** grouped_testing(angle...)
-#     ** grouped_testing(spoke...)
 #
 #
 #

@@ -110,6 +110,12 @@ get_layer_data <- function(p) {
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)
     item$data <- as_data_frame(item$data)
+    # qq plot
+    if (
+      ! tibble::has_name(item$data, "x") & tibble::has_name(item$data, "sample")
+    ) {
+      item$data$x <- item$data$sample
+    }
     item
   })
   for (i in seq_along(ans)) {
@@ -142,15 +148,21 @@ get_data_list.ggplot <- function(p) {
 
     ret_name <- switch(layer_name,
       "geom_point" = switch(snake_class(layer$position),
-        "position_jitter" = "geom_jitter",
+        # "position_jitter" = "geom_jitter",
         switch(
           snake_class(layer$stat),
+          "stat_qq" = "geom_qq",
           "stat_sum" = "geom_count",
           "geom_point"
         )
-
+      ),
+      "geom_smooth" = switch(as.character(layer$stat_params$method),
+        "loess" = "geom_smooth_loess",
+        "lm" = "geom_smooth_lm",
+        "geom_smooth"
       ),
       "geom_tile" = if (inherits(layer$stat, "StatBin2d")) "geom_bin2d" else "geom_tile",
+      "geom_bar" = if(inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
       layer_name
     )
 

@@ -11,11 +11,15 @@ Imports: dplyr,
     checkmate,
     trelliscopejs,
     MASS,
-    broom
+    broom,
+    moments,
+    diptest,
+    mclust,
+    ggplot2
 Remotes:
     hafen/trelliscopejs
 RoxygenNote: 6.0.1
-Collate: 
+Collate:
     'known.R'
     'auto_cogs.R'
     'plot_fn.R'

@@ -77,8 +77,14 @@ calculate_auto_cogs <- function(p) {
         # dt_i_list$plot <- p
         # dt_i_list$layer_data <- layer_item
 
+        if (has_name(layer_item$params, "method.args")) {
+          layer_item$params$method_args <- layer_item$params$method.args
+          layer_item$params$method.args <- NULL
+        }
+
         fn <- item_cog_dt$fn[[i]]
-        ans <- do.call(fn, dt_i_list)
+        args <- append(dt_i_list, layer_item$params)
+        ans <- do.call(fn, args)
         as_data_frame(ans)
       })
 
@@ -165,10 +171,10 @@ get_data_list.ggplot <- function(p) {
       "geom_bar" = if(inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
       layer_name
     )
-
     list(
       name = ret_name,
-      data = ret_data
+      data = ret_data,
+      params = layer$stat_params
       # TODO
       # ,
       # geom_params = list(),

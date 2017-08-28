@@ -339,7 +339,7 @@ add_plot_cog(
   )
 )
 add_plot_cog(
-  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess", span = 0.9, method.args = list(degree = 1)); calculate_auto_cogs(p)
   "geom_smooth_loess",
   "Loess plot of continuous x-y data",
   tribble(
@@ -369,10 +369,6 @@ add_plot_cog(
 )
 
 
-#
-#
-#
-#
 # Maybe Nothing?
 #   geom_contour stat_contour
 #     - 2d contours of a 3d surface

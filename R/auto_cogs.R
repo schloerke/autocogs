@@ -583,7 +583,7 @@ add_auto_cog(
     x, y, ...,
     method = "auto", formula = y ~ x, se = TRUE,
     n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
-    method.args = list(), na.rm = FALSE
+    method_args = list(), na.rm = FALSE
   ) {
 
     dt <- data.frame(
@@ -602,7 +602,7 @@ add_auto_cog(
 
     params <- list(method = method, formula = formula, se = se,
     n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-    method.args = method.args, na.rm = na.rm)
+    method_args = method_args, na.rm = na.rm)
 
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
 
@@ -639,35 +639,33 @@ add_auto_cog(
   "Linear model diagnostics",
   fn = function(
     x, y, ...,
-    formula = y ~ x, se = TRUE,
-    n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
-    method.args = list(), na.rm = FALSE
+    weights = 1,
+    formula = y ~ x,
+    # se = TRUE,
+    # n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    method_args = list(), na.rm = FALSE
   ) {
     method = "lm"
-    #
-    # dt <- data.frame(
-    #   x = x,
-    #   y = y,
-    #   group = 1,
-    #   PANEL = 1
-    # )
-    #
-    # scales <- list(
-    #   x = ScaleContinuous$clone(),
-    #   y = ScaleContinuous$clone()
-    # )
-    # scales$x$train(dt$x)
-    # scales$y$train(dt$y)
-    #
-    params <- list(method = method, formula = formula, se = se,
-    n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-    method.args = method.args, na.rm = na.rm)
+
+    dt <- data.frame(
+      x = x,
+      y = y,
+      group = 1,
+      PANEL = 1,
+      weights = weights
+    )
+
+    params <- list(
+      method = method, formula = formula,
+      # se = se,
+      # n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
+      method_args = method_args, na.rm = na.rm
+    )
 
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
-    #
-    # ret <- do.call(StatSmooth$compute_group, append(list(dt, scales), params))
+    core_params <- list(formula, data = dt, weight = dt$weights)
 
-    mod <- do.call(lm, c(formula, params$method.args))
+    mod <- do.call(lm, c(core_params, params$method_args))
 
     coefs <- broom::tidy(mod)
     infos <- broom::glance(mod)
@@ -727,20 +725,27 @@ add_auto_cog(
   "Loess model diagnostics",
   fn = function(
     x, y, ...,
-    formula = y ~ x, se = TRUE,
-    n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
-    method.args = list(), na.rm = FALSE
+    weights = 1,
+    formula = y ~ x,
+    # se = TRUE,
+    # n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    method_args = list(), na.rm = FALSE
   ) {
     method = "loess"
 
-    params <- list(method = method, formula = formula, se = se,
-    n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-    method.args = method.args, na.rm = na.rm)
+    params <- list(
+      method = method, formula = formula,
+      # se = se,
+      # n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
+      method_args = method_args, na.rm = na.rm
+    )
+
+    dt <- data.frame(x = x, y = y, weights = weights)
 
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
+    core_params <- list(formula, data = dt, weight = dt$weights, span = span)
 
-    mod <- do.call(loess, c(formula, params$method.args))
-
+    mod <- do.call(loess, c(core_params, params$method_args))
     infos <- mod[c(
       "n", "enp", "s", "trace.hat"
     )]

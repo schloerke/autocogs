@@ -492,13 +492,19 @@ add_auto_cog(
 
     ret$theo_line <- ret$theoretical * slope + int
 
-    sum_above <- sum((ret$sample - ret$theo_line) > 0)
-    sum_below <- sum((ret$sample - ret$theo_line) < 0)
+    sum_above <- sum(
+      (ret$sample - ret$theo_line) > 0
+    )
+    sum_below <- sum(
+      (ret$sample - ret$theo_line) < 0
+    )
 
     ks_ans <- suppressWarnings(
       ks.test(ret$sample, ret$theoretical)
     )
-    qq_mse <- mean((ret$sample - ret$theo_line)^2)
+    qq_mse <- mean(
+      (ret$sample - ret$theo_line) ^ 2
+    )
 
     max_deviation <- max(abs(ret$sample - ret$theoretical))
 
@@ -550,7 +556,9 @@ add_auto_cog(
     ret <- do.call(StatSmooth$compute_group, append(list(dt, scales), params))
 
     dt$y_fit <- approx(ret$x, ret$y, xout = dt$x)$y
-    mse <- mean((dt$y - dt$y_fit)^2)
+    mse <- mean(
+      (dt$y - dt$y_fit) ^ 2
+    )
     max_deviation <- max(abs(dt$y - dt$y_fit))
 
     # y_max_out <- approx(ret$x, ret$ymax, xout = dt$x)
@@ -620,7 +628,7 @@ add_auto_cog(
     coefs <- coefs[coefs$term != "(Intercept)", ]
 
     bc <- MASS::boxcox(mod)
-    bc_range <- range(bc$x[bc$y > max(bc$y) - 1/2 * qchisq(.95,1)])
+    bc_range <- range(bc$x[bc$y > max(bc$y) - (1 / 2) * qchisq(.95,1)])
 
     ret %>%
       append(list(

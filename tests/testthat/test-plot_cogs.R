@@ -11,8 +11,8 @@ expect_auto_cogs <- function(p, names, lengths) {
 
   x <- large_cog_list[[1]]
 
-  ans1 <- expect_list(x, types = c("data.frame"), len = length(lengths))
-  ans2 <- expect_names(names(x), identical.to = names)
+  expect_list(x, types = c("data.frame"), len = length(lengths))
+  expect_names(names(x), identical.to = names)
 
   lapply(seq_along(x), function(i) {
     item <- x[[i]]
@@ -26,11 +26,10 @@ expect_auto_cogs <- function(p, names, lengths) {
 
 
 test_that("ggplot2::geom_bar", {
-
   qplot(Sepal.Length, data = iris, geom = "bar") %>%
     expect_auto_cogs(
-      names = c("_x", "_n"),
-      lengths = c(5, 2)
+      c("_x", "_n"),
+      c(5, 2)
     )
 })
 
@@ -38,24 +37,24 @@ test_that("ggplot2::geom_col", {
   # geom_col
   qplot(Sepal.Length, Sepal.Width, data = iris, geom = "col") %>%
     expect_auto_cogs(
-      names = c("_x", "_n"),
-      lengths = c(5, 5)
+      c("_x", "_y", "_n"),
+      c(5, 5, 5)
     )
 })
 
 test_that("ggplot2::geom_hex", {
   qplot(carat, price, data = diamonds, geom = "hex") %>%
     expect_auto_cogs(
-      names = c("_x", "_y", "_bivar", "_hex_bins", "_n"),
-      lengths = c(5, 5, 2, 6, 5)
+      c("_x", "_y", "_bivar", "_hex_bins", "_n"),
+      c(5, 5, 2, 6, 5)
     )
 })
 
 test_that("ggplot2::geom_bin2d", {
   qplot(carat, price, data = diamonds, geom = "bin2d") %>%
     expect_auto_cogs(
-      names = c("_square_bins", "_n"),
-      lengths = c(6, 5)
+      c("_square_bins", "_n"),
+      c(6, 5)
     )
 })
 

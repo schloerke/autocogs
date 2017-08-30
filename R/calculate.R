@@ -30,7 +30,7 @@ calculate_auto_cogs <- function(p) {
   # for every layer
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
-    layer_cog_group <- plot_cogs %>% filter(kind == plot_class_val, name == layer_item$name)
+    layer_cog_group <- plot_cogs %>% filter_(~ kind == plot_class_val, ~ name == layer_item$name)
 
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
@@ -65,7 +65,7 @@ calculate_auto_cogs <- function(p) {
         dt_i_list <- list()
 
         if (nrow(item_cog_dt$fields[[i]]) != length(item_cog_dt$cols[[i]])) {
-          str(as.list(cog_dt[i,c("cols", "fields")]))
+          str(as.list(item_cog_dt[i, c("cols", "fields")]))
           stop("non matching lengths found for cog info and spec")
         }
 
@@ -174,7 +174,7 @@ get_data_list.ggplot <- function(p) {
         "geom_smooth"
       ),
       "geom_tile" = if (inherits(layer$stat, "StatBin2d")) "geom_bin2d" else "geom_tile",
-      "geom_bar" = if(inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
+      "geom_bar" = if (inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
       layer_name
     )
     list(

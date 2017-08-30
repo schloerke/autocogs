@@ -26,6 +26,7 @@ add_plot_cog(
   tribble(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
     "bivariate_counts", c("x", "y"), "_n"
   )
 )

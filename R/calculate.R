@@ -65,7 +65,7 @@ calculate_auto_cogs <- function(p) {
         dt_i_list <- list()
 
         if (nrow(item_cog_dt$fields[[i]]) != length(item_cog_dt$cols[[i]])) {
-          str(as.list(item_cog_dt[i, c("cols", "fields")]))
+          utils::str(as.list(item_cog_dt[i, c("cols", "fields")]))
           stop("non matching lengths found for cog info and spec")
         }
 
@@ -136,7 +136,15 @@ get_layer_data <- function(p) {
   ans
 }
 
+#' Data List
+#'
+#' @param p plot object
 #' @export
+#' @examples
+#' require(ggplot2)
+#' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+#'   geom_point(data = mpg, mapping = aes(cty, hwy))
+#' get_data_list(p)
 get_data_list <- function(p) {
   UseMethod("get_data_list", p)
 }

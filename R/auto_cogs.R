@@ -99,7 +99,7 @@ add_auto_cog(
       Striated = cog(info$Striated, "sumation of angles over all adjacent edges of a MST"),
       Convex = cog(info$Convex, "ratio of the area of the alpha hull and the area of the convex hull"),
       Skinny = cog(info$Skinny, "ratio of perimeter to area of a polygon measures, roughly, how skinny it is"),
-      Stringy = cog(info$Stringy, "The stringy measure is based on the π index, which is the ratio of width to length of a network"),
+      Stringy = cog(info$Stringy, "The stringy measure is based on the _ index, which is the ratio of width to length of a network"),
       Monotonic = cog(info$Monotonic, "squared Spearman corre- lation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)")
     )
   }
@@ -655,7 +655,7 @@ add_auto_cog(
         resid_shapiro = cog(
           shapiro.test(dta$.resid)$p.value,
           "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
-          (1995) to be adequate for ‘p.value < 0.1’\""
+          (1995) to be adequate for 'p.value < 0.1'\""
         ),
         bc_lower = cog(bc_range[1], "lower bound of 95% CI of Box Cox Transformation"),
         bc_upper = cog(bc_range[2], "upper bound of 95% CI of Box Cox Transformation")
@@ -712,7 +712,7 @@ add_auto_cog(
       degree = cog(infos$degree, "polynomial degree used in loess model"),
       # normalize = cog(infos$normalize, "was data normalized before fit?"),
       # parametric = cog(infos$parametric, "should any terms be fitted globally rather than locally?"),
-      # drop.square = cog(infos$drop.square, "for fits with more than one predictor and ‘degree = 2’, should the quadratic term be dropped for particular predictors?"),
+      # drop.square = cog(infos$drop.square, "for fits with more than one predictor and 'degree = 2', should the quadratic term be dropped for particular predictors?"),
       # family = cog(infos$family, "if 'gaussian' fitting is by least-squares, and if 'symmetric' a re-descending M estimator is used with Tukey's biweight function"),
       iterations = cog(infos$iterations, "number of iterations used to calculate model")
     )

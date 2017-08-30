@@ -18,7 +18,11 @@ Imports: dplyr,
     moments,
     diptest,
     mclust,
-    ggplot2
+    ggplot2,
+    tibble,
+    scagnostics,
+    utils,
+    hexbin
 Remotes:
     hafen/trelliscopejs
 RoxygenNote: 6.0.1

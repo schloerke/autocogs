@@ -34,6 +34,10 @@ cog <- trelliscopejs::cog
 #' @import tibble dplyr checkmate
 NULL
 
+#' Field Type info
+#'
+#' @param dimension field name. (use one of the listed options provided)
+#' @param type field type. (use one of the listed options provided)
 #' @export
 #' @import dplyr
 field_info <- function(

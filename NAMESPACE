@@ -2,8 +2,10 @@
 
 S3method(get_data_list,default)
 S3method(get_data_list,ggplot)
+export(add_panel_cogs)
 export(field_info)
 export(get_data_list)
+export(panel_cogs)
 import(checkmate)
 import(dplyr)
 import(scagnostics)

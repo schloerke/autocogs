@@ -627,7 +627,7 @@ add_auto_cog(
     }
     coefs <- coefs[coefs$term != "(Intercept)", ]
 
-    bc <- MASS::boxcox(mod)
+    bc <- MASS::boxcox(mod, plotit = FALSE)
     bc_range <- range(bc$x[bc$y > max(bc$y) - (1 / 2) * qchisq(.95, 1)])
 
     ret %>%

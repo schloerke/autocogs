@@ -22,7 +22,7 @@ plot_class <- function(p) {
 }
 
 
-calculate_auto_cogs <- function(p) {
+calculate_auto_cogs <- function(p, verbose = FALSE) {
 
   plot_class_val <- plot_class(p)
   layer_info <- get_layer_data(p)
@@ -34,7 +34,9 @@ calculate_auto_cogs <- function(p) {
 
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
-      message("no cog group found for layer: ", plot_class_val, "::", layer_item$name)
+      if (verbose) {
+        message("no cog group found for layer: ", plot_class_val, "::", layer_item$name)
+      }
       return(NULL)
     }
 
@@ -48,9 +50,10 @@ calculate_auto_cogs <- function(p) {
       item_cog_dt <- inner_join(auto_cog_dt, known_cogs, c("auto_cog" = "name"))
 
       if (nrow(item_cog_dt) != nrow(auto_cog_dt)) {
-        message("no cog group found for auto cogs: ", paste(setdiff(auto_cog_dt$auto_cog, known_cogs$name), sep = ", "))
-        print(auto_cog_dt)
-        browser()
+        if (verbose) {
+          message("missing cog groups found for auto cogs: ", paste(setdiff(auto_cog_dt$auto_cog, known_cogs$name), sep = ", "))
+          print(auto_cog_dt)
+        }
       }
       if (nrow(item_cog_dt) == 0) {
         return(NULL)

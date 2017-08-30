@@ -216,3 +216,50 @@ test_that("ggplot2::geom_qq", {
       c(5, 5)
     )
 })
+
+
+test_that("ggplot2::geom_smooth", {
+  qplot(cty, hwy, data = mpg, geom = "smooth") %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_smooth", "_n"),
+      c(5, 5, 2, 2, 5)
+    )
+})
+
+
+
+test_that("ggplot2::geom_smooth_loess", {
+  p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess")
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_smooth", "_loess", "_n"),
+      c(5, 5, 2, 2, 6, 5)
+    )
+  cogs <- calculate_auto_cogs(p)
+  expect_equal(cogs[[1]]$"_loess"$span[1], 0.75)
+  expect_equal(cogs[[1]]$"_loess"$degree[1], 2)
+
+  p <- qplot(
+    cty, hwy, data = mpg,
+    geom = "smooth", method = "loess",
+    span = 0.9, method.args = list(degree = 1)
+  )
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_smooth", "_loess", "_n"),
+      c(5, 5, 2, 2, 6, 5)
+    )
+  cogs <- calculate_auto_cogs(p)
+  expect_equal(cogs[[1]]$"_loess"$span[1], 0.9)
+  expect_equal(cogs[[1]]$"_loess"$degree[1], 1)
+})
+
+
+test_that("ggplot2::geom_smooth_lm", {
+  p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "lm")
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_smooth", "_lm", "_n"),
+      c(5, 5, 2, 2, 19, 5)
+    )
+})

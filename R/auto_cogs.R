@@ -543,7 +543,7 @@ add_auto_cog(
 
     params <- list(method = method, formula = formula, se = se,
     n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-    method_args = method_args, na.rm = na.rm)
+    method.args = method_args, na.rm = na.rm)
 
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
 
@@ -600,13 +600,13 @@ add_auto_cog(
       method = method, formula = formula,
       # se = se,
       # n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-      method_args = method_args, na.rm = na.rm
+      method.args = method_args, na.rm = na.rm
     )
 
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weight = dt$weights)
 
-    mod <- do.call(lm, c(core_params, params$method_args))
+    mod <- do.call(lm, c(core_params, params$method.args))
 
     coefs <- broom::tidy(mod)
     infos <- broom::glance(mod)
@@ -669,7 +669,9 @@ add_auto_cog(
     weights = 1,
     formula = y ~ x,
     # se = TRUE,
-    # n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
+    # n = 80,
+    span = 0.75,
+    # fullrange = FALSE, xseq = NULL, level = 0.95,
     method_args = list(), na.rm = FALSE
   ) {
     method = "loess"
@@ -677,8 +679,10 @@ add_auto_cog(
     params <- list(
       method = method, formula = formula,
       # se = se,
-      # n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
-      method_args = method_args, na.rm = na.rm
+      # n = n,
+      span = span,
+      # fullrange = fullrange, xseq = xseq, level = level,
+      method.args = method_args, na.rm = na.rm
     )
 
     dt <- data.frame(x = x, y = y, weights = weights)
@@ -686,7 +690,7 @@ add_auto_cog(
     params <- suppressMessages(StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weight = dt$weights, span = span)
 
-    mod <- do.call(loess, c(core_params, params$method_args))
+    mod <- do.call(loess, c(core_params, params$method.args))
     infos <- mod[c(
       "n", "enp", "s", "trace.hat"
     )]

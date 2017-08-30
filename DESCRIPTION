@@ -29,6 +29,7 @@ Collate:
     'calculate.R'
     'of_type.R'
     'plot_cogs.R'
-Suggests: testthat
+Suggests: testthat,
+    covr
 URL: https://github.com/schloerke/autocogs
 BugReports: https://github.com/schloerke/autocogs/issues

@@ -1,8 +1,11 @@
 Package: autocogs
-Title: What the Package Does (one line, title case)
+Title: Automatic Cognostic Calculations
 Version: 0.0.0.9000
-Authors@R: person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut", "cre")
+    person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths")
+  )
+Description: Automatically calculates cognostics for plot objects and list column plot objects.  Returns all results a nested 'data_frame'.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -26,3 +29,6 @@ Collate:
     'calculate.R'
     'of_type.R'
     'plot_cogs.R'
+Suggests: testthat
+URL: https://github.com/schloerke/autocogs
+BugReports: https://github.com/schloerke/autocogs/issues

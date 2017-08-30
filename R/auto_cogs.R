@@ -116,8 +116,8 @@ add_auto_cog(
     n <- length(x)
     x_is_na <- is.na(x)
     list(
-      'n' = cog(n, "count of non NA data"),
-      'n_na' = cog(sum(x_is_na), "count of NA data")
+      "n" = cog(n, "count of non NA data"),
+      "n_na" = cog(sum(x_is_na), "count of NA data")
     )
   }
 )
@@ -133,11 +133,11 @@ add_auto_cog(
     x_is_na <- is.na(x)
     y_is_na <- is.na(y)
     list(
-      'n' = cog(n, "count of non NA data"),
-      'n_both_na' = cog(sum(x_is_na & y_is_na), "count of data where both X and Y are NA"),
-      'n_or_na' = cog(sum(x_is_na | y_is_na), "count of data where either X or Y are NA"),
-      'n_x_na' = cog(sum(x_is_na), "count of X NA data"),
-      'n_y_na' = cog(sum(y_is_na), "count of Y NA data")
+      "n" = cog(n, "count of non NA data"),
+      "n_both_na" = cog(sum(x_is_na & y_is_na), "count of data where both X and Y are NA"),
+      "n_or_na" = cog(sum(x_is_na | y_is_na), "count of data where either X or Y are NA"),
+      "n_x_na" = cog(sum(x_is_na), "count of X NA data"),
+      "n_y_na" = cog(sum(y_is_na), "count of Y NA data")
     )
   }
 )
@@ -312,7 +312,7 @@ add_auto_cog(
     )
     if (isTRUE(clusters)) {
       ret$clusters <- cog(
-        mclust::Mclust(dt[,c("x", "y")], verbose = FALSE)$G,
+        mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
         "optimal number of components found using Model-Based Clustering"
       )
     }
@@ -594,7 +594,7 @@ add_auto_cog(
     # n = 80, span = 0.75, fullrange = FALSE, xseq = NULL, level = 0.95,
     method_args = list(), na.rm = FALSE
   ) {
-    method = "lm"
+    method <- "lm"
 
     dt <- data.frame(
       x = x,
@@ -628,7 +628,7 @@ add_auto_cog(
     coefs <- coefs[coefs$term != "(Intercept)", ]
 
     bc <- MASS::boxcox(mod)
-    bc_range <- range(bc$x[bc$y > max(bc$y) - (1 / 2) * qchisq(.95,1)])
+    bc_range <- range(bc$x[bc$y > max(bc$y) - (1 / 2) * qchisq(.95, 1)])
 
     ret %>%
       append(list(
@@ -657,8 +657,8 @@ add_auto_cog(
           "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
           (1995) to be adequate for ‘p.value < 0.1’\""
         ),
-        bc_lower = cog(bc_range[1],"lower bound of 95% CI of Box Cox Transformation"),
-        bc_upper = cog(bc_range[2],"upper bound of 95% CI of Box Cox Transformation")
+        bc_lower = cog(bc_range[1], "lower bound of 95% CI of Box Cox Transformation"),
+        bc_upper = cog(bc_range[2], "upper bound of 95% CI of Box Cox Transformation")
       ))
   }
 )
@@ -682,7 +682,7 @@ add_auto_cog(
     # fullrange = FALSE, xseq = NULL, level = 0.95,
     method_args = list(), na.rm = FALSE
   ) {
-    method = "loess"
+    method <- "loess"
 
     params <- list(
       method = method, formula = formula,

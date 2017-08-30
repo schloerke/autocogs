@@ -90,9 +90,9 @@ add_plot_cog(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x","y"), "_bivar",
-    "scagnostics", c("x","y"), "_scagnostic",
-    "bivariate_counts", c("x","y"), "_n"
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "scagnostics", c("x", "y"), "_scagnostic",
+    "bivariate_counts", c("x", "y"), "_n"
   )
 )
 
@@ -136,10 +136,10 @@ add_plot_cog(
     "univariate_continuous", "y", "_y",
     "univariate_discrete", "x", "_x_counts",
     "univariate_discrete", "y", "_y_counts",
-    "bivariate_continuous", c("x","y"), "_bivar",
-    "pairwise_counts", c("x","y"), "_xy_counts",
-    "scagnostics", c("x","y"), "_scagnostic",
-    "bivariate_counts", c("x","y"), "_n"
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "pairwise_counts", c("x", "y"), "_xy_counts",
+    "scagnostics", c("x", "y"), "_scagnostic",
+    "bivariate_counts", c("x", "y"), "_n"
   )
 )
 
@@ -193,11 +193,11 @@ add_plot_cog(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x","y"), "_bivar",
+    "bivariate_continuous", c("x", "y"), "_bivar",
     "density_continuous", c("x"), "_density_x",
     "density_continuous", c("y"), "_density_y",
     "density_2d_continuous", c("x", "y"), "_density2d",
-    "bivariate_counts", c("x","y"), "_n"
+    "bivariate_counts", c("x", "y"), "_n"
   )
 )
 

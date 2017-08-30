@@ -40,8 +40,8 @@ field_info <- function(
   dimension = c("x", "y", "z", "group", "any"),
   type = c("continuous", "discrete", "date", "any")
 ) {
-  dimension = match.arg(dimension)
-  type = match.arg(type)
+  dimension <- match.arg(dimension)
+  type <- match.arg(type)
 
   assert_choice(dimension, c("x", "y", "z", "group", "any"))
   assert_choice(type, c("continuous", "discrete", "date", "any"))

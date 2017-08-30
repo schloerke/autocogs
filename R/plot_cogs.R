@@ -115,7 +115,7 @@ add_plot_cog(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "y", "_y",
     "boxplot_metrics", "y", "_boxplot",
-    "univariate_counts", "x", "_counts"
+    "univariate_counts", "y", "_n"
   )
 )
 
@@ -173,7 +173,7 @@ add_plot_cog(
   tribble(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "y", "_y",
-    "density_continuous", "y", "_density",
+    "density_continuous", "y", "_violin",
     "univariate_counts", "y", "_n"
   )
 )
@@ -185,7 +185,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
 add_plot_cog(
-  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "density_2d"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(carat, price, data = diamonds[1:1000, ], geom = "density_2d"); calculate_auto_cogs(p)
   "geom_density2d",
   "Contours of a 2d density estimate. Similar to a topographical map",
   tribble(
@@ -209,7 +209,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "dot"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, data = mpg, geom = "dotplot"); calculate_auto_cogs(p)
   # TODO could be done better
   "geom_dotplot",
   "stacked dots where each dot represents an observation.  The width of the dot represents the bin width.",
@@ -230,7 +230,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "histogram"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); calculate_auto_cogs(p)
   "geom_histogram",
   "histogram of continuous data",
   tribble(
@@ -271,14 +271,21 @@ add_plot_cog(
 #     ** grouped_testing(angle...)
 #     ** grouped_testing(spoke...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
-  "geom_rug",
-  "Rug plot of continuous data",
+  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, radius = ~ Petal.Length, spoke = ~ Petal.Width, data = iris, geom = "spoke"); calculate_auto_cogs(p)
+  "geom_spoke",
+  "Spoke plot of continuous data",
   tribble(
     ~ auto_cog, ~ cols, ~ store_name,
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
-    "univariate_counts", c("x"), "_n"
+    "univariate_continuous", "y", "_y",
+    "density_continuous", c("y"), "_density_y",
+    "univariate_continuous", "angle", "_angle",
+    "density_continuous", c("angle"), "_density_angle",
+    "univariate_continuous", "radius", "_radius",
+    "density_continuous", c("radius"), "_density_radius",
+    "bivariate_counts", c("x", "y"), "_n_xy",
+    "bivariate_counts", c("angle", "radius"), "_n_angle_radius"
   )
 )
 
@@ -290,7 +297,7 @@ add_plot_cog(
 #     * sum of delta^2
 #     * KS test (x, dist)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(sample = Sepal.Length, data = iris, geom = "qq"); print(p); calculate_auto_cogs(p)
   "geom_qq",
   "Quantile-Quantile plot of continuous data",
   tribble(
@@ -301,22 +308,8 @@ add_plot_cog(
 )
 
 
-#   geom_quantile stat_quantile
-#     - Quantile regression
-#     ^ contains N points
-#     ^ contains N points above
-#     ^ contains N points below
-#     ^ integral of area
-#     ** contains N points in group
-#     ** contains N points above in group
-#     ** contains N points below in group
-#     ** integral of area in group
-#     ** grouped_counts(counts...)
-#     ** grouped_testing(y...)
 
 
-
-# Geoms
 #   geom_smooth stat_smooth
 #     - Smoothed conditional means
 #     * bivariate_counts(x,y)
@@ -398,3 +391,18 @@ add_plot_cog(
 #     - Text
 #   stat_sf geom_sf coord_sf
 #     - Visualise sf objects
+
+
+## NONE
+#   geom_quantile stat_quantile
+#     - Quantile regression
+#     ^ contains N points
+#     ^ contains N points above
+#     ^ contains N points below
+#     ^ integral of area
+#     ** contains N points in group
+#     ** contains N points above in group
+#     ** contains N points below in group
+#     ** integral of area in group
+#     ** grouped_counts(counts...)
+#     ** grouped_testing(y...)

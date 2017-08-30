@@ -85,12 +85,18 @@ calculate_auto_cogs <- function(p) {
         fn <- item_cog_dt$fn[[i]]
         args <- append(dt_i_list, layer_item$params)
         ans <- do.call(fn, args)
+        if (is.null(ans)) return(ans)
         as_data_frame(ans)
       })
 
       # store values with store_name
       ret <- list()
       ret[item_cog_dt$store_name] <- cog_ans
+
+      nulls <- lapply(ret, is.null) %>% unlist()
+      if (any(nulls)) {
+        ret[nulls] <- NULL
+      }
 
       # return layer group info
       ret

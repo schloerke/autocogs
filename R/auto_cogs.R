@@ -81,6 +81,7 @@ add_auto_cog(
 )
 
 
+#' @import scagnostics
 add_auto_cog(
   "scagnostics",
   bind_rows(
@@ -89,7 +90,7 @@ add_auto_cog(
   ),
   "scagnostics of bivariate continuous data",
   function(x, y, ...) {
-    info <- as.list(scagnostics::scagnostics(x, y))
+    info <- as.list(scagnostics(x, y))
     list(
       Outlying = cog(info$Outlying, "proportion of the total edge length due to extremely long edges connected to points of single degree"),
       Skewed = cog(info$Skewed, "distribution of edge lengths of a minimum spanning tree gives us information about the relative density of points in a scattered configuration"),
@@ -203,74 +204,6 @@ add_auto_cog(
 )
 
 
-
-# add_auto_cog(
-#   "linear_model",
-#   bind_rows(
-#     field_info("x", "continuous"),
-#     field_info("y", "continuous")
-#   ),
-#   "linear model metrics",
-#   fn = function(x, y, ..., intercept = TRUE) {
-#
-#     dt <- data_frame(x, y)
-#
-#     if (isTRUE(intercept)) {
-#       mod <- lm(y ~ x)
-#     } else {
-#       mod <- lm(y ~ x - 1)
-#     }
-#
-#     coefs <- broom::tidy(mod)
-#     infos <- broom::glance(mod)
-#     dta <- broom::augment(mod)
-#
-#     ret <- list()
-#     if (isTRUE(intercept)) {
-#       ret$intercept <- cog(coefs$estimate[1], "intercept of model")
-#       ret$intercept_p_value <- cog(coefs$p.value[1], "intercept of model")
-#     }
-#     coefs <- filter_(coefs, coefs$term != "(Intercept)")
-#
-#     bc <- MASS::boxcox(mod)
-#     bc_range <- range(bc$x[bc$y > max(bc$y) - 1/2 * qchisq(.95,1)])
-#
-#     ret %>%
-#       append(
-#         list(
-#           beta = cog(coefs$estimate[1], "beta value of coefficient"),
-#           beta_p_value = cog(coefs$p.value[1], "significance of coefficient"),
-#           r2 = cog(infos$r.squared, "fraction of variance explained by the model"),
-#           sigma = cog(infos$sigma, "square root of the estimated residual variance"),
-#           statistic = cog(infos$statistic, "F-statistic of the model"),
-#           p_value = cog(infos$p.value, "p-value form the F test"),
-#           df = cog(infos$p.value, "degrees of freedom used by the coefficients"),
-#           log_lik = cog(infos$logLik, "log-likelihood value under the model"),
-#           aic = cog(infos$AIC, "Akaike's An Information Criterion"),
-#           bic = cog(infos$BIC, "Schwarz's Bayesian criterion"),
-#           deviance = cog(infos$deviance, "quality-of-fit statistic of the model"),
-#           df_residual = cog(infos$df.residual, "residual degrees of freedom"),
-#           n_sig_cooks = cog(
-#             sum(dta$.cooksd > 4 / nrow(dta)),
-#             "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
-#           ),
-#           n_sig_hat = cog(
-#             sum(dta$.hat > (2 * 1 / nrow(dta))),
-#             "number of significant influence points. (sum(hat > 2 * p / n))"
-#           ),
-#           resid_shapiro = cog(
-#             shapiro.test(dta$.resid)$p.value,
-#             "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
-#             (1995) to be adequate for ‘p.value < 0.1’\""
-#           ),
-#           bc_lower = cog(bc_range[1],"lower bound of 95% CI of Box Cox Transformation"),
-#           bc_upper = cog(bc_range[2],"upper bound of 95% CI of Box Cox Transformation")
-#         )
-#       )
-#   }
-# )
-
-
 # need to import the BIC function as it's called internally in Mclust()
 #' @importFrom mclust Mclust mclustBIC
 add_auto_cog(
@@ -286,6 +219,10 @@ add_auto_cog(
     n <- length(x)
     x_is_na <- is.na(x)
     dt <- data.frame(x)
+
+    if (length(unique(dt$x)) == 1) {
+      return(NULL)
+    }
 
     scales <- list(
       x = ScaleContinuous$clone()
@@ -342,7 +279,8 @@ add_auto_cog(
     # StatDensity2d parameters
     na.rm = FALSE, h = NULL,
     # contour = TRUE,
-    n = 100, bins = NULL, binwidth = NULL
+    n = 100, bins = NULL, binwidth = NULL,
+    clusters = length(x) <= 1000
   ) {
 
     n <- length(x)
@@ -365,17 +303,21 @@ add_auto_cog(
     max_density_x <- ret$x[max_row]
     max_density_y <- ret$y[max_row]
 
-    list(
+    ret <- list(
       max_density = cog(max_density, "maximum density height"),
       max_density_x = cog(max_density_x, "X location of maximum density height"),
-      max_density_y = cog(max_density_y, "Y location of maximum density height"),
+      max_density_y = cog(max_density_y, "Y location of maximum density height")#,
       # max_density_slope = cog(max_slope, "maximum absolute value density slope"),
       # uniform_mse = cog(mse, "mean squared error compared to uniform")
-      cluters = cog(
+    )
+    if (isTRUE(clusters)) {
+      ret$clusters <- cog(
         mclust::Mclust(dt[,c("x", "y")], verbose = FALSE)$G,
         "optimal number of components found using Model-Based Clustering"
       )
-    )
+    }
+
+    ret
   }
 )
 
@@ -392,8 +334,7 @@ add_auto_cog(
     # StatBin parameters
     binwidth = NULL, bins = 30, center = NULL,
     boundary = NULL, closed = c("right", "left"), pad = FALSE,
-    breaks = NULL, origin = NULL, right = NULL, drop = NULL,
-    width = NULL
+    breaks = NULL
   ) {
 
     n <- length(x)
@@ -404,13 +345,13 @@ add_auto_cog(
     )
     scales$x$train(dt$x)
 
-    ret <- StatBin$compute_group(
-      dt, scales,
+    params <- list(
       binwidth = binwidth, bins = bins, center = center,
       boundary = boundary, closed = closed, pad = pad,
-      breaks = breaks, origin = origin, right = right, drop = drop,
-      width = width
+      breaks = breaks
     )
+    params <- StatBin$setup_params(dt, params)
+    ret <- do.call(StatBin$compute_group, append(list(dt, scales), params))
 
     counts <- ret$count
 

@@ -11,8 +11,14 @@ test_that("ggplot2 layers", {
 
   expect_silent({
     ignore <- plot_cogs(p, layers = TRUE)
+  })
+  expect_silent({
     ignore <- plot_cogs(p, layers = c(FALSE, TRUE))
+  })
+  expect_silent({
     ignore <- plot_cogs(p, layers = c(TRUE, FALSE))
+  })
+  expect_silent({
     ignore <- plot_cogs(p, layers = c(TRUE, TRUE))
   })
 

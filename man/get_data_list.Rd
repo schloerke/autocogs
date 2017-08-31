@@ -2,12 +2,22 @@
 % Please edit documentation in R/calculate.R
 \name{get_data_list}
 \alias{get_data_list}
+\alias{get_data_list.default}
+\alias{get_data_list.ggplot}
 \title{Data List}
 \usage{
 get_data_list(p, ...)
+
+\method{get_data_list}{default}(p, ...)
+
+\method{get_data_list}{ggplot}(p, ..., layers = TRUE)
 }
 \arguments{
 \item{p}{plot object}
+
+\item{...}{parameters passed on to corresponding \code{get_data_list}}
+
+\item{layers}{boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated}
 }
 \description{
 Data List

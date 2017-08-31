@@ -16,6 +16,7 @@ simplify_cogs <- function(cog_list) {
 #' Return or concatinate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.
 #' @param dt data to be used
 #' @param panel_col panel column to be used in \code{dt}
+#' @param ... parameters passed to \code{\link{get_data_list}}
 #' @rdname panel_cogs
 #' @export
 panel_cogs <- function(dt, panel_col = "panel", ...) {
@@ -52,6 +53,7 @@ add_panel_cogs <- function(dt, panel_col = "panel", ...) {
 #' @param .name name of a known cognostic
 #' @param ... arguments passed onto the found function
 #' @param .fn_only boolean that determines if the function should be returned
+#' @export
 #' @examples
 #' auto_cog("univariate_continuous", iris$Sepal.Length)
 #' fn <- auto_cog("univariate_continuous", .fn_only = TRUE)

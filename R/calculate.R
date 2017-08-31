@@ -142,7 +142,9 @@ get_layer_data <- function(p, ...) {
 #' Data List
 #'
 #' @param p plot object
+#' @param ... parameters passed on to corresponding \code{get_data_list}
 #' @export
+#' @rdname get_data_list
 #' @examples
 #' require(ggplot2)
 #' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
@@ -152,6 +154,7 @@ get_data_list <- function(p, ...) {
   UseMethod("get_data_list", p)
 }
 
+#' @rdname get_data_list
 #' @export
 get_data_list.default <- function(p, ...) {
   stop("Please implement `get_data_list.PLOT_TYPE(p, ...)`")
@@ -160,6 +163,8 @@ get_data_list.default <- function(p, ...) {
 
 # must return x, (y, ) group.
 # if group is all equal, then there is only one grouping
+#' @param layers boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated
+#' @rdname get_data_list
 #' @export
 get_data_list.ggplot <- function(p, ..., layers = TRUE) {
   assert_logical(layers, any.missing = FALSE)

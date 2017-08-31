@@ -13,6 +13,8 @@ add_panel_cogs(dt, panel_col = "panel", ...)
 \item{dt}{data to be used}
 
 \item{panel_col}{panel column to be used in \code{dt}}
+
+\item{...}{parameters passed to \code{\link{get_data_list}}}
 }
 \description{
 Return or concatinate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.

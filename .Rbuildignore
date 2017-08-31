@@ -5,4 +5,7 @@
 ^\.lintr$
 ^schema\.graphql$
 ^README\.Rmd$
+^README\.html$
 ^README-.*\.png$
+^_ignore$
+^appfiles$

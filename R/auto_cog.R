@@ -11,9 +11,14 @@ simplify_cogs <- function(cog_list) {
 }
 
 
-
+#' Panel cognostics
+#'
+#' Return or concatinate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.
+#' @param dt data to be used
+#' @param panel_col panel column to be used in \code{dt}
+#' @rdname panel_cogs
 #' @export
-panel_cogs <- function(dt, panel_cogs = "panel") {
+panel_cogs <- function(dt, panel_col = "panel") {
   panels <- dt[[panel_col]]
 
   pb <- progress::progress_bar$new(total = length(panels), format = "auto cogs [:bar] :current/:total eta::eta ")
@@ -30,7 +35,8 @@ panel_cogs <- function(dt, panel_cogs = "panel") {
   cog_dt
 }
 
+#' @rdname panel_cogs
 #' @export
-add_panel_cogs <- function(dt, ...) {
-  bind_cols(dt, panel_cogs(dt, ...))
+add_panel_cogs <- function(dt, panel_col) {
+  bind_cols(dt, panel_cogs(dt, panel_col))
 }

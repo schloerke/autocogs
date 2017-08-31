@@ -22,11 +22,12 @@ Imports: dplyr,
     tibble,
     scagnostics,
     utils,
-    hexbin
+    hexbin,
+    progress
 Remotes:
     hafen/trelliscopejs
 RoxygenNote: 6.0.1
-Collate: 
+Collate:
     'known.R'
     'add_auto_cogs.R'
     'auto_cog.R'

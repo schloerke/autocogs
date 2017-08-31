@@ -84,11 +84,6 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
         # dt_i_list$plot <- p
         # dt_i_list$layer_data <- layer_item
 
-        if (has_name(layer_item$params, "method.args")) {
-          layer_item$params$method_args <- layer_item$params$method.args
-          layer_item$params$method.args <- NULL
-        }
-
         fn <- item_cog_dt$fn[[i]]
         args <- append(dt_i_list, layer_item$params)
         ans <- do.call(fn, args)
@@ -100,6 +95,7 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
       ret <- list()
       ret[item_cog_dt$store_name] <- cog_ans
 
+      # remove any NULL values
       nulls <- lapply(ret, is.null) %>% unlist()
       if (any(nulls)) {
         ret[nulls] <- NULL
@@ -125,18 +121,18 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
 
 get_layer_data <- function(p, ...) {
   ret <- get_data_list(p, ...)
+  assert_list(ret, min.len = 1)
+
   ans <- lapply(ret, function(item) {
+    assert_list(item, max.len = 3, unique = TRUE)
+    assert_names(names(item), subset.of = c("name", "data", "params"))
+    assert_list(item$params, null.ok = TRUE)
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)
     item$data <- as_data_frame(item$data)
-    # qq plot
-    if (
-      ! tibble::has_name(item$data, "x") & tibble::has_name(item$data, "sample")
-    ) {
-      item$data$x <- item$data$sample
-    }
     item
   })
+
   for (i in seq_along(ans)) {
     ans[[i]]$layer_num <- i
   }
@@ -152,16 +148,13 @@ get_layer_data <- function(p, ...) {
 #' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
 #'   geom_point(data = mpg, mapping = aes(cty, hwy))
 #' get_data_list(p)
-get_data_list <- function(p, ..., layers = TRUE) {
-  assert_logical(layers, any.missing = FALSE)
-  if (length(layers) == 1) assert_true(layers)
-
+get_data_list <- function(p, ...) {
   UseMethod("get_data_list", p)
 }
 
 #' @export
 get_data_list.default <- function(p, ...) {
-  stop("Please implement `get_data_list.PLOT_TYPE(p, ..., layers)`")
+  stop("Please implement `get_data_list.PLOT_TYPE(p, ...)`")
 }
 
 
@@ -169,6 +162,8 @@ get_data_list.default <- function(p, ...) {
 # if group is all equal, then there is only one grouping
 #' @export
 get_data_list.ggplot <- function(p, ..., layers = TRUE) {
+  assert_logical(layers, any.missing = FALSE)
+  if (length(layers) == 1) assert_true(layers)
   layer_list <- p$layers[layers]
   assert_list(layer_list, min.len = 1)
 
@@ -176,6 +171,13 @@ get_data_list.ggplot <- function(p, ..., layers = TRUE) {
     layer_data <- layer$layer_data(p$data) %>% mutate(PANEL = -2L)
 
     ret_data <- layer$compute_aesthetics(layer_data, p)
+
+    if (
+      ! tibble::has_name(ret_data, "x") &
+      tibble::has_name(ret_data, "sample")
+    ) {
+      ret_data$x <- ret_data$sample
+    }
 
     layer_name <- snake_class(layer$geom)
 
@@ -198,13 +200,18 @@ get_data_list.ggplot <- function(p, ..., layers = TRUE) {
       "geom_bar" = if (inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
       layer_name
     )
+
+    params <- layer$stat_params
+    if (has_name(params, "method.args")) {
+      params$method_args <- params$method.args
+      params$method.args <- NULL
+    }
+
     list(
       name = ret_name,
       data = ret_data,
-      params = layer$stat_params
+      params = params
       # TODO
-      # ,
-      # geom_params = list(),
       # mapping = list(x, y, color, fill, ...)
     )
   })

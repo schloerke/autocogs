@@ -1,4 +1,8 @@
+
 context("layers")
+
+library(ggplot2)
+
 
 test_that("ggplot2 layers", {
 

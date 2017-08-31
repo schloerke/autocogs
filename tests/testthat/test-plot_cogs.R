@@ -1,4 +1,8 @@
+
 context("plot_cogs")
+
+library(ggplot2)
+
 
 expect_auto_cogs <- function(p, names, lengths) {
   cat("") # make the tests show up while running

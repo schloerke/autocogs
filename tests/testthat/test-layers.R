@@ -7,7 +7,7 @@ library(ggplot2)
 test_that("ggplot2 layers", {
 
   p <- qplot(Sepal.Length, Sepal.Width, data = iris) +
-    geom_smooth(method = "lm")
+    geom_smooth(method = "auto")
 
   expect_silent({
     ignore <- plot_cogs(p, layers = TRUE)

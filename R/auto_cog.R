@@ -21,7 +21,10 @@ simplify_cogs <- function(cog_list) {
 panel_cogs <- function(dt, panel_col = "panel", ...) {
   panels <- dt[[panel_col]]
 
-  pb <- progress::progress_bar$new(total = length(panels), format = "auto cogs [:bar] :current/:total eta::eta ")
+  pb <- progress::progress_bar$new(
+    total = length(panels),
+    format = "auto cogs [:bar] :current/:total eta::eta "
+  )
 
   panels %>%
     lapply(function(x) {

@@ -18,7 +18,7 @@ simplify_cogs <- function(cog_list) {
 #' @param panel_col panel column to be used in \code{dt}
 #' @rdname panel_cogs
 #' @export
-panel_cogs <- function(dt, panel_col = "panel") {
+panel_cogs <- function(dt, panel_col = "panel", ...) {
   panels <- dt[[panel_col]]
 
   pb <- progress::progress_bar$new(total = length(panels), format = "auto cogs [:bar] :current/:total eta::eta ")
@@ -26,7 +26,7 @@ panel_cogs <- function(dt, panel_col = "panel") {
   panels %>%
     lapply(function(x) {
       pb$tick()
-      calculate_auto_cogs(x)
+      calculate_auto_cogs(x, ...)
     }) %>%
     lapply(simplify_cogs) %>%
     bind_rows() ->
@@ -37,6 +37,6 @@ panel_cogs <- function(dt, panel_col = "panel") {
 
 #' @rdname panel_cogs
 #' @export
-add_panel_cogs <- function(dt, panel_col) {
-  bind_cols(dt, panel_cogs(dt, panel_col))
+add_panel_cogs <- function(dt, panel_col = "panel", ...) {
+  bind_cols(dt, panel_cogs(dt, panel_col, ...))
 }

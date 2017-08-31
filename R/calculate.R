@@ -22,10 +22,10 @@ plot_class <- function(p) {
 }
 
 
-calculate_auto_cogs <- function(p, verbose = FALSE) {
+calculate_auto_cogs <- function(p, ..., verbose = FALSE) {
 
   plot_class_val <- plot_class(p)
-  layer_info <- get_layer_data(p)
+  layer_info <- get_layer_data(p, ...)
 
   # for every layer
   lapply(layer_info, function(layer_item) {
@@ -119,8 +119,8 @@ calculate_auto_cogs <- function(p, verbose = FALSE) {
 
 
 
-get_layer_data <- function(p) {
-  ret <- get_data_list(p)
+get_layer_data <- function(p, ...) {
+  ret <- get_data_list(p, ...)
   ans <- lapply(ret, function(item) {
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)
@@ -148,21 +148,27 @@ get_layer_data <- function(p) {
 #' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
 #'   geom_point(data = mpg, mapping = aes(cty, hwy))
 #' get_data_list(p)
-get_data_list <- function(p) {
+get_data_list <- function(p, ..., layers = TRUE) {
+  assert_logical(layers, any.missing = FALSE)
+  if (length(layers) == 1) assert_true(layers)
+
   UseMethod("get_data_list", p)
 }
 
 #' @export
-get_data_list.default <- function(p) {
-  stop("Please implement `get_data_list.PLOT_TYPE(p)`")
+get_data_list.default <- function(p, ...) {
+  stop("Please implement `get_data_list.PLOT_TYPE(p, ..., layers)`")
 }
 
 
 # must return x, (y, ) group.
 # if group is all equal, then there is only one grouping
 #' @export
-get_data_list.ggplot <- function(p) {
-  lapply(p$layers, function(layer) {
+get_data_list.ggplot <- function(p, ..., layers = TRUE) {
+  layer_list <- p$layers[layers]
+  assert_list(layer_list, min.len = 1)
+
+  lapply(layer_list, function(layer) {
     layer_data <- layer$layer_data(p$data) %>% mutate(PANEL = -2L)
 
     ret_data <- layer$compute_aesthetics(layer_data, p)
@@ -199,7 +205,3 @@ get_data_list.ggplot <- function(p) {
     )
   })
 }
-
-
-
-# load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris); calculate_auto_cogs(p)

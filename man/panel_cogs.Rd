@@ -5,9 +5,9 @@
 \alias{add_panel_cogs}
 \title{Panel cognostics}
 \usage{
-panel_cogs(dt, panel_col = "panel")
+panel_cogs(dt, panel_col = "panel", ...)
 
-add_panel_cogs(dt, panel_col)
+add_panel_cogs(dt, panel_col = "panel", ...)
 }
 \arguments{
 \item{dt}{data to be used}

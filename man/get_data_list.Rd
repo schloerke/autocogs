@@ -4,7 +4,7 @@
 \alias{get_data_list}
 \title{Data List}
 \usage{
-get_data_list(p)
+get_data_list(p, ..., layers = TRUE)
 }
 \arguments{
 \item{p}{plot object}

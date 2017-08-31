@@ -43,3 +43,38 @@ panel_cogs <- function(dt, panel_col = "panel", ...) {
 add_panel_cogs <- function(dt, panel_col = "panel", ...) {
   bind_cols(dt, panel_cogs(dt, panel_col, ...))
 }
+
+
+#' Auto cognostic function
+#'
+#' Calculate an auto cognostic function given a name
+#'
+#' @param .name name of a known cognostic
+#' @param ... arguments passed onto the found function
+#' @param .fn_only boolean that determines if the function should be returned
+#' @examples
+#' auto_cog("univariate_continuous", iris$Sepal.Length)
+#' fn <- auto_cog("univariate_continuous", .fn_only = TRUE)
+#' fn(iris$Sepal.Length)
+auto_cog <- function(.name, ..., .fn_only = FALSE) {
+  assert_character(.name, len = 1, any.missing = FALSE)
+  assert_subset(.name, known_cogs$name, empty.ok = FALSE)
+
+  this_cog <- known_cogs[known_cogs$name == .name, ]
+
+  # fields <- this_cog$fields[[1]]
+  fn <- this_cog$fn[[1]]
+  attr(fn, "description") <- this_cog$description[[1]]
+
+  if (isTRUE(.fn_only)) {
+    ret <- function(...) {
+      as_tibble(fn(...))
+    }
+    attr(ret, "fn") <- fn
+    return(ret)
+  }
+
+  # TODO could check for field type here
+  args <- list(...)
+  as_tibble(do.call(fn, args))
+}

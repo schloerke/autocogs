@@ -29,7 +29,7 @@ panel_cogs <- function(dt, panel_col = "panel", ...) {
   panels %>%
     lapply(function(x) {
       pb$tick()
-      calculate_auto_cogs(x, ...)
+      plot_cogs(x, ...)
     }) %>%
     lapply(simplify_cogs) %>%
     bind_rows() ->

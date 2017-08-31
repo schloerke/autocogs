@@ -18,7 +18,7 @@ NULL
 #   cognostics: [String!]! # list of all cognostics names. ex: univariate_counts, univariate_continuous
 # }
 
-plot_cogs <- data_frame(
+known_plot_cogs <- data_frame(
   # plot mechanism (ggplot2, rbokeh, plotly, etc.)
   kind = character(0),
 
@@ -92,8 +92,8 @@ add_plot_cog <- function(
   # })
 
 
-  plot_cogs <<- bind_rows(
-    plot_cogs,
+  known_plot_cogs <<- bind_rows(
+    known_plot_cogs,
     data_frame(
       kind,
       name,

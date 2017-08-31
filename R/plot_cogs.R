@@ -10,7 +10,7 @@ NULL
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "bar"); print(p); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "bar"); print(p); plot_cogs(p)
   "geom_bar",
   "bar plot. (height is calculated)",
   tribble(
@@ -20,7 +20,7 @@ add_plot_cog(
   )
 )
 add_plot_cog(
-  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris, geom = "col"); print(p); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris, geom = "col"); print(p); plot_cogs(p)
   "geom_col",
   "bar plot with known height",
   tribble(
@@ -37,7 +37,7 @@ add_plot_cog(
 #     * bivariate_counts(x, y)
 #     * chi_square_test(bin_counts)
 add_plot_cog(
-  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "hex"); print(p); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "hex"); print(p); plot_cogs(p)
   "geom_hex",
   "hexegon density plot",
   tribble(
@@ -54,7 +54,7 @@ add_plot_cog(
 #     * bivariate_counts(x, y)
 #     * chi_square_test(bin_counts)
 add_plot_cog(
-  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "bin2d"); print(p); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(carat, price, data = diamonds, geom = "bin2d"); print(p); plot_cogs(p)
   "geom_bin2d",
   "hexegon density plot",
   tribble(
@@ -83,7 +83,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
 add_plot_cog(
-  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris); plot_cogs(p)
   "geom_point",
   "scatter plot points",
   tribble(
@@ -109,7 +109,7 @@ add_plot_cog(
 #     ** ('max_non_outlier', 'maximum non outlier point')
 #     ** ('n_outlier_upper', 'count of upper outliers')
 add_plot_cog(
-  # load_all(); p <- qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot"); plot_cogs(p)
   "geom_boxplot",
   "boxplot plot",
   tribble(
@@ -127,7 +127,7 @@ add_plot_cog(
 #     * bivariate_counts(x, y)
 #     ** grouped_counts(counts...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "count"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "count"); plot_cogs(p)
   "geom_count",
   "count of discrete scatter plot points",
   tribble(
@@ -151,7 +151,7 @@ add_plot_cog(
 #     ** grouped_testing(x...)
 #     ** grouped_counts(counts...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "density"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, data = mpg, geom = "density"); plot_cogs(p)
   "geom_density",
   "density of a single variable",
   tribble(
@@ -168,7 +168,7 @@ add_plot_cog(
 #     ** grouped_testing(x...)
 #     ** grouped_counts(counts...)
 add_plot_cog(
-  # load_all(); p <- qplot(1, cty, data = mpg, geom = "violin"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(1, cty, data = mpg, geom = "violin"); plot_cogs(p)
   "geom_violin",
   "density of a single y variable",
   tribble(
@@ -186,7 +186,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
 add_plot_cog(
-  # load_all(); p <- qplot(carat, price, data = diamonds[1:1000, ], geom = "density_2d"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(carat, price, data = diamonds[1:1000, ], geom = "density_2d"); plot_cogs(p)
   "geom_density2d",
   "Contours of a 2d density estimate. Similar to a topographical map",
   tribble(
@@ -210,7 +210,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "dotplot"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, data = mpg, geom = "dotplot"); plot_cogs(p)
   # TODO could be done better
   "geom_dotplot",
   "stacked dots where each dot represents an observation.  The width of the dot represents the bin width.",
@@ -231,7 +231,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); plot_cogs(p)
   "geom_histogram",
   "histogram of continuous data",
   tribble(
@@ -251,7 +251,7 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); plot_cogs(p)
   "geom_rug",
   "Rug plots in the margins",
   tribble(
@@ -272,7 +272,7 @@ add_plot_cog(
 #     ** grouped_testing(angle...)
 #     ** grouped_testing(spoke...)
 add_plot_cog(
-  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, radius = ~ Petal.Length, spoke = ~ Petal.Width, data = iris, geom = "spoke"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(Sepal.Length, Sepal.Width, radius = ~ Petal.Length, spoke = ~ Petal.Width, data = iris, geom = "spoke"); plot_cogs(p)
   "geom_spoke",
   "Spoke plot of continuous data",
   tribble(
@@ -298,7 +298,7 @@ add_plot_cog(
 #     * sum of delta^2
 #     * KS test (x, dist)
 add_plot_cog(
-  # load_all(); p <- qplot(sample = Sepal.Length, data = iris, geom = "qq"); print(p); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(sample = Sepal.Length, data = iris, geom = "qq"); print(p); plot_cogs(p)
   "geom_qq",
   "Quantile-Quantile plot of continuous data",
   tribble(
@@ -320,7 +320,7 @@ add_plot_cog(
 #     ** group and x interaction significance (slope)
 #     ** grouped_counts(counts...)
 add_plot_cog(
-  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth"); plot_cogs(p)
   "geom_smooth",
   "Smooth line plot of continuous x-y data",
   tribble(
@@ -333,7 +333,7 @@ add_plot_cog(
   )
 )
 add_plot_cog(
-  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess", span = 0.9, method.args = list(degree = 1)); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess", span = 0.9, method.args = list(degree = 1)); plot_cogs(p)
   "geom_smooth_loess",
   "Loess plot of continuous x-y data",
   tribble(
@@ -348,7 +348,7 @@ add_plot_cog(
 )
 
 add_plot_cog(
-  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "lm"); calculate_auto_cogs(p)
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "lm"); plot_cogs(p)
   "geom_smooth_lm",
   "Smooth line plot of continuous x-y data",
   tribble(

@@ -5,7 +5,7 @@ library(ggplot2)
 expect_auto_cogs <- function(p, names, lengths) {
   cat("") # make the tests show up while running
 
-  large_cog_list <- p %>% calculate_auto_cogs()
+  large_cog_list <- p %>% plot_cogs()
 
   expect_list(large_cog_list, types = "list", len = 1)
 
@@ -234,7 +234,7 @@ test_that("ggplot2::geom_smooth_loess", {
       c("_x", "_y", "_bivar", "_smooth", "_loess", "_n"),
       c(5, 5, 2, 2, 6, 5)
     )
-  cogs <- calculate_auto_cogs(p)
+  cogs <- plot_cogs(p)
   expect_equal(cogs[[1]]$"_loess"$span[1], 0.75)
   expect_equal(cogs[[1]]$"_loess"$degree[1], 2)
 
@@ -248,7 +248,7 @@ test_that("ggplot2::geom_smooth_loess", {
       c("_x", "_y", "_bivar", "_smooth", "_loess", "_n"),
       c(5, 5, 2, 2, 6, 5)
     )
-  cogs <- calculate_auto_cogs(p)
+  cogs <- plot_cogs(p)
   expect_equal(cogs[[1]]$"_loess"$span[1], 0.9)
   expect_equal(cogs[[1]]$"_loess"$degree[1], 1)
 })

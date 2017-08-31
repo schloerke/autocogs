@@ -22,7 +22,7 @@ plot_class <- function(p) {
 }
 
 
-calculate_auto_cogs <- function(p, ..., verbose = FALSE) {
+plot_cogs <- function(p, ..., verbose = FALSE) {
 
   plot_class_val <- plot_class(p)
   layer_info <- get_layer_data(p, ...)
@@ -30,7 +30,7 @@ calculate_auto_cogs <- function(p, ..., verbose = FALSE) {
   # for every layer
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
-    layer_cog_group <- plot_cogs %>% filter_(~ kind == plot_class_val, ~ name == layer_item$name)
+    layer_cog_group <- known_plot_cogs %>% filter_(~ kind == plot_class_val, ~ name == layer_item$name)
 
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
@@ -47,7 +47,11 @@ calculate_auto_cogs <- function(p, ..., verbose = FALSE) {
     lapply(layer_cog_group$auto_cogs, function(auto_cog_dt) {
 
       # produce a join of the request auto cogs and known auto cogs
-      item_cog_dt <- inner_join(auto_cog_dt, known_cogs, c("auto_cog" = "name"))
+      # (as the known cogs could have updated since last execution)
+      item_cog_dt <- inner_join(
+        auto_cog_dt, known_cogs,
+        c("auto_cog" = "name")
+      )
 
       if (nrow(item_cog_dt) != nrow(auto_cog_dt)) {
         if (verbose) {

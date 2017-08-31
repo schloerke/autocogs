@@ -6,16 +6,16 @@ test_that("ggplot2 layers", {
     geom_smooth(method = "lm")
 
   expect_silent({
-    ignore <- calculate_auto_cogs(p, layers = TRUE)
-    ignore <- calculate_auto_cogs(p, layers = c(FALSE, TRUE))
-    ignore <- calculate_auto_cogs(p, layers = c(TRUE, FALSE))
-    ignore <- calculate_auto_cogs(p, layers = c(TRUE, TRUE))
+    ignore <- plot_cogs(p, layers = TRUE)
+    ignore <- plot_cogs(p, layers = c(FALSE, TRUE))
+    ignore <- plot_cogs(p, layers = c(TRUE, FALSE))
+    ignore <- plot_cogs(p, layers = c(TRUE, TRUE))
   })
 
   expect_error({
-    calculate_auto_cogs(p, layers = FALSE)
+    plot_cogs(p, layers = FALSE)
   })
   expect_error({
-    calculate_auto_cogs(p, layers = c(TRUE, TRUE, TRUE))
+    plot_cogs(p, layers = c(TRUE, TRUE, TRUE))
   })
 })

@@ -88,7 +88,8 @@ known_cogs <- data_frame(
   fn = list()
 )
 
-add_auto_cog <- function(
+#' Add known cognostic
+add_cog <- function(
   name,
   fields,
   description = NA,

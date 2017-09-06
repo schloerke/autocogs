@@ -3,7 +3,7 @@ NULL
 
 
 
-add_cog(
+add_cog_group(
   "univariate_continuous",
   field_info("x", "continuous"),
   "univariate metrics for continuous data",
@@ -23,7 +23,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "univariate_discrete",
   field_info("x", "discrete"),
   "univariate metrics for discrete data",
@@ -42,7 +42,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "boxplot_metrics",
   field_info("x", "continuous"),
   "univariate boxplot metrics for continuous data",
@@ -65,7 +65,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "bivariate_continuous",
   bind_rows(
     field_info("x", "continuous"),
@@ -82,7 +82,7 @@ add_cog(
 
 
 #' @import scagnostics
-add_cog(
+add_cog_group(
   "scagnostics",
   bind_rows(
     field_info("x", "continuous"),
@@ -106,7 +106,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "univariate_counts",
   bind_rows(
     field_info("x", "any")
@@ -121,7 +121,7 @@ add_cog(
     )
   }
 )
-add_cog(
+add_cog_group(
   "bivariate_counts",
   bind_rows(
     field_info("x", "any"),
@@ -143,7 +143,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "hex_counts",
   bind_rows(
     field_info("x", "continuous"),
@@ -170,7 +170,7 @@ add_cog(
     )
   }
 )
-add_cog(
+add_cog_group(
   "square_counts",
   bind_rows(
     field_info("x", "continuous"),
@@ -206,7 +206,7 @@ add_cog(
 
 # need to import the BIC function as it's called internally in Mclust()
 #' @importFrom mclust Mclust mclustBIC
-add_cog(
+add_cog_group(
   "density_continuous",
   field_info("x", "continuous"),
   "density plot information",
@@ -267,7 +267,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "density_2d_continuous",
   bind_rows(
     field_info("x", "continuous"),
@@ -323,7 +323,7 @@ add_cog(
 
 
 
-add_cog(
+add_cog_group(
   "histogram_counts",
   bind_rows(
     field_info("x", "continuous")
@@ -367,7 +367,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "pairwise_counts",
   bind_rows(
     field_info("x", "any"),
@@ -402,7 +402,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "grouped_counts",
   bind_rows(
     field_info("x", "continuous"),
@@ -437,7 +437,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "grouped_testing",
   bind_rows(
     field_info("x", "continuous"),
@@ -467,7 +467,7 @@ add_cog(
 
 
 
-add_cog(
+add_cog_group(
   "quantile_quantile",
   field_info("x", "continuous"),
   "quantile quantile plot diagnostics",
@@ -519,7 +519,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "smooth_line",
   bind_rows(
     field_info("x", "continuous"),
@@ -579,7 +579,7 @@ add_cog(
 )
 
 
-add_cog(
+add_cog_group(
   "linear_model",
   bind_rows(
     field_info("x", "continuous"),
@@ -665,7 +665,7 @@ add_cog(
 
 
 
-add_cog(
+add_cog_group(
   "loess_model",
   bind_rows(
     field_info("x", "continuous"),
@@ -725,4 +725,4 @@ add_cog(
 
 
 
-# known_cogs %>% tibble::glimpse() %>% as.list() %>% print()
+# known_cog_groups %>% tibble::glimpse() %>% as.list() %>% print()

@@ -9,22 +9,22 @@ NULL
 #     * univariate_counts(x)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "bar"); print(p); plot_cogs(p)
   "geom_bar",
   "bar plot. (height is calculated)",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_counts", "x", "_n"
   )
 )
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris, geom = "col"); print(p); plot_cogs(p)
   "geom_col",
   "bar plot with known height",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_counts", c("x", "y"), "_n"
@@ -36,12 +36,12 @@ add_plot_cog(
 #     - Hexagonal heatmap of 2d bin counts
 #     * bivariate_counts(x, y)
 #     * chi_square_test(bin_counts)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(carat, price, data = diamonds, geom = "hex"); print(p); plot_cogs(p)
   "geom_hex",
   "hexegon density plot",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",
@@ -53,12 +53,12 @@ add_plot_cog(
 #     - Heatmap of 2d bin counts
 #     * bivariate_counts(x, y)
 #     * chi_square_test(bin_counts)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(carat, price, data = diamonds, geom = "bin2d"); print(p); plot_cogs(p)
   "geom_bin2d",
   "hexegon density plot",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "square_counts", c("x", "y"), "_square_bins",
     "bivariate_counts", c("x", "y"), "_n"
   )
@@ -82,12 +82,12 @@ add_plot_cog(
 #     * bivariate_counts(x,y)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, Sepal.Width, data = iris); plot_cogs(p)
   "geom_point",
   "scatter plot points",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",
@@ -108,12 +108,12 @@ add_plot_cog(
 #     ** ('min_non_outlier', 'minimum point')
 #     ** ('max_non_outlier', 'maximum non outlier point')
 #     ** ('n_outlier_upper', 'count of upper outliers')
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot"); plot_cogs(p)
   "geom_boxplot",
   "boxplot plot",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "y", "_y",
     "boxplot_metrics", "y", "_boxplot",
     "univariate_counts", "y", "_n"
@@ -126,12 +126,12 @@ add_plot_cog(
 #     * expected count(x)
 #     * bivariate_counts(x, y)
 #     ** grouped_counts(counts...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "count"); plot_cogs(p)
   "geom_count",
   "count of discrete scatter plot points",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "univariate_discrete", "x", "_x_counts",
@@ -150,12 +150,12 @@ add_plot_cog(
 #     * univariate_continuous(x)
 #     ** grouped_testing(x...)
 #     ** grouped_counts(counts...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, data = mpg, geom = "density"); plot_cogs(p)
   "geom_density",
   "density of a single variable",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "density_continuous", "x", "_density",
     "univariate_counts", "x", "_n"
@@ -167,12 +167,12 @@ add_plot_cog(
 #     * univariate_continuous(x)
 #     ** grouped_testing(x...)
 #     ** grouped_counts(counts...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(1, cty, data = mpg, geom = "violin"); plot_cogs(p)
   "geom_violin",
   "density of a single y variable",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "y", "_y",
     "density_continuous", "y", "_violin",
     "univariate_counts", "y", "_n"
@@ -185,12 +185,12 @@ add_plot_cog(
 #     * bivariate_continuous(x,y)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(y...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(carat, price, data = diamonds[1:1000, ], geom = "density_2d"); plot_cogs(p)
   "geom_density2d",
   "Contours of a 2d density estimate. Similar to a topographical map",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",
@@ -209,13 +209,13 @@ add_plot_cog(
 #     * univariate_counts(x)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, data = mpg, geom = "dotplot"); plot_cogs(p)
   # TODO could be done better
   "geom_dotplot",
   "stacked dots where each dot represents an observation.  The width of the dot represents the bin width.",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
     "univariate_counts", c("x"), "_n"
@@ -230,12 +230,12 @@ add_plot_cog(
 #     * univariate_continuous(counts)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); plot_cogs(p)
   "geom_histogram",
   "histogram of continuous data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
     "histogram_counts", c("x"), "_hist_x",
@@ -250,12 +250,12 @@ add_plot_cog(
 #     * univariate_counts(x)
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(x...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); plot_cogs(p)
   "geom_rug",
   "Rug plots in the margins",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
     "univariate_counts", c("x"), "_n"
@@ -271,12 +271,12 @@ add_plot_cog(
 #     ** grouped_counts(counts...)
 #     ** grouped_testing(angle...)
 #     ** grouped_testing(spoke...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, Sepal.Width, radius = ~ Petal.Length, spoke = ~ Petal.Width, data = iris, geom = "spoke"); plot_cogs(p)
   "geom_spoke",
   "Spoke plot of continuous data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
     "univariate_continuous", "y", "_y",
@@ -297,12 +297,12 @@ add_plot_cog(
 #     * sum of delta^2 | below
 #     * sum of delta^2
 #     * KS test (x, dist)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(sample = Sepal.Length, data = iris, geom = "qq"); print(p); plot_cogs(p)
   "geom_qq",
   "Quantile-Quantile plot of continuous data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "quantile_quantile", "x", "_qq"
   )
@@ -319,12 +319,12 @@ add_plot_cog(
 #     ** group variable significance (intercept)
 #     ** group and x interaction significance (slope)
 #     ** grouped_counts(counts...)
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth"); plot_cogs(p)
   "geom_smooth",
   "Smooth line plot of continuous x-y data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",
@@ -332,12 +332,12 @@ add_plot_cog(
     "bivariate_counts", c("x", "y"), "_n"
   )
 )
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess", span = 0.9, method.args = list(degree = 1)); plot_cogs(p)
   "geom_smooth_loess",
   "Loess plot of continuous x-y data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",
@@ -347,12 +347,12 @@ add_plot_cog(
   )
 )
 
-add_plot_cog(
+add_layer_cogs(
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "lm"); plot_cogs(p)
   "geom_smooth_lm",
   "Smooth line plot of continuous x-y data",
   tribble(
-    ~ auto_cog, ~ cols, ~ store_name,
+    ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
     "bivariate_continuous", c("x", "y"), "_bivar",

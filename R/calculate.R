@@ -14,11 +14,33 @@ snake_class <- function(x) {
   snakeize(class(x)[1])
 }
 
+#' Plot class
+#'
+#' First class of the plot object. Exception is ggplot2 as many objects are of class 'gg'
+#' @param p plot object to retrieve class from
+#' @rdname plot_class
+#' @export
+#' @examples
+#' library(ggplot2)
+#' p <- qplot(Sepal.Length, Sepal.Width, data = iris)
+#' plot_class(p)
 plot_class <- function(p) {
-  if (inherits(p, "ggplot")) {
-    return("ggplot")
-  }
+  UseMethod("plot_class", p)
+}
+#' @rdname plot_class
+#' @export
+plot_class.default <- function(p) {
   class(p)[1]
+}
+#' @rdname plot_class
+#' @export
+plot_class.gg <- function(p) {
+  NextMethod()
+}
+#' @rdname plot_class
+#' @export
+plot_class.ggplot <- function(p) {
+  return("ggplot")
 }
 
 
@@ -44,19 +66,19 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
     layer_cog_group <- as.list(layer_cog_group)
 
     # for every layer info row found, look at the auto_cog data frame
-    lapply(layer_cog_group$auto_cogs, function(auto_cog_dt) {
+    lapply(layer_cog_group$layer_cogs, function(layer_cog_dt) {
 
       # produce a join of the request auto cogs and known auto cogs
       # (as the known cogs could have updated since last execution)
       item_cog_dt <- inner_join(
-        auto_cog_dt, known_cogs,
+        layer_cog_dt, known_cog_groups,
         c("auto_cog" = "name")
       )
 
-      if (nrow(item_cog_dt) != nrow(auto_cog_dt)) {
+      if (nrow(item_cog_dt) != nrow(layer_cog_dt)) {
         if (verbose) {
-          message("missing cog groups found for auto cogs: ", paste(setdiff(auto_cog_dt$auto_cog, known_cogs$name), sep = ", "))
-          print(auto_cog_dt)
+          message("missing cog groups found for auto cogs: ", paste(setdiff(layer_cog_dt$auto_cog, known_cog_groups$name), sep = ", "))
+          print(layer_cog_dt)
         }
       }
       if (nrow(item_cog_dt) == 0) {

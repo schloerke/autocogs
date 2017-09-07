@@ -1,6 +1,10 @@
 
 
-cog <- trelliscopejs::cog
+cog <- function(x, desc) {
+  assert_character(desc, len = 1, any.missing = FALSE)
+  attr(x, "desc") <- desc
+  x
+}
 # type CogGroupRequirements {
 #   name: String!
 #   description: String

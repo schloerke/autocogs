@@ -102,23 +102,23 @@ known_cog_groups <- data_frame(
 #' @param ... ignored
 #' @export
 #' @examples
-# \dontrun{
-# add_cog_group(
-#   "univariate_continuous",
-#   field_info("x", "continuous"),
-#   "univariate metrics for continuous data",
-#   function(x, ...) {
-#     x_range <- range(x, na.rm = TRUE)
-#     list(
-#       min = cog(x_range[1], "minimum of non NA data"),
-#       max = cog(x_range[2], "maximum of non NA data"),
-#       mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
-#       median = cog(median(x, na.rm = TRUE), "median of non NA data"),
-#       var = cog(var(x, na.rm = TRUE), "variance of non NA data")
-#     )
-#   }
-# )
-# }
+#' \dontrun{
+#' add_cog_group(
+#'   "univariate_continuous",
+#'   field_info("x", "continuous"),
+#'   "univariate metrics for continuous data",
+#'   function(x, ...) {
+#'     x_range <- range(x, na.rm = TRUE)
+#'     list(
+#'       min = cog(x_range[1], "minimum of non NA data"),
+#'       max = cog(x_range[2], "maximum of non NA data"),
+#'       mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
+#'       median = cog(median(x, na.rm = TRUE), "median of non NA data"),
+#'       var = cog(var(x, na.rm = TRUE), "variance of non NA data")
+#'     )
+#'   }
+#' )
+#' }
 add_cog_group <- function(
   name,
   fields,

@@ -179,7 +179,7 @@ get_data_list <- function(p, ...) {
 #' @rdname get_data_list
 #' @export
 get_data_list.default <- function(p, ...) {
-  stop("Please implement `get_data_list.PLOT_TYPE(p, ...)`")
+  stop("Please implement `get_data_list.", class(p)[1], "(p, ...)`")
 }
 
 

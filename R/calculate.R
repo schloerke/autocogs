@@ -72,7 +72,7 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
       # (as the known cogs could have updated since last execution)
       item_cog_dt <- inner_join(
         layer_cog_dt, known_cog_groups,
-        c("auto_cog" = "name")
+        c("cog_group" = "name")
       )
 
       if (nrow(item_cog_dt) != nrow(layer_cog_dt)) {
@@ -113,9 +113,9 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
         as_data_frame(ans)
       })
 
-      # store values with store_name
+      # store values by name store_name
       ret <- list()
-      ret[item_cog_dt$store_name] <- cog_ans
+      ret[item_cog_dt$name] <- cog_ans
 
       # remove any NULL values
       nulls <- lapply(ret, is.null) %>% unlist()

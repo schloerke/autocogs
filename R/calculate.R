@@ -105,7 +105,7 @@ plot_cogs <- function(p, ..., verbose = FALSE) {
 
         # dt_i_list$plot <- p
         # dt_i_list$layer_data <- layer_item
-
+# TODO listen to field type here
         fn <- item_cog_dt$fn[[i]]
         args <- append(dt_i_list, layer_item$params)
         ans <- do.call(fn, args)

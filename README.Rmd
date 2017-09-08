@@ -37,11 +37,12 @@ devtools::install_github("schloerke/autocogs")
 
 ### Gapminder
 
+```{r autocogs}
+library(autocogs)
+```
 ```{r explore}
 library(tidyverse)
 library(gapminder)
-library(gapminder)
-library(autocogs)
 # devtools::install_github("hafen/trelliscopejs")
 # devtools::install_github("schloerke/trelliscopejs@autocogs")
 library(trelliscopejs)
@@ -60,32 +61,32 @@ In the examples below, we will extract cognostics to aid in exploring the countr
 
 #### `trelliscopejs::facet_trelliscope()`
 
-```{r facet_trelliscope, eval = FALSE}
+```{r facet_trelliscope}
 ggplot(gapminder, aes(year, lifeExp)) +
-  geom_line() +
   geom_smooth(method = "lm") +
+  geom_line() +
   trelliscopejs::facet_trelliscope(
-    # facet by 'country' and 'continent'
     ~ country + continent,
-    # calculate the automatic cognostics for each plot layer using `autocogs` package
-    auto_cog = TRUE,
-    nrow = 4, ncol = 8,
+    nrow = 3, ncol = 6,
     self_contained = TRUE,
-    # set the state to display the country, continent, and R^2 value
-    #   sorted by ascending R^2 value
     state = list(
-      sort = list(list(name = "r2", dir = "asc")),
+      # set the state to display the country, continent, and R^2 value
+      #   sorted by ascending R^2 value
+      sort = list(trelliscopejs::sort_spec("r2")),
       labels = c("country", "continent", "r2")
     )
-  ) %>%
-  print()
+  )
+# (screen shot of trelliscopejs widget)
 ```
 
 #### `trelliscopejs::trelliscope()`
 
 This is a full, start to finish example how automatic cognostics could be inserted into a data exploration workflow.
 
-```{r gapminder, eval = FALSE}
+```{r gapminder}
+# Find a consistent y range
+y_range <- range(gapminder$lifeExp)
+
 ## # Set up data and panel column
 gapminder %>%
   group_by(country, continent) %>%
@@ -94,13 +95,12 @@ gapminder %>%
   mutate(
     # create a column of plots with a
     # * line
-    # * points
-    # * and a linear model
+    # * linear model
     panel = lapply(data, function(dt) {
       ggplot(dt, aes(year, lifeExp)) +
+        geom_smooth(method = "lm") +
         geom_line() +
-        geom_point() +
-        geom_smooth(method = "lm")
+        ylim(y_range[1], y_range[2])
     })
   ) %>%
   print() ->
@@ -116,21 +116,19 @@ gap_data$panel[[1]]
 gap_data %>%
   autocogs::add_panel_cogs() %>%
   # double check it was added
-  print() ->
+  print(width = 100) ->
 full_gap_data
-
-tibble::glimpse(full_gap_data)
 
 # Display the panel and cognostics in a trelliscopejs widget
 trelliscopejs::trelliscope(
   full_gap_data, "gapminder life expectancy",
   panel_col = "panel",
-  ncol = 8, nrow = 4,
+  ncol = 6, nrow = 3,
   auto_cog = FALSE,
   self_contained = TRUE,
   state = list(
     # sort by ascending R^2 value (percent explained by linear model)
-    sort = list(list(name = "r2", dir = "asc")),
+    sort = list(trelliscopejs::sort_spec("r2")),
     # display the country, continent, and R^2 value
     labels = c("country", "continent", "r2")
   )
@@ -143,7 +141,7 @@ trelliscopejs::trelliscope(
 * `add_cog_group()` to add a custom cognostics group.
 * `add_layer_cogs()` to call which cognostics groups should be executed for a given plot layer.
 
-Using code from the `autocogs` package, we will add the univariate continuous cognostics group.
+Using existing code from the `autocogs` package, we will add the univariate continuous cognostics group.
 
 ```r
 add_cog_group(
@@ -153,11 +151,11 @@ add_cog_group(
   function(x, ...) {
     x_range <- range(x, na.rm = TRUE)
     list(
-      min = cog(x_range[1], "minimum of non NA data"),
-      max = cog(x_range[2], "maximum of non NA data"),
-      mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
-      median = cog(median(x, na.rm = TRUE), "median of non NA data"),
-      var = cog(var(x, na.rm = TRUE), "variance of non NA data")
+      min = cog_desc(x_range[1], "minimum of non NA data"),
+      max = cog_desc(x_range[2], "maximum of non NA data"),
+      mean = cog_desc(mean(x, na.rm = TRUE), "mean of non NA data"),
+      median = cog_desc(median(x, na.rm = TRUE), "median of non NA data"),
+      var = cog_desc(var(x, na.rm = TRUE), "variance of non NA data")
     )
   }
 )

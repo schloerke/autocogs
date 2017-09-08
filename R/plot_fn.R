@@ -46,11 +46,12 @@ known_plot_cogs <- data_frame(
 #' @param ... ignored
 #' @export
 #' @examples
+#' \dontrun{
 #' add_layer_cogs(
 #'   "geom_point",
 #'   kind = "ggplot",
 #'   "scatter plot points",
-#'   tribble(
+#'   tibble::tribble(
 #'     ~ cog_group, ~ cols, ~ name,
 #'     "univariate_continuous", "x", "_x",
 #'     "univariate_continuous", "y", "_y",
@@ -59,6 +60,7 @@ known_plot_cogs <- data_frame(
 #'     "bivariate_counts", c("x", "y"), "_n"
 #'   )
 #' )
+#' }
 add_layer_cogs <- function(
   name,
   description,

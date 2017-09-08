@@ -21,11 +21,12 @@ add_layer_cogs(name, description, layer_cogs, kind = "ggplot", ...)
 Add a new set of cognostic groups for a given plot layer. If the plot layer is found, the corresponding cognostic groups will be calculated.
 }
 \examples{
+\dontrun{
 add_layer_cogs(
   "geom_point",
   kind = "ggplot",
   "scatter plot points",
-  tribble(
+  tibble::tribble(
     ~ cog_group, ~ cols, ~ name,
     "univariate_continuous", "x", "_x",
     "univariate_continuous", "y", "_y",
@@ -34,4 +35,5 @@ add_layer_cogs(
     "bivariate_counts", c("x", "y"), "_n"
   )
 )
+}
 }

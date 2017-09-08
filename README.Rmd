@@ -43,6 +43,7 @@ library(gapminder)
 library(gapminder)
 library(autocogs)
 # devtools::install_github("hafen/trelliscopejs")
+# devtools::install_github("schloerke/trelliscopejs@autocogs")
 library(trelliscopejs)
 
 # Explore

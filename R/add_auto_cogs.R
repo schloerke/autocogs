@@ -13,11 +13,11 @@ add_cog_group(
   function(x, ...) {
     x_range <- range(x, na.rm = TRUE)
     list(
-      min = cog(x_range[1], "minimum of non NA data"),
-      max = cog(x_range[2], "maximum of non NA data"),
-      mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
-      median = cog(median(x, na.rm = TRUE), "median of non NA data"),
-      var = cog(var(x, na.rm = TRUE), "variance of non NA data")
+      min = cog_desc(x_range[1], "minimum of non NA data"),
+      max = cog_desc(x_range[2], "maximum of non NA data"),
+      mean = cog_desc(mean(x, na.rm = TRUE), "mean of non NA data"),
+      median = cog_desc(median(x, na.rm = TRUE), "median of non NA data"),
+      var = cog_desc(var(x, na.rm = TRUE), "variance of non NA data")
     )
   }
 )
@@ -32,11 +32,11 @@ add_cog_group(
     count_names <- names(table_counts)
     n_groups <- length(table_counts)
     list(
-      min_name = cog(count_names[1], "minimum group count name"),
-      count_min = cog(table_counts[1], "minimum group count"),
-      count_mean = cog(sum(table_counts) / n_groups, "average group count"),
-      count_max = cog(table_counts[n_groups], "maximum group count"),
-      max_name = cog(count_names[n_groups], "maximum group count name")
+      min_name = cog_desc(count_names[1], "minimum group count name"),
+      count_min = cog_desc(table_counts[1], "minimum group count"),
+      count_mean = cog_desc(sum(table_counts) / n_groups, "average group count"),
+      count_max = cog_desc(table_counts[n_groups], "maximum group count"),
+      max_name = cog_desc(count_names[n_groups], "maximum group count name")
     )
   }
 )
@@ -53,13 +53,13 @@ add_cog_group(
     median <- boxplot_info$middle[[1]]
     outliers <- boxplot_info$outliers[[1]]
     list(
-      "n_outlier_lower" = cog(sum(outliers < median), "count of lower outliers"),
-      "lower_whisker" = cog(boxplot_info$lower[[1]], "minimum point"),
-      "q1" = cog(boxplot_info$notchlower[[1]], "first quartile value"),
-      "median" = cog(median, "median value"),
-      "q3" = cog(boxplot_info$notchupper[[1]], "third quartile value"),
-      "upper_whisker" = cog(boxplot_info$upper[[1]], "maximum non outlier point"),
-      "n_outlier_upper" = cog(sum(outliers > median), "count of upper outliers")
+      "n_outlier_lower" = cog_desc(sum(outliers < median), "count of lower outliers"),
+      "lower_whisker" = cog_desc(boxplot_info$lower[[1]], "minimum point"),
+      "q1" = cog_desc(boxplot_info$notchlower[[1]], "first quartile value"),
+      "median" = cog_desc(median, "median value"),
+      "q3" = cog_desc(boxplot_info$notchupper[[1]], "third quartile value"),
+      "upper_whisker" = cog_desc(boxplot_info$upper[[1]], "maximum non outlier point"),
+      "n_outlier_upper" = cog_desc(sum(outliers > median), "count of upper outliers")
     )
   }
 )
@@ -74,8 +74,8 @@ add_cog_group(
   "continuous bivariate metrics",
   function(x, y, ...) {
     list(
-      "covariance" = cog(cov(x, y, use = "na.or.complete"), "covariance of non na pairs"),
-      "correlation" = cog(cor(x, y, use = "na.or.complete"), "correlation of non na pairs")
+      "covariance" = cog_desc(cov(x, y, use = "na.or.complete"), "covariance of non na pairs"),
+      "correlation" = cog_desc(cor(x, y, use = "na.or.complete"), "correlation of non na pairs")
     )
   }
 )
@@ -92,15 +92,15 @@ add_cog_group(
   function(x, y, ...) {
     info <- as.list(scagnostics(x, y))
     list(
-      Outlying = cog(info$Outlying, "proportion of the total edge length due to extremely long edges connected to points of single degree"),
-      Skewed = cog(info$Skewed, "distribution of edge lengths of a minimum spanning tree gives us information about the relative density of points in a scattered configuration"),
-      Clumpy = cog(info$Clumpy, "An extremely skewed distribution of MST edge lengths does not necessarily indicate clustering of points. For this, we turn to another measure based on the MST: the Hartigan and Mo- hanty RUNT statistic [20]. This statistic is most easily un- derstood in terms of the single-linkage hierarchical clustering tree called a dendrogram."),
-      Sparse = cog(info$Sparse, "the 90% quantile of the edge lengths of the MST"),
-      Striated = cog(info$Striated, "sumation of angles over all adjacent edges of a MST"),
-      Convex = cog(info$Convex, "ratio of the area of the alpha hull and the area of the convex hull"),
-      Skinny = cog(info$Skinny, "ratio of perimeter to area of a polygon measures, roughly, how skinny it is"),
-      Stringy = cog(info$Stringy, "The stringy measure is based on the _ index, which is the ratio of width to length of a network"),
-      Monotonic = cog(info$Monotonic, "squared Spearman corre- lation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)")
+      Outlying = cog_desc(info$Outlying, "proportion of the total edge length due to extremely long edges connected to points of single degree"),
+      Skewed = cog_desc(info$Skewed, "distribution of edge lengths of a minimum spanning tree gives us information about the relative density of points in a scattered configuration"),
+      Clumpy = cog_desc(info$Clumpy, "An extremely skewed distribution of MST edge lengths does not necessarily indicate clustering of points. For this, we turn to another measure based on the MST: the Hartigan and Mo- hanty RUNT statistic [20]. This statistic is most easily un- derstood in terms of the single-linkage hierarchical clustering tree called a dendrogram."),
+      Sparse = cog_desc(info$Sparse, "the 90% quantile of the edge lengths of the MST"),
+      Striated = cog_desc(info$Striated, "sumation of angles over all adjacent edges of a MST"),
+      Convex = cog_desc(info$Convex, "ratio of the area of the alpha hull and the area of the convex hull"),
+      Skinny = cog_desc(info$Skinny, "ratio of perimeter to area of a polygon measures, roughly, how skinny it is"),
+      Stringy = cog_desc(info$Stringy, "The stringy measure is based on the _ index, which is the ratio of width to length of a network"),
+      Monotonic = cog_desc(info$Monotonic, "squared Spearman corre- lation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)")
     )
   }
 )
@@ -116,8 +116,8 @@ add_cog_group(
     n <- length(x)
     x_is_na <- is.na(x)
     list(
-      "n" = cog(n, "count of non NA data"),
-      "n_na" = cog(sum(x_is_na), "count of NA data")
+      "n" = cog_desc(n, "count of non NA data"),
+      "n_na" = cog_desc(sum(x_is_na), "count of NA data")
     )
   }
 )
@@ -133,11 +133,11 @@ add_cog_group(
     x_is_na <- is.na(x)
     y_is_na <- is.na(y)
     list(
-      "n" = cog(n, "count of non NA data"),
-      "n_both_na" = cog(sum(x_is_na & y_is_na), "count of data where both X and Y are NA"),
-      "n_or_na" = cog(sum(x_is_na | y_is_na), "count of data where either X or Y are NA"),
-      "n_x_na" = cog(sum(x_is_na), "count of X NA data"),
-      "n_y_na" = cog(sum(y_is_na), "count of Y NA data")
+      "n" = cog_desc(n, "count of non NA data"),
+      "n_both_na" = cog_desc(sum(x_is_na & y_is_na), "count of data where both X and Y are NA"),
+      "n_or_na" = cog_desc(sum(x_is_na | y_is_na), "count of data where either X or Y are NA"),
+      "n_x_na" = cog_desc(sum(x_is_na), "count of X NA data"),
+      "n_y_na" = cog_desc(sum(y_is_na), "count of Y NA data")
     )
   }
 )
@@ -161,12 +161,12 @@ add_cog_group(
     hex_info <- StatBinhex$compute_group(dt, NULL, binwidth)
     counts <- hex_info$count
     list(
-      count_min = cog(min(counts), "minimum count"),
-      count_max = cog(max(counts), "maximum count"),
-      count_mean = cog(mean(counts), "mean (expected) count"),
-      count_median = cog(median(counts), "median count"),
-      count_var = cog(var(counts), "variance of counts"),
-      "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      count_min = cog_desc(min(counts), "minimum count"),
+      count_max = cog_desc(max(counts), "maximum count"),
+      count_mean = cog_desc(mean(counts), "mean (expected) count"),
+      count_median = cog_desc(median(counts), "median count"),
+      count_var = cog_desc(var(counts), "variance of counts"),
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
 )
@@ -193,12 +193,12 @@ add_cog_group(
     )
     counts <- bin_dt$count
     list(
-      count_min = cog(min(counts), "minimum count"),
-      count_max = cog(max(counts), "maximum count"),
-      count_mean = cog(mean(counts), "mean (expected) count"),
-      count_median = cog(median(counts), "median count"),
-      count_var = cog(var(counts), "variance of counts"),
-      "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      count_min = cog_desc(min(counts), "minimum count"),
+      count_max = cog_desc(max(counts), "maximum count"),
+      count_mean = cog_desc(mean(counts), "mean (expected) count"),
+      count_median = cog_desc(median(counts), "median count"),
+      count_var = cog_desc(var(counts), "variance of counts"),
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
 )
@@ -248,20 +248,20 @@ add_cog_group(
     max_density_location <- ret$x[which(ret$density == max_density)[1]]
 
     list(
-      max_density = cog(max_density, "maximum density height"),
-      max_density_location = cog(max_density_location, "location of maximum density height"),
-      # max_density_slope = cog(max_slope, "maximum absolute value density slope"),
-      # uniform_mse = cog(mse, "mean squared error compared to uniform")
-      cluters = cog(
+      max_density = cog_desc(max_density, "maximum density height"),
+      max_density_location = cog_desc(max_density_location, "location of maximum density height"),
+      # max_density_slope = cog_desc(max_slope, "maximum absolute value density slope"),
+      # uniform_mse = cog_desc(mse, "mean squared error compared to uniform")
+      cluters = cog_desc(
         mclust::Mclust(dt$x, verbose = FALSE)$G,
         "optimal number of components found using Model-Based Clustering"
       ),
-      uni_modal_p_value = cog(
+      uni_modal_p_value = cog_desc(
         diptest::dip.test(dt$x)$p.value,
         "Hartigans' dip test for unimodality / multimodality. (Low p-value means non-unimodal density)"
       ),
-      skew = cog(moments::skewness(x, na.rm = TRUE), "skewness of non NA data"),
-      kurt = cog(moments::kurtosis(x, na.rm = TRUE), "kurtosis of non NA data")
+      skew = cog_desc(moments::skewness(x, na.rm = TRUE), "skewness of non NA data"),
+      kurt = cog_desc(moments::kurtosis(x, na.rm = TRUE), "kurtosis of non NA data")
     )
   }
 )
@@ -304,14 +304,14 @@ add_cog_group(
     max_density_y <- ret$y[max_row]
 
     ret <- list(
-      max_density = cog(max_density, "maximum density height"),
-      max_density_x = cog(max_density_x, "X location of maximum density height"),
-      max_density_y = cog(max_density_y, "Y location of maximum density height")#,
-      # max_density_slope = cog(max_slope, "maximum absolute value density slope"),
-      # uniform_mse = cog(mse, "mean squared error compared to uniform")
+      max_density = cog_desc(max_density, "maximum density height"),
+      max_density_x = cog_desc(max_density_x, "X location of maximum density height"),
+      max_density_y = cog_desc(max_density_y, "Y location of maximum density height")#,
+      # max_density_slope = cog_desc(max_slope, "maximum absolute value density slope"),
+      # uniform_mse = cog_desc(mse, "mean squared error compared to uniform")
     )
     if (isTRUE(clusters)) {
-      ret$clusters <- cog(
+      ret$clusters <- cog_desc(
         mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
         "optimal number of components found using Model-Based Clustering"
       )
@@ -356,12 +356,12 @@ add_cog_group(
     counts <- ret$count
 
     list(
-      count_min = cog(min(counts), "minimum count"),
-      count_max = cog(max(counts), "maximum count"),
-      count_mean = cog(mean(counts), "mean (expected) count"),
-      count_median = cog(median(counts), "median count"),
-      count_var = cog(var(counts), "variance of counts"),
-      "chisq" = cog(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      count_min = cog_desc(min(counts), "minimum count"),
+      count_max = cog_desc(max(counts), "maximum count"),
+      count_mean = cog_desc(mean(counts), "mean (expected) count"),
+      count_median = cog_desc(median(counts), "median count"),
+      count_var = cog_desc(var(counts), "variance of counts"),
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
     )
   }
 )
@@ -391,12 +391,12 @@ add_cog_group(
     count_values <- counts$n
 
     list(
-      min = cog(min(count_values), "minimum occurances of an x,y pair"),
-      max = cog(max(count_values), "maximum occurances of an x,y pair"),
-      mean = cog(mean(count_values), "mean occurances of an x,y pair"),
-      median = cog(median(count_values), "median occurances of an x,y pair"),
-      var = cog(var(count_values), "variance of occurances of an x,y pair"),
-      na_count = cog(na_count, "count of NA occurances of a x,y pair")
+      min = cog_desc(min(count_values), "minimum occurances of an x,y pair"),
+      max = cog_desc(max(count_values), "maximum occurances of an x,y pair"),
+      mean = cog_desc(mean(count_values), "mean occurances of an x,y pair"),
+      median = cog_desc(median(count_values), "median occurances of an x,y pair"),
+      var = cog_desc(var(count_values), "variance of occurances of an x,y pair"),
+      na_count = cog_desc(na_count, "count of NA occurances of a x,y pair")
     )
   }
 )
@@ -426,12 +426,12 @@ add_cog_group(
     count_values <- counts$n
 
     list(
-      min = cog(min(count_values), "minimum occurances of a group"),
-      max = cog(max(count_values), "maximum occurances of a group"),
-      mean = cog(mean(count_values), "mean occurances of a group"),
-      median = cog(median(count_values), "median occurances of a group"),
-      var = cog(var(count_values), "variance of occurances of a group"),
-      na_count = cog(na_count, "count of NA occurances of the grouping variable")
+      min = cog_desc(min(count_values), "minimum occurances of a group"),
+      max = cog_desc(max(count_values), "maximum occurances of a group"),
+      mean = cog_desc(mean(count_values), "mean occurances of a group"),
+      median = cog_desc(median(count_values), "median occurances of a group"),
+      var = cog_desc(var(count_values), "variance of occurances of a group"),
+      na_count = cog_desc(na_count, "count of NA occurances of the grouping variable")
     )
   }
 )
@@ -455,11 +455,11 @@ add_cog_group(
     num_sig_diff <- sum(tukey$conf.low > 0 | tukey$conf.high < 0)
 
     list(
-      anova_model_df = cog(an_broom$df[1], "ANOVA model degrees of freedom"),
-      anova_model_df_resid = cog(an_broom$df[2], "ANOVA residual degrees of freedom"),
-      anova_f_value = cog(an_broom$statistic[1], "ANOVA F value"),
-      anova_p_value = cog(an_broom$p.value[1], "ANOVA p value"),
-      sig_diff_pairs = cog(num_sig_diff, "Number of significantly different groups according to `stats::TukeyHSD`"),
+      anova_model_df = cog_desc(an_broom$df[1], "ANOVA model degrees of freedom"),
+      anova_model_df_resid = cog_desc(an_broom$df[2], "ANOVA residual degrees of freedom"),
+      anova_f_value = cog_desc(an_broom$statistic[1], "ANOVA F value"),
+      anova_p_value = cog_desc(an_broom$p.value[1], "ANOVA p value"),
+      sig_diff_pairs = cog_desc(num_sig_diff, "Number of significantly different groups according to `stats::TukeyHSD`"),
     )
   }
 )
@@ -509,11 +509,11 @@ add_cog_group(
     max_deviation <- max(abs(ret$sample - ret$theoretical))
 
     list(
-      points_above = cog(sum_above, "Sum of sample points above qqline"),
-      points_below = cog(sum_below, "Sum of sample points below qqline"),
-      ks_test = cog(ks_ans$p.value, "Kolmogorov-Smirnov test p value. Low value represents differing distributions"),
-      qq_mse = cog(qq_mse, "Mean Squared Error of sample points to theoretical QQ line"),
-      max_deviation = cog(max_deviation, "Max deviation from the theoretical QQ line")
+      points_above = cog_desc(sum_above, "Sum of sample points above qqline"),
+      points_below = cog_desc(sum_below, "Sum of sample points below qqline"),
+      ks_test = cog_desc(ks_ans$p.value, "Kolmogorov-Smirnov test p value. Low value represents differing distributions"),
+      qq_mse = cog_desc(qq_mse, "Mean Squared Error of sample points to theoretical QQ line"),
+      max_deviation = cog_desc(max_deviation, "Max deviation from the theoretical QQ line")
     )
   }
 )
@@ -572,8 +572,8 @@ add_cog_group(
     # max_se <- max(ret$se)
 
     list(
-      mse = cog(mse, "Mean Squared Error of fitted points and y data"),
-      max_deviation = cog(max_deviation, "Max deviation from fitted points")
+      mse = cog_desc(mse, "Mean Squared Error of fitted points and y data"),
+      max_deviation = cog_desc(max_deviation, "Max deviation from fitted points")
     )
   }
 )
@@ -622,8 +622,8 @@ add_cog_group(
 
     ret <- list()
     if ("(Intercept)" %in% coefs$term) {
-      ret$intercept <- cog(coefs$estimate[1], "intercept of model")
-      ret$intercept_p_value <- cog(coefs$p.value[1], "intercept of model")
+      ret$intercept <- cog_desc(coefs$estimate[1], "intercept of model")
+      ret$intercept_p_value <- cog_desc(coefs$p.value[1], "intercept of model")
     }
     coefs <- coefs[coefs$term != "(Intercept)", ]
 
@@ -632,33 +632,33 @@ add_cog_group(
 
     ret %>%
       append(list(
-        beta = cog(coefs$estimate[1], "beta value of coefficient"),
-        beta_p_value = cog(coefs$p.value[1], "significance of coefficient"),
-        r2 = cog(infos$r.squared, "fraction of variance explained by the model"),
-        sigma = cog(infos$sigma, "square root of the estimated residual variance"),
-        statistic = cog(infos$statistic, "F-statistic of the model"),
-        p_value = cog(infos$p.value, "p-value form the F test"),
-        df = cog(infos$p.value, "degrees of freedom used by the coefficients"),
-        log_lik = cog(infos$logLik, "log-likelihood value under the model"),
-        aic = cog(infos$AIC, "Akaike's An Information Criterion"),
-        bic = cog(infos$BIC, "Schwarz's Bayesian criterion"),
-        deviance = cog(infos$deviance, "quality-of-fit statistic of the model"),
-        df_residual = cog(infos$df.residual, "residual degrees of freedom"),
-        n_sig_cooks = cog(
+        beta = cog_desc(coefs$estimate[1], "beta value of coefficient"),
+        beta_p_value = cog_desc(coefs$p.value[1], "significance of coefficient"),
+        r2 = cog_desc(infos$r.squared, "fraction of variance explained by the model"),
+        sigma = cog_desc(infos$sigma, "square root of the estimated residual variance"),
+        statistic = cog_desc(infos$statistic, "F-statistic of the model"),
+        p_value = cog_desc(infos$p.value, "p-value form the F test"),
+        df = cog_desc(infos$p.value, "degrees of freedom used by the coefficients"),
+        log_lik = cog_desc(infos$logLik, "log-likelihood value under the model"),
+        aic = cog_desc(infos$AIC, "Akaike's An Information Criterion"),
+        bic = cog_desc(infos$BIC, "Schwarz's Bayesian criterion"),
+        deviance = cog_desc(infos$deviance, "quality-of-fit statistic of the model"),
+        df_residual = cog_desc(infos$df.residual, "residual degrees of freedom"),
+        n_sig_cooks = cog_desc(
           sum(dta$.cooksd > 4 / nrow(dta)),
           "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
         ),
-        n_sig_hat = cog(
+        n_sig_hat = cog_desc(
           sum(dta$.hat > (2 * 1 / nrow(dta))),
           "number of significant influence points. (sum(hat > 2 * p / n))"
         ),
-        resid_shapiro = cog(
+        resid_shapiro = cog_desc(
           shapiro.test(dta$.resid)$p.value,
           "an approximate p-value for the Shapiro-Wilk test of normality.  \"This is said in Royston
           (1995) to be adequate for 'p.value < 0.1'\""
         ),
-        bc_lower = cog(bc_range[1], "lower bound of 95% CI of Box Cox Transformation"),
-        bc_upper = cog(bc_range[2], "upper bound of 95% CI of Box Cox Transformation")
+        bc_lower = cog_desc(bc_range[1], "lower bound of 95% CI of Box Cox Transformation"),
+        bc_upper = cog_desc(bc_range[2], "upper bound of 95% CI of Box Cox Transformation")
       ))
   }
 )
@@ -705,16 +705,16 @@ add_cog_group(
     infos <- append(infos, mod$pars)
 
     list(
-      enp = cog(infos$enp, "effective number of parameters"),
-      s = cog(infos$s, "sigma of loess model"),
-      trace.hat = cog(infos$trace.hat, "trace of hat matrix"),
-      span = cog(infos$span, "parameter alpha which controls the degree of smoothing"),
-      degree = cog(infos$degree, "polynomial degree used in loess model"),
-      # normalize = cog(infos$normalize, "was data normalized before fit?"),
-      # parametric = cog(infos$parametric, "should any terms be fitted globally rather than locally?"),
-      # drop.square = cog(infos$drop.square, "for fits with more than one predictor and 'degree = 2', should the quadratic term be dropped for particular predictors?"),
-      # family = cog(infos$family, "if 'gaussian' fitting is by least-squares, and if 'symmetric' a re-descending M estimator is used with Tukey's biweight function"),
-      iterations = cog(infos$iterations, "number of iterations used to calculate model")
+      enp = cog_desc(infos$enp, "effective number of parameters"),
+      s = cog_desc(infos$s, "sigma of loess model"),
+      trace.hat = cog_desc(infos$trace.hat, "trace of hat matrix"),
+      span = cog_desc(infos$span, "parameter alpha which controls the degree of smoothing"),
+      degree = cog_desc(infos$degree, "polynomial degree used in loess model"),
+      # normalize = cog_desc(infos$normalize, "was data normalized before fit?"),
+      # parametric = cog_desc(infos$parametric, "should any terms be fitted globally rather than locally?"),
+      # drop.square = cog_desc(infos$drop.square, "for fits with more than one predictor and 'degree = 2', should the quadratic term be dropped for particular predictors?"),
+      # family = cog_desc(infos$family, "if 'gaussian' fitting is by least-squares, and if 'symmetric' a re-descending M estimator is used with Tukey's biweight function"),
+      iterations = cog_desc(infos$iterations, "number of iterations used to calculate model")
     )
   }
 )

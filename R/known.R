@@ -7,8 +7,8 @@
 #' @param desc description of \code{x}
 #' @export
 #' @examples
-#' cog(mean(1:10), "mean of 10 numbers")
-cog <- function(x, desc = NULL) {
+#' cog_desc(mean(1:10), "mean of 10 numbers")
+cog_desc <- function(x, desc = NULL) {
   assert_scalar(x, na.ok = TRUE)
   assert_character(desc, len = 1, any.missing = FALSE)
   attr(x, "desc") <- desc
@@ -107,7 +107,7 @@ known_cog_groups <- data_frame(
 #' @param name Name of cognostic group
 #' @param fields \code{data.frame} of \code{'dimension'} and \code{'type'} columns. \code{dplyr::\link[dplyr]{bind_rows}()} of \code{\link{field_info}} outputs for convenience
 #' @param description Description of cognostic group
-#' @param fn function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog}}
+#' @param fn function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog_desc}}
 #' @param ... ignored
 #' @export
 #' @examples
@@ -119,11 +119,11 @@ known_cog_groups <- data_frame(
 #'   function(x, ...) {
 #'     x_range <- range(x, na.rm = TRUE)
 #'     list(
-#'       min = cog(x_range[1], "minimum of non NA data"),
-#'       max = cog(x_range[2], "maximum of non NA data"),
-#'       mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
-#'       median = cog(median(x, na.rm = TRUE), "median of non NA data"),
-#'       var = cog(var(x, na.rm = TRUE), "variance of non NA data")
+#'       min = cog_desc(x_range[1], "minimum of non NA data"),
+#'       max = cog_desc(x_range[2], "maximum of non NA data"),
+#'       mean = cog_desc(mean(x, na.rm = TRUE), "mean of non NA data"),
+#'       median = cog_desc(median(x, na.rm = TRUE), "median of non NA data"),
+#'       var = cog_desc(var(x, na.rm = TRUE), "variance of non NA data")
 #'     )
 #'   }
 #' )

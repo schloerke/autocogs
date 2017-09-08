@@ -13,7 +13,7 @@ add_cog_group(name, fields, description = NA, fn, ...)
 
 \item{description}{Description of cognostic group}
 
-\item{fn}{function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog}}}
+\item{fn}{function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog_desc}}}
 
 \item{...}{ignored}
 }
@@ -29,11 +29,11 @@ add_cog_group(
   function(x, ...) {
     x_range <- range(x, na.rm = TRUE)
     list(
-      min = cog(x_range[1], "minimum of non NA data"),
-      max = cog(x_range[2], "maximum of non NA data"),
-      mean = cog(mean(x, na.rm = TRUE), "mean of non NA data"),
-      median = cog(median(x, na.rm = TRUE), "median of non NA data"),
-      var = cog(var(x, na.rm = TRUE), "variance of non NA data")
+      min = cog_desc(x_range[1], "minimum of non NA data"),
+      max = cog_desc(x_range[2], "maximum of non NA data"),
+      mean = cog_desc(mean(x, na.rm = TRUE), "mean of non NA data"),
+      median = cog_desc(median(x, na.rm = TRUE), "median of non NA data"),
+      var = cog_desc(var(x, na.rm = TRUE), "variance of non NA data")
     )
   }
 )

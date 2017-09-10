@@ -256,7 +256,7 @@ add_cog_group(
       clusters = cog_desc(
         ifelse(
           isTRUE(clusters),
-          mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
+          mclust::Mclust(dt[, c("x")], verbose = FALSE)$G,
           NA
         ),
         "optimal number of components found using Model-Based Clustering. Cluster value is NA if there are more than 1000 points in subset"

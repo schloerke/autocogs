@@ -110,7 +110,7 @@ test_that("ggplot2::geom_density_2d", {
   qplot(carat, price, data = diamonds[1:1001, ], geom = "density_2d") %>%
     expect_auto_cogs(
       c("_x", "_y", "_bivar", "_density_x", "_density_y", "_density2d", "_n"),
-      c(5, 5, 2, 6, 6, 3, 5)
+      c(5, 5, 2, 6, 6, 4, 5)
     )
 })
 

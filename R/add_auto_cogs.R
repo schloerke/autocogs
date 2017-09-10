@@ -213,7 +213,8 @@ add_cog_group(
   function(
     x, ...,
     # StatDensity parameters
-    bw = "nrd0", adjust = 1, kernel = "gaussian", n = 512, trim = FALSE, na.rm = FALSE
+    bw = "nrd0", adjust = 1, kernel = "gaussian", n = 512, trim = FALSE, na.rm = FALSE,
+    clusters = length(x) <= 1000
   ) {
 
     n <- length(x)
@@ -252,9 +253,13 @@ add_cog_group(
       max_density_location = cog_desc(max_density_location, "location of maximum density height"),
       # max_density_slope = cog_desc(max_slope, "maximum absolute value density slope"),
       # uniform_mse = cog_desc(mse, "mean squared error compared to uniform")
-      cluters = cog_desc(
-        mclust::Mclust(dt$x, verbose = FALSE)$G,
-        "optimal number of components found using Model-Based Clustering"
+      clusters = cog_desc(
+        ifelse(
+          isTRUE(clusters),
+          mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
+          NA
+        ),
+        "optimal number of components found using Model-Based Clustering. Cluster value is NA if there are more than 1000 points in subset"
       ),
       uni_modal_p_value = cog_desc(
         diptest::dip.test(dt$x)$p.value,
@@ -303,21 +308,21 @@ add_cog_group(
     max_density_x <- ret$x[max_row]
     max_density_y <- ret$y[max_row]
 
-    ret <- list(
+    list(
       max_density = cog_desc(max_density, "maximum density height"),
       max_density_x = cog_desc(max_density_x, "X location of maximum density height"),
-      max_density_y = cog_desc(max_density_y, "Y location of maximum density height")#,
+      max_density_y = cog_desc(max_density_y, "Y location of maximum density height"),
       # max_density_slope = cog_desc(max_slope, "maximum absolute value density slope"),
-      # uniform_mse = cog_desc(mse, "mean squared error compared to uniform")
-    )
-    if (isTRUE(clusters)) {
-      ret$clusters <- cog_desc(
-        mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
-        "optimal number of components found using Model-Based Clustering"
+      # uniform_mse = cog_desc(mse, "mean squared error compared to uniform"),
+      clusters = cog_desc(
+        ifelse(
+          isTRUE(clusters),
+          mclust::Mclust(dt[, c("x", "y")], verbose = FALSE)$G,
+          NA
+        ),
+        "optimal number of components found using Model-Based Clustering. Cluster value is NA if there are more than 1000 points in subset"
       )
-    }
-
-    ret
+    )
   }
 )
 

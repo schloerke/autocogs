@@ -264,3 +264,30 @@ test_that("ggplot2::geom_smooth_lm", {
       c(5, 5, 2, 2, 19, 5)
     )
 })
+
+
+
+test_that("ggplot2::geom_line", {
+  p <- qplot(cty, hwy, data = mpg, geom = "line")
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_n"),
+      c(5, 5, 2, 5)
+    )
+})
+test_that("ggplot2::geom_path", {
+  p <- qplot(cty, hwy, data = mpg, geom = "path")
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_bivar", "_n"),
+      c(5, 5, 2, 5)
+    )
+})
+test_that("ggplot2::geom_step", {
+  p <- qplot(cty, hwy, data = mpg, geom = "step")
+  p %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_step", "_bivar", "_n"),
+      c(5, 5, 11, 2, 5)
+    )
+})

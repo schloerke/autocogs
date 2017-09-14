@@ -726,6 +726,91 @@ add_cog_group(
 
 
 
+add_cog_group(
+  "bivariate_step",
+  bind_rows(
+    field_info("x", "continuous"),
+    field_info("y", "continuous")
+  ),
+  "Step function",
+  fn = function(
+    x, y, ...,
+    direction = "hv"
+  ) {
+
+    dt <- data.frame(x = x, y = y, group = 1, PANEL = 1)
+
+    stairstep <- getFromNamespace("stairstep", "ggplot2")
+    step_path <- stairstep(dt, direction)
+
+    unique_x_steps <- unique(step_path$x)
+    if (length(unique_x_steps) > 1) {
+      step_diff <- unique_x_steps[-1] - unique_x_steps[-length(unique_x_steps)]
+
+      min_step_width <- min(step_diff)
+      mean_step_width <- mean(step_diff)
+      median_step_width <- median(step_diff)
+      max_step_width <- max(step_diff)
+      var_step_width <- var(step_diff)
+    } else {
+      min_step_width <-
+        mean_step_width <-
+        median_step_width <-
+        max_step_width <-
+        var_step_width <- NA
+    }
+
+    group_counts <- step_path %>%
+      group_by_("x") %>%
+      count() %>%
+      filter(n > 1)
+
+    if (nrow(group_counts) > 0) {
+      multi_groups <- group_counts$x
+      grouped_step_path <- step_path[step_path$x %in% multi_groups, ]
+      heights <- grouped_step_path %>%
+        group_by_("x") %>%
+        summarise(
+          min = min(y),
+          max = max(y),
+        ) %>%
+        mutate(
+          diff = max - min
+        )
+      diffs <- heights$diff
+      min_step_height <- min(diffs)
+      mean_step_height <- mean(diffs)
+      median_step_height <- median(diffs)
+      max_step_height <- max(diffs)
+      var_step_height <- var(diffs)
+    } else {
+      min_step_height <-
+        mean_step_height <-
+        median_step_height <-
+        max_step_height <-
+        var_step_height <- NA
+    }
+
+    list(
+      steps = cog_desc(length(unique_x_steps) - 1, "number of steps"),
+
+      min_step_width = cog_desc(min_step_width, "minimum step width"),
+      mean_step_width = cog_desc(mean_step_width, "mean step width"),
+      median_step_width = cog_desc(median_step_width, "median step width"),
+      max_step_width = cog_desc(max_step_width, "max step width"),
+      var_step_width = cog_desc(var_step_width, "variance of step widths"),
+
+      min_step_height = cog_desc(min_step_height, "minimum step group height"),
+      mean_step_height = cog_desc(mean_step_height, "mean step group height"),
+      median_step_height = cog_desc(median_step_height, "median step group height"),
+      max_step_height = cog_desc(max_step_height, "max step group height"),
+      var_step_height = cog_desc(var_step_width, "variance of step group heights")
+    )
+  }
+)
+
+
+
 
 
 

@@ -350,6 +350,43 @@ add_layer_cogs(
 )
 
 
+# geom_path geom_line
+add_layer_cogs(
+  "geom_line",
+  "Line plot (with data sorted by x) of continuous data",
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "line"); plot_cogs(p)
+  cog_group_df(
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+add_layer_cogs(
+  "geom_path",
+  "Line Path plot of continuous data",
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "path"); plot_cogs(p)
+  cog_group_df(
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+add_layer_cogs(
+  "geom_step",
+  "Line Step plot of continuous data",
+  # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "step"); plot_cogs(p)
+  cog_group_df(
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "bivariate_step", c("x", "y"), "_step",
+    "bivariate_continuous", c("x", "y"), "_bivar",
+    "bivariate_counts", c("x", "y"), "_n"
+  )
+)
+
+
 # Maybe Nothing?
 #   geom_contour stat_contour
 #     - 2d contours of a 3d surface

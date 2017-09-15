@@ -163,13 +163,13 @@ We can then call the `'univariate_continuous'` cognostics group whenever a `geom
 
 ```r
 add_layer_cogs(
-  "geom_rug", kind = "ggplot"
-  "Rug plots in the margins",
-  tribble(
-    ~ cog_group, ~ cols, ~ name,
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "univariate_counts", c("x"), "_n"
+  # load_all(); p <- qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot"); plot_cogs(p)
+  "geom_boxplot",
+  "boxplot plot",
+  cog_group_df(
+    "univariate_continuous", "y", "_y",
+    "boxplot_metrics", "y", "_boxplot",
+    "univariate_counts", "y", "_n"
   )
 )
 ```

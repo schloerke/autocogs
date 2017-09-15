@@ -2,6 +2,23 @@
 NULL
 
 
+#' Cog group data frame
+#'
+#' Make a cog group data grame to be passed into \code{\link{add_layer_cogs}}
+#' @param ... sets of three values to fill in 'cog_group', 'cols', and 'name'
+#' @export
+#' @examples
+#' cog_group_df(
+#'   "univariate_discrete", "x", "_x",
+#'   "univariate_counts", "x", "_n"
+#' )
+#' cog_group_df(
+#'   "univariate_continuous", "x", "_x",
+#'   "univariate_continuous", "y", "_y",
+#'   "bivariate_continuous", c("x", "y"), "_bivar",
+#'   "scagnostics", c("x", "y"), "_scagnostic",
+#'   "bivariate_counts", c("x", "y"), "_n"
+#' )
 cog_group_df <- function(...) {
   tibble::tribble(
     ~ cog_group, ~ cols, ~ name,

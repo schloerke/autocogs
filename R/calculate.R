@@ -70,6 +70,35 @@ layer_count.ggplot <- function(p) {
   length(p$layers)
 }
 
+upgrade_cog_specs <- function(p, specs) {
+
+  if (length(specs) < 1) {
+    stop("`specs` must have a length of at least 1")
+  }
+  if (length(specs) == 1) {
+    if (is.logical(specs[[1]])) {
+      specs <- rep(specs[[1]], layer_count(p))
+    }
+  }
+  specs <- as.list(specs)
+
+  if (length(specs) != layer_count(p)) {
+    stop("`specs` should have a length equal to the numer of layers in the plot (", layer_count(p), ") or 1, not ", length(specs))
+  }
+
+  specs <- lapply(specs, function(spec) {
+    if (inherits(spec, "cog_spec")) {
+      return(spec)
+    }
+    if (!test_logical(spec, any.missing = FALSE)) {
+      stop("`spec` values should either by logical or created from `cog_spec()`. Found: ", paste(class(spec), collapse = ", "))
+    }
+    # only true of false values
+    cog_spec(keep = spec)
+  })
+
+  specs
+}
   plot_class_val <- plot_class(p)
   layer_info <- get_layer_data(p, ...)
 

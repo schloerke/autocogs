@@ -6,6 +6,6 @@
 ^schema\.graphql$
 ^README\.Rmd$
 ^README\.html$
-^README-.*\.png$
+^readme-figs$
 ^_ignore$
 ^appfiles$

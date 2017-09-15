@@ -26,16 +26,35 @@ Examples
 ``` r
 library(autocogs)
 #> [1] TRUE
-```
-
-``` r
 library(tidyverse)
+#> Loading required package: tidyverse
+#> Loading tidyverse: ggplot2
+#> Loading tidyverse: tibble
+#> Loading tidyverse: tidyr
+#> Loading tidyverse: readr
+#> Loading tidyverse: purrr
+#> Loading tidyverse: dplyr
+#> Loading required package: magrittr
+#> 
+#> Attaching package: 'magrittr'
+#> The following object is masked from 'package:purrr':
+#> 
+#>     set_names
+#> The following object is masked from 'package:tidyr':
+#> 
+#>     extract
+#> Conflicts with tidy packages ----------------------------------------------
+#> filter():     dplyr, stats
+#> is_numeric(): purrr, autocogs
+#> lag():        dplyr, stats
 #> [1] TRUE
 library(gapminder)
+#> Loading required package: gapminder
 #> [1] TRUE
 # devtools::install_github("hafen/trelliscopejs")
 # devtools::install_github("schloerke/trelliscopejs@autocogs")
 library(trelliscopejs)
+#> Loading required package: trelliscopejs
 #> [1] TRUE
 
 # Explore
@@ -46,7 +65,7 @@ p <-
 p
 ```
 
-![](README-explore-1.png)
+![](readme-figs/explore-1.png)
 
 Looking at the plot above, most countries follow a linear trend: As the year increases, life expectancy goes up. A few countries do not follow a linear trend.
 
@@ -72,7 +91,7 @@ ggplot(gapminder, aes(year, lifeExp)) +
 #> using data from the first layer
 ```
 
-![](README-facet_trelliscope-1.png)
+![](readme-figs/facet_trelliscope-1.png)
 
 ``` r
 # (screen shot of trelliscopejs widget)
@@ -124,7 +143,7 @@ gap_data
 gap_data$panel[[1]]
 ```
 
-![](README-gapminder-1.png)
+![](readme-figs/gapminder-1.png)
 
 ``` r
 
@@ -137,20 +156,20 @@ gap_data %>%
   print(width = 100) ->
 full_gap_data
 #> # A tibble: 142 x 10
-#>        country continent              data    panel             `_x`             `_y`
-#>         <fctr>    <fctr>            <list>   <list>           <list>           <list>
-#>  1 Afghanistan      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  2     Albania    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  3     Algeria    Africa <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  4      Angola    Africa <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  5   Argentina  Americas <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  6   Australia   Oceania <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  7     Austria    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  8     Bahrain      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#>  9  Bangladesh      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#> 10     Belgium    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 5]> <tibble [1 x 5]>
-#> # ... with 132 more rows, and 4 more variables: `_bivar` <list>,
-#> #   `_smooth` <list>, `_lm` <list>, `_n` <list>
+#>        country continent              data    panel        `_smooth`             `_lm`
+#>         <fctr>    <fctr>            <list>   <list>           <list>            <list>
+#>  1 Afghanistan      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  2     Albania    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  3     Algeria    Africa <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  4      Angola    Africa <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  5   Argentina  Americas <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  6   Australia   Oceania <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  7     Austria    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  8     Bahrain      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#>  9  Bangladesh      Asia <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#> 10     Belgium    Europe <tibble [12 x 4]> <S3: gg> <tibble [1 x 2]> <tibble [1 x 19]>
+#> # ... with 132 more rows, and 4 more variables: `_x` <list>, `_y` <list>,
+#> #   `_bivar` <list>, `_n` <list>
 
 # Display the panel and cognostics in a trelliscopejs widget
 trelliscopejs::trelliscope(
@@ -170,7 +189,7 @@ trelliscopejs::trelliscope(
 #> Warning: Removed 8 rows containing missing values (geom_smooth).
 ```
 
-![](README-gapminder-2.png)
+![](readme-figs/gapminder-2.png)
 
 ``` r
 # (screen shot of trelliscopejs widget)

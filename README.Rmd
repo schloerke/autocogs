@@ -10,7 +10,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-",
+  fig.path = file.path("readme-figs", ""),
   fig.height = 8,
   fig.width = 12
 )
@@ -37,10 +37,8 @@ devtools::install_github("schloerke/autocogs")
 
 ### Gapminder
 
-```{r autocogs}
-library(autocogs)
-```
 ```{r explore}
+library(autocogs)
 library(tidyverse)
 library(gapminder)
 # devtools::install_github("hafen/trelliscopejs")

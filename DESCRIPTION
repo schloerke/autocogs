@@ -34,6 +34,7 @@ Collate:
     'layer_count.R'
     'layer_info.R'
     'of_type.R'
+    'plot_class.R'
     'plot_cogs.R'
 Suggests: testthat,
     covr

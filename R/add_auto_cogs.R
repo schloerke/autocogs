@@ -11,6 +11,8 @@ add_cog_group(
   #   str_c("_univar_", mapping$x)
   # },
   function(x, ...) {
+    if (is.null(x)) return(NULL)
+
     x_range <- range(x, na.rm = TRUE)
     list(
       min = cog_desc(x_range[1], "minimum of non NA data"),
@@ -28,6 +30,8 @@ add_cog_group(
   field_info("x", "discrete"),
   "univariate metrics for discrete data",
   function(x, ...) {
+    if (is.null(x)) return(NULL)
+
     table_counts <- x %>% table() %>% sort()
     count_names <- names(table_counts)
     n_groups <- length(table_counts)
@@ -47,6 +51,8 @@ add_cog_group(
   field_info("x", "continuous"),
   "univariate boxplot metrics for continuous data",
   function(x, ...) {
+    if (is.null(x)) return(NULL)
+
     boxplot_info <- StatBoxplot$compute_group(
       data.frame(x = 1, y = x), scales = NULL, width = 1, na.rm = FALSE, coef = 1.5
     )
@@ -73,6 +79,8 @@ add_cog_group(
   ),
   "continuous bivariate metrics",
   function(x, y, ...) {
+    if (is.null(x)) return(NULL)
+
     list(
       "covariance" = cog_desc(cov(x, y, use = "na.or.complete"), "covariance of non na pairs"),
       "correlation" = cog_desc(cor(x, y, use = "na.or.complete"), "correlation of non na pairs")
@@ -90,6 +98,9 @@ add_cog_group(
   ),
   "scagnostics of bivariate continuous data",
   function(x, y, ...) {
+    if (is.null(x)) return(NULL)
+    if (is.null(y)) return(NULL)
+
     info <- as.list(scagnostics(x, y))
     list(
       Outlying = cog_desc(info$Outlying, "proportion of the total edge length due to extremely long edges connected to points of single degree"),

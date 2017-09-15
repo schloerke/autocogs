@@ -145,7 +145,7 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
 
 get_layer_info <- function(p, keep = TRUE, ...) {
-  ret <- get_data_list(p, keep = keep, ...)
+  ret <- layer_info(p, keep = keep, ...)
   assert_list(ret, min.len = 1)
 
   ans <- lapply(ret, function(item) {

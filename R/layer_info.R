@@ -2,30 +2,30 @@
 #'
 #' @param p plot object
 #' @param keep boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated
-#' @param ... parameters passed on to corresponding \code{get_data_list}
+#' @param ... parameters passed on to corresponding \code{layer_info}
 #' @export
-#' @rdname get_data_list
+#' @rdname layer_info
 #' @examples
 #' require(ggplot2)
 #' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
 #'   geom_point(data = mpg, mapping = aes(cty, hwy))
-#' get_data_list(p)
-get_data_list <- function(p, keep = TRUE, ...) {
-  UseMethod("get_data_list", p)
+#' layer_info(p)
+layer_info <- function(p, keep = TRUE, ...) {
+  UseMethod("layer_info", p)
 }
 
-#' @rdname get_data_list
+#' @rdname layer_info
 #' @export
-get_data_list.default <- function(p, keep = TRUE, ...) {
-  stop("Please implement `get_data_list.", class(p)[1], "(p, keep, ...)`")
+layer_info.default <- function(p, keep = TRUE, ...) {
+  stop("Please implement `layer_info.", class(p)[1], "(p, keep, ...)`")
 }
 
 
 # must return x, (y, ) group.
 # if group is all equal, then there is only one grouping
-#' @rdname get_data_list
+#' @rdname layer_info
 #' @export
-get_data_list.ggplot <- function(p, keep = TRUE, ...) {
+layer_info.ggplot <- function(p, keep = TRUE, ...) {
   assert_logical(keep, any.missing = FALSE)
   if (length(keep) == 1) assert_true(keep)
   layer_list <- p$layers[keep]

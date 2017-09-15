@@ -39,9 +39,9 @@ known_plot_cogs <- data_frame(
 #' Add plot layer cognostics
 #'
 #' Add a new set of cognostic groups for a given plot layer. If the plot layer is found, the corresponding cognostic groups will be calculated.
-#' @param name Name of plot layer. This should match the output of the \code{"name"} values of \code{\link{get_data_list}}
+#' @param name Name of plot layer. This should match the output of the \code{"name"} values of \code{\link{layer_info}}
 #' @param description Description of cognostic group
-#' @param layer_cogs A \code{data.frame} (or \code{tibble}) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by \code{\link{get_data_list}} during calculations. "name" should contain the final storage name of the cognostic group.
+#' @param layer_cogs A \code{data.frame} (or \code{tibble}) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by \code{\link{layer_info}} during calculations. "name" should contain the final storage name of the cognostic group.
 #' @param kind String value that will match the output of \code{\link{plot_class}} of the desired plot object
 #' @param ... ignored
 #' @export

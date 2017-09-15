@@ -36,7 +36,7 @@ add_layer_cogs(
   "geom_bar",
   "bar plot. (height is calculated)",
   cog_group_df(
-    "univariate_continuous", "x", "_x",
+    "univariate_discrete", "x", "_x",
     "univariate_counts", "x", "_n"
   )
 )

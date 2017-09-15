@@ -855,12 +855,13 @@ cog_spec <- function(
   }
 
   args <- as.list(sys.call())[-1]
+  args$keep <- NULL
 
   known_vals <- character(0)
 
   if (length(args) > 0) {
     # turn symbols into values
-    args <- lapply(args, eval)
+    args <- lapply(args, eval, envir = parent.frame())
     assert_list(args, min.len = 1, types = "logical", any.missing = FALSE)
 
     known_vals <- known_cog_groups$name

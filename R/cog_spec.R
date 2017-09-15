@@ -68,6 +68,9 @@ cog_spec <- function(
 
 
 as_cog_specs <- function(p, specs) {
+  if (inherits(specs, "cog_spec")) {
+    specs <- list(specs)
+  }
 
   if (length(specs) < 1) {
     stop("`specs` must have a length of at least 1")

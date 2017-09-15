@@ -1,3 +1,5 @@
+
+
 #' Plot layer count
 #'
 #' Retrieves the number of layers in a given plot
@@ -13,11 +15,15 @@
 layer_count <- function(p) {
   UseMethod("layer_count")
 }
+
+
 #' @export
 #' @rdname layer_count
 layer_count.default <- function(p) {
   stop("Please implement `layer_count.", class(p)[1], "(p)`")
 }
+
+
 #' @export
 #' @rdname layer_count
 layer_count.ggplot <- function(p) {

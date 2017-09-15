@@ -48,7 +48,7 @@ plot_class.ggplot <- function(p) {
 plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
   plot_class_val <- plot_class(p)
-  cog_specs <- upgrade_cog_specs(p, spec)
+  cog_specs <- as_cog_spec(p, spec)
   keep_layers <- lapply(cog_specs, `[[`, "keep") %>% unlist()
   layer_info <- get_layer_info(p, keep = keep_layers, ...)
 

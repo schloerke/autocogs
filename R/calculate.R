@@ -22,11 +22,16 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
   cog_specs <- as_cog_specs(p, spec)
   keep_layers <- lapply(cog_specs, `[[`, "keep") %>% unlist()
   layer_info <- get_layer_info(p, keep = keep_layers, ...)
+  layer_cog_specs <- cog_specs[keep_layers]
 
   # for every layer
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
-    layer_cog_group <- known_plot_cogs %>% filter_(~ kind == plot_class_val, ~ name == layer_item$name)
+    layer_cog_group <- known_plot_cogs %>%
+      filter_(
+        ~ kind == plot_class_val,
+        ~ name == layer_item$name
+      )
 
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
@@ -40,7 +45,15 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
     layer_cog_group <- as.list(layer_cog_group)
 
     # for every layer info row found, look at the auto_cog data frame
-    lapply(layer_cog_group$layer_cogs, function(layer_cog_dt) {
+    lapply(seq_along(layer_cog_group$layer_cogs), function(layer_cog_i) {
+
+      layer_cog_spec <- layer_cog_specs[[layer_cog_i]]
+      layer_cog_dt <- layer_cog_group$layer_cogs[[layer_cog_i]]
+
+      # remove unwanted cogs in layer
+      layer_cog_dt <- layer_cog_dt[
+        !(layer_cog_dt$cog_group %in% layer_cog_spec$remove),
+      ]
 
       # produce a join of the request auto cogs and known auto cogs
       # (as the known cogs could have updated since last execution)

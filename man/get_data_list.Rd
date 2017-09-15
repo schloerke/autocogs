@@ -6,18 +6,18 @@
 \alias{get_data_list.ggplot}
 \title{Data List}
 \usage{
-get_data_list(p, ...)
+get_data_list(p, keep = TRUE, ...)
 
-\method{get_data_list}{default}(p, ...)
+\method{get_data_list}{default}(p, keep = TRUE, ...)
 
-\method{get_data_list}{ggplot}(p, ..., layers = TRUE)
+\method{get_data_list}{ggplot}(p, keep = TRUE, ...)
 }
 \arguments{
 \item{p}{plot object}
 
-\item{...}{parameters passed on to corresponding \code{get_data_list}}
+\item{keep}{boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated}
 
-\item{layers}{boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated}
+\item{...}{parameters passed on to corresponding \code{get_data_list}}
 }
 \description{
 Data List

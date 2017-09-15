@@ -99,8 +99,14 @@ upgrade_cog_specs <- function(p, specs) {
 
   specs
 }
+
+
+plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
+
   plot_class_val <- plot_class(p)
-  layer_info <- get_layer_data(p, ...)
+  cog_specs <- upgrade_cog_specs(p, spec)
+  keep_layers <- lapply(cog_specs, `[[`, "keep") %>% unlist()
+  layer_info <- get_layer_data(p, keep = keep_layers, ...)
 
   # for every layer
   lapply(layer_info, function(layer_item) {
@@ -194,29 +200,28 @@ upgrade_cog_specs <- function(p, specs) {
 
 
 
-get_layer_data <- function(p, ...) {
-  ret <- get_data_list(p, ...)
+get_layer_data <- function(p, keep = TRUE, ...) {
+  ret <- get_data_list(p, keep = keep, ...)
   assert_list(ret, min.len = 1)
 
   ans <- lapply(ret, function(item) {
-    assert_list(item, max.len = 3, unique = TRUE)
-    assert_names(names(item), subset.of = c("name", "data", "params"))
+    assert_list(item, max.len = 4, unique = TRUE)
+    assert_names(names(item), subset.of = c("name", "data", "params", "layer_num"))
     assert_list(item$params, null.ok = TRUE)
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)
+    assert_numeric(item$layer_num, len = 1, any.missing = FALSE)
     item$data <- as_data_frame(item$data)
     item
   })
 
-  for (i in seq_along(ans)) {
-    ans[[i]]$layer_num <- i
-  }
   ans
 }
 
 #' Data List
 #'
 #' @param p plot object
+#' @param keep boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated
 #' @param ... parameters passed on to corresponding \code{get_data_list}
 #' @export
 #' @rdname get_data_list
@@ -225,29 +230,31 @@ get_layer_data <- function(p, ...) {
 #' p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
 #'   geom_point(data = mpg, mapping = aes(cty, hwy))
 #' get_data_list(p)
-get_data_list <- function(p, ...) {
+get_data_list <- function(p, keep = TRUE, ...) {
   UseMethod("get_data_list", p)
 }
 
 #' @rdname get_data_list
 #' @export
-get_data_list.default <- function(p, ...) {
-  stop("Please implement `get_data_list.", class(p)[1], "(p, ...)`")
+get_data_list.default <- function(p, keep = TRUE, ...) {
+  stop("Please implement `get_data_list.", class(p)[1], "(p, keep, ...)`")
 }
 
 
 # must return x, (y, ) group.
 # if group is all equal, then there is only one grouping
-#' @param layers boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated
 #' @rdname get_data_list
 #' @export
-get_data_list.ggplot <- function(p, ..., layers = TRUE) {
-  assert_logical(layers, any.missing = FALSE)
-  if (length(layers) == 1) assert_true(layers)
-  layer_list <- p$layers[layers]
+get_data_list.ggplot <- function(p, keep = TRUE, ...) {
+  assert_logical(keep, any.missing = FALSE)
+  if (length(keep) == 1) assert_true(keep)
+  layer_list <- p$layers[keep]
   assert_list(layer_list, min.len = 1)
 
-  lapply(layer_list, function(layer) {
+  layer_nums <- seq_len(layer_count(p))[keep]
+
+  lapply(seq_along(layer_list), function(layer_i) {
+    layer <- layer_list[[layer_i]]
     layer_data <- layer$layer_data(p$data) %>% mutate(PANEL = -2L)
 
     ret_data <- layer$compute_aesthetics(layer_data, p)
@@ -278,6 +285,11 @@ get_data_list.ggplot <- function(p, ..., layers = TRUE) {
       ),
       "geom_tile" = if (inherits(layer$stat, "StatBin2d")) "geom_bin2d" else "geom_tile",
       "geom_bar" = if (inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
+      "geom_rug" = {
+        rug_sides <- strsplit(layer$geom_params$sides, "")[[1]]
+        rug_axes <- c("t" = "x", "b" = "x", "r" = "y", "l" = "y")[rug_sides]
+        paste("geom_rug_", paste(sort(unique(rug_axes)), collapse = ""), sep = "")
+      },
       layer_name
     )
 
@@ -290,9 +302,8 @@ get_data_list.ggplot <- function(p, ..., layers = TRUE) {
     list(
       name = ret_name,
       data = ret_data,
-      params = params
-      # TODO
-      # mapping = list(x, y, color, fill, ...)
+      params = params,
+      layer_num = layer_nums[layer_i]
     )
   })
 }

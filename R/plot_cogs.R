@@ -245,12 +245,35 @@ add_layer_cogs(
 #     ** grouped_testing(x...)
 add_layer_cogs(
   # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); plot_cogs(p)
-  "geom_rug",
+  "geom_rug_x",
   "Rug plots in the margins",
   cog_group_df(
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",
     "univariate_counts", c("x"), "_n"
+  )
+)
+add_layer_cogs(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); plot_cogs(p)
+  "geom_rug_y",
+  "Rug plots in the margins",
+  cog_group_df(
+    "univariate_continuous", "y", "_y",
+    "density_continuous", c("y"), "_density_y",
+    "univariate_counts", c("y"), "_n"
+  )
+)
+add_layer_cogs(
+  # load_all(); p <- qplot(cty, data = mpg, geom = "rug"); plot_cogs(p)
+  "geom_rug_xy",
+  "Rug plots in the margins",
+  cog_group_df(
+    "univariate_continuous", "x", "_x",
+    "univariate_continuous", "y", "_y",
+    "density_continuous", c("x"), "_density_x",
+    "density_continuous", c("y"), "_density_y",
+    "univariate_counts", c("x"), "_n_x",
+    "univariate_counts", c("y"), "_n_y"
   )
 )
 

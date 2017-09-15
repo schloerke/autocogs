@@ -4,10 +4,17 @@ context("plot_cogs")
 library(ggplot2)
 
 
-expect_auto_cogs <- function(p, names, lengths) {
+expect_auto_cogs <- function(
+  p,
+  names,
+  lengths,
+  debug = FALSE
+) {
   cat("") # make the tests show up while running
 
   large_cog_list <- p %>% plot_cogs()
+
+  # if (debug) browser()
 
   expect_list(large_cog_list, types = "list", len = 1)
 
@@ -131,7 +138,23 @@ test_that("ggplot2::geom_histogram", {
 })
 
 test_that("ggplot2::geom_rug", {
-  qplot(cty, data = mpg, geom = "rug") %>%
+  qplot(cty, hwy, data = mpg, geom = "rug") %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_density_x", "_density_y", "_n_x", "_n_y"),
+      c(5, 5, 6, 6, 2, 2),
+      debug = TRUE
+    )
+  qplot(cty, hwy, data = mpg, geom = "rug", sides = "ltrb") %>%
+    expect_auto_cogs(
+      c("_x", "_y", "_density_x", "_density_y", "_n_x", "_n_y"),
+      c(5, 5, 6, 6, 2, 2)
+    )
+  qplot(cty, hwy, data = mpg, geom = "rug", sides = "r") %>%
+    expect_auto_cogs(
+      c("_y", "_density_y", "_n"),
+      c(5, 6, 2)
+    )
+  qplot(cty, hwy, data = mpg, geom = "rug", sides = "t") %>%
     expect_auto_cogs(
       c("_x", "_density_x", "_n"),
       c(5, 6, 2)

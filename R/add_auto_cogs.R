@@ -272,7 +272,7 @@ add_cog_group(
         ),
         "optimal number of components found using Model-Based Clustering. Cluster value is NA if there are more than 1000 points in subset"
       ),
-      uni_modal_p_value = cog_desc(
+      unimodal_p_value = cog_desc(
         diptest::dip.test(dt$x)$p.value,
         "Hartigans' dip test for unimodality / multimodality. (Low p-value means non-unimodal density)"
       ),

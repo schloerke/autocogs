@@ -237,7 +237,7 @@ test_that("ggplot2::geom_qq", {
   qplot(sample = Sepal.Length, data = iris, geom = "qq") %>%
     expect_auto_cogs(
       c("_x", "_qq"),
-      c(5, 5)
+      c(5, 4)
     )
 })
 

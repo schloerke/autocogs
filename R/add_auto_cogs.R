@@ -528,8 +528,11 @@ add_cog_group(
       points_above = cog_desc(sum_above, "Sum of sample points above qqline"),
       points_below = cog_desc(sum_below, "Sum of sample points below qqline"),
       ks_test = cog_desc(ks_ans$p.value, "Kolmogorov-Smirnov test p value. Low value represents differing distributions"),
-      qq_mse = cog_desc(qq_mse, "Mean Squared Error of sample points to theoretical QQ line"),
-      max_deviation = cog_desc(max_deviation, "Max deviation from the theoretical QQ line")
+      qq_mse = cog_desc(qq_mse, "Mean Squared Error of sample points to theoretical QQ line")
+
+      # # Should not add as the line is not shifted.  What is displayed does not make sense when looking at the max deviation
+      # ,
+      # max_deviation = cog_desc(max_deviation, "Max deviation from the theoretical QQ line")
     )
   }
 )

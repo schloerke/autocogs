@@ -131,7 +131,7 @@ add_layer_cogs(
   "boxplot plot",
   cog_group_df(
     "univariate_continuous", "y", "_y",
-    "boxplot_metrics", "y", "_boxplot",
+    "boxplot", "y", "_boxplot",
     "univariate_counts", "y", "_n"
   )
 )

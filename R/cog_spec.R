@@ -4,7 +4,7 @@ cog_spec <- function(
   bivariate_continuous = TRUE,
   bivariate_counts = TRUE,
   bivariate_step = TRUE,
-  boxplot_metrics = TRUE,
+  boxplot = TRUE,
   density_2d_continuous = TRUE,
   density_continuous = TRUE,
   grouped_counts = TRUE,

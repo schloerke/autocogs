@@ -47,7 +47,7 @@ add_cog_group(
 
 
 add_cog_group(
-  "boxplot_metrics",
+  "boxplot",
   field_info("x", "continuous"),
   "univariate boxplot metrics for continuous data",
   function(x, ...) {

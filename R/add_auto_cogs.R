@@ -225,7 +225,7 @@ add_cog_group(
     x, ...,
     # StatDensity parameters
     bw = "nrd0", adjust = 1, kernel = "gaussian", n = 512, trim = FALSE, na.rm = FALSE,
-    clusters = length(x) <= 1000
+    clusters = FALSE
   ) {
 
     n <- length(x)

@@ -578,7 +578,10 @@ add_cog_group(
     mse <- mean(
       (dt$y - dt$y_fit) ^ 2
     )
-    max_deviation <- max(abs(dt$y - dt$y_fit))
+    deviations <- abs(dt$y - dt$y_fit)
+    max_pos <- which.max(deviations)[1]
+    max_deviation <- deviations[max_pos]
+    max_deviation_location <- dt$x[max_pos]
 
     # y_max_out <- approx(ret$x, ret$ymax, xout = dt$x)
     # outliers_above <- sum(dt$y > y_max_out)

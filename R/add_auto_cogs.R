@@ -296,7 +296,7 @@ add_cog_group(
     na.rm = FALSE, h = NULL,
     # contour = TRUE,
     n = 100, bins = NULL, binwidth = NULL,
-    clusters = length(x) <= 1000
+    clusters = FALSE
   ) {
 
     n <- length(x)

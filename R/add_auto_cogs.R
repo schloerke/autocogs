@@ -105,13 +105,13 @@ add_cog_group(
     list(
       Outlying = cog_desc(info$Outlying, "proportion of the total edge length due to extremely long edges connected to points of single degree"),
       Skewed = cog_desc(info$Skewed, "distribution of edge lengths of a minimum spanning tree gives us information about the relative density of points in a scattered configuration"),
-      Clumpy = cog_desc(info$Clumpy, "An extremely skewed distribution of MST edge lengths does not necessarily indicate clustering of points. For this, we turn to another measure based on the MST: the Hartigan and Mo- hanty RUNT statistic [20]. This statistic is most easily un- derstood in terms of the single-linkage hierarchical clustering tree called a dendrogram."),
+      Clumpy = cog_desc(info$Clumpy, "the Hartigan and Mohanty RUNT statistic"),
       Sparse = cog_desc(info$Sparse, "the 90% quantile of the edge lengths of the MST"),
       Striated = cog_desc(info$Striated, "sumation of angles over all adjacent edges of a MST"),
       Convex = cog_desc(info$Convex, "ratio of the area of the alpha hull and the area of the convex hull"),
       Skinny = cog_desc(info$Skinny, "ratio of perimeter to area of a polygon measures, roughly, how skinny it is"),
-      Stringy = cog_desc(info$Stringy, "The stringy measure is based on the _ index, which is the ratio of width to length of a network"),
-      Monotonic = cog_desc(info$Monotonic, "squared Spearman corre- lation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)")
+      Stringy = cog_desc(info$Stringy, "the ratio of width to length of a network"),
+      Monotonic = cog_desc(info$Monotonic, "squared Spearman correlation coefficient, which is a Pearson correlation on the ranks of x and y (corrected for ties)")
     )
   }
 )
@@ -595,7 +595,8 @@ add_cog_group(
 
     list(
       mse = cog_desc(mse, "Mean Squared Error of fitted points and y data"),
-      max_deviation = cog_desc(max_deviation, "Max deviation from fitted points")
+      max_deviation = cog_desc(max_deviation, "Max deviation from the fitted points"),
+      max_deviation_location = cog_desc(max_deviation_location, "X location of the max deviation from the fitted points")
     )
   }
 )
@@ -659,11 +660,11 @@ add_cog_group(
         r2 = cog_desc(infos$r.squared, "fraction of variance explained by the model"),
         sigma = cog_desc(infos$sigma, "square root of the estimated residual variance"),
         statistic = cog_desc(infos$statistic, "F-statistic of the model"),
-        p_value = cog_desc(infos$p.value, "p-value form the F test"),
+        p_value = cog_desc(infos$p.value, "p-value from the F test"),
         df = cog_desc(infos$p.value, "degrees of freedom used by the coefficients"),
         log_lik = cog_desc(infos$logLik, "log-likelihood value under the model"),
-        aic = cog_desc(infos$AIC, "Akaike's An Information Criterion"),
-        bic = cog_desc(infos$BIC, "Schwarz's Bayesian criterion"),
+        aic = cog_desc(infos$AIC, "Akaike's Information Criterion"),
+        bic = cog_desc(infos$BIC, "Schwarz's Bayesian Criterion"),
         deviance = cog_desc(infos$deviance, "quality-of-fit statistic of the model"),
         df_residual = cog_desc(infos$df.residual, "residual degrees of freedom"),
         n_sig_cooks = cog_desc(

@@ -643,6 +643,9 @@ add_cog_group(
     infos <- broom::glance(mod)
     dta <- broom::augment(mod)
 
+    p <- nrow(coefs)
+    n <- nrow(dta)
+
     ret <- list()
     if ("(Intercept)" %in% coefs$term) {
       ret$intercept <- cog_desc(coefs$estimate[1], "intercept of model")
@@ -668,8 +671,8 @@ add_cog_group(
         deviance = cog_desc(infos$deviance, "quality-of-fit statistic of the model"),
         df_residual = cog_desc(infos$df.residual, "residual degrees of freedom"),
         n_sig_cooks = cog_desc(
-          sum(dta$.cooksd > 4 / nrow(dta)),
-          "number of significant cooks distance points. (sum(cooks_distance >= 4/n))"
+          sum(dta$.cooksd > qf(0.5, p, n - p)),
+          "number of significant cooks distance points. (sum(cooks_distance > F_{p, n-p}(0.5)))"
         ),
         n_sig_hat = cog_desc(
           sum(dta$.hat > (2 * 1 / nrow(dta))),

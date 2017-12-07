@@ -844,4 +844,4 @@ add_cog_group(
 
 
 
-# known_cog_groups %>% tibble::glimpse() %>% as.list() %>% print()
+# cog_groups() %>% tibble::glimpse() %>% as.list() %>% print()

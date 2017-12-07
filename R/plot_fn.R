@@ -98,7 +98,7 @@ add_layer_cogs <- function(
   #     return(auto_cog)
 
       #
-      # cog_info <- known_cog_groups[known_cog_groups$name == auto_cog[[1]], ]
+      # cog_info <- cog_groups()[cog_groups_name() == auto_cog[[1]], ]
       # if (nrow(cog_info) == 0) {
       #   browser()
       #   stop("could not find auto_cog information for name: '", auto_cog, "'")

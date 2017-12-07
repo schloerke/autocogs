@@ -43,14 +43,16 @@ cog_spec <- function(
     args <- lapply(args, eval, envir = parent.frame())
     assert_list(args, min.len = 1, types = "logical", any.missing = FALSE)
 
-    known_vals <- known_cog_groups$name
+    known_vals <- cog_groups_name()
 
-    matched_arg_pos <- pmatch(names(args), known_cog_groups$name, duplicates.ok = FALSE)
+    matched_arg_pos <- pmatch(names(args), cog_groups_name(), duplicates.ok = FALSE)
     if (any(is.na(matched_arg_pos))) {
       stop(
         "all arguments supplied to `cog_spec()` must be able to be matched to known cognostic groups.\n",
         "unmatched arguments: \n\t", paste(names(args)[is.na(matched_arg_pos)], collapse = "\n\t"), "\n",
-        "known cognostic groups: \n\t", paste(known_cog_groups$name, collapse = "\n\t")
+        "known cognostic groups: \n\t", paste(cog_groups_name(), collapse = "\n\t"), "\n",
+        "extra arguments: \n\t",
+        ".keep_layer", "\n"
       )
     }
 

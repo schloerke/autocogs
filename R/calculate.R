@@ -58,13 +58,13 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
       # produce a join of the request auto cogs and known auto cogs
       # (as the known cogs could have updated since last execution)
       item_cog_dt <- inner_join(
-        layer_cog_dt, known_cog_groups,
+        layer_cog_dt, cog_groups(),
         c("cog_group" = "name")
       )
 
       if (nrow(item_cog_dt) != nrow(layer_cog_dt)) {
         if (verbose) {
-          message("missing cog groups found for auto cogs: ", paste(setdiff(layer_cog_dt$auto_cog, known_cog_groups$name), sep = ", "))
+          message("missing cog groups found for auto cogs: ", paste(setdiff(layer_cog_dt$auto_cog, cog_groups_name()), sep = ", "))
           print(layer_cog_dt)
         }
       }

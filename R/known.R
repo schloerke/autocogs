@@ -67,30 +67,7 @@ field_info <- function(
 }
 
 
-# field_infos <- function(...) {
-#   args <- list(...)
-#   if (length(args) %% 2 != 0 || length(args) == 0) {
-#     stop("must supply a positive, even length number of args")
-#   }
-#
-#   lapply(2 * seq_len(length(args) / 2), function(i) {
-#     field_info(args[[i - 1]], args[[i]])
-#   }) %>%
-#     bind_rows()
-# }
-
-
-# cog <- function(name, fn, description = NULL, ..., fn_args = NULL) {
-#   assert_character(name, len = 1, any.missing = FALSE)
-#   assert_character(fn_args, null.ok = TRUE)
-#   assert_function(fn, args = fn_args, ordered = TRUE)
-#   assert_character(description, len = 1, null.ok = TRUE)
-#
-#   data_frame(name, fn = list(fn), description = list(description))
-# }
-
-
-known_cog_groups <- data_frame(
+cog_groups_ <- data_frame(
   # Name of autocog
   name = character(0),
   # Fields required
@@ -100,6 +77,20 @@ known_cog_groups <- data_frame(
   # function to calculate the auto cogs
   fn = list()
 )
+
+#' Cognostic Group information
+#'
+#' To add more cognostic groups, please see \code{\link{add_cog_group}()}
+#'
+#' @export
+#' @examples
+#' cog_groups()
+cog_groups <- function() {
+  cog_groups_
+}
+cog_groups_name <- function() {
+  cog_groups_$name
+}
 
 #' Add a cognostic group
 #'
@@ -152,7 +143,7 @@ add_cog_group <- function(
     fn = list(fn)
   )
 
-  known_cog_groups <<- bind_rows(known_cog_groups, cog_group)
+  cog_groups_ <<- bind_rows(cog_groups_, cog_group)
 
   invisible(cog_group)
 }

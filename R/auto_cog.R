@@ -60,9 +60,9 @@ add_panel_cogs <- function(dt, panel_col = "panel", ...) {
 #' fn(iris$Sepal.Length)
 auto_cog <- function(.name, ..., .fn_only = FALSE) {
   assert_character(.name, len = 1, any.missing = FALSE)
-  assert_subset(.name, known_cog_groups$name, empty.ok = FALSE)
+  assert_subset(.name, cog_groups_name(), empty.ok = FALSE)
 
-  this_cog <- known_cog_groups[known_cog_groups$name == .name, ]
+  this_cog <- cog_groups()[cog_groups_name() == .name, ]
 
   # fields <- this_cog$fields[[1]]
   fn <- this_cog$fn[[1]]

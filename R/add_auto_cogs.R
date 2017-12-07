@@ -372,6 +372,14 @@ add_cog_group(
     counts <- ret$count
 
     list(
+      binwidth = cog_desc(
+        ifelse(length(params$binwidth) == 1, params$binwidth, NA),
+        "binwidth of histogram"
+      ),
+      bins = cog_desc(
+        ifelse(length(params$bins) == 1, params$bins, NA),
+        "number of bins"
+      ),
       count_min = cog_desc(min(counts), "minimum count"),
       count_max = cog_desc(max(counts), "maximum count"),
       count_mean = cog_desc(mean(counts), "mean (expected) count"),

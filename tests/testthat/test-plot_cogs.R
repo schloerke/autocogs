@@ -133,7 +133,7 @@ test_that("ggplot2::geom_histogram", {
   qplot(Sepal.Length, data = iris, geom = "histogram") %>%
     expect_auto_cogs(
       c("_x", "_density_x", "_hist_x", "_n"),
-      c(5, 6, 6, 2)
+      c(5, 6, 8, 2)
     )
 })
 

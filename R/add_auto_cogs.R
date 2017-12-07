@@ -177,7 +177,7 @@ add_cog_group(
       count_mean = cog_desc(mean(counts), "mean (expected) count"),
       count_median = cog_desc(median(counts), "median count"),
       count_var = cog_desc(var(counts), "variance of counts"),
-      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means not statistically 'uniform' counts")
     )
   }
 )
@@ -209,7 +209,7 @@ add_cog_group(
       count_mean = cog_desc(mean(counts), "mean (expected) count"),
       count_median = cog_desc(median(counts), "median count"),
       count_var = cog_desc(var(counts), "variance of counts"),
-      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means not statistically 'uniform' counts")
     )
   }
 )
@@ -385,7 +385,7 @@ add_cog_group(
       count_mean = cog_desc(mean(counts), "mean (expected) count"),
       count_median = cog_desc(median(counts), "median count"),
       count_var = cog_desc(var(counts), "variance of counts"),
-      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means non statistically 'uniform' counts")
+      "chisq" = cog_desc(chisq.test(counts)$p.value, "p-value of chi square test of counts. Low value means not statistically 'uniform' counts")
     )
   }
 )

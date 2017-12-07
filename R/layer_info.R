@@ -65,6 +65,7 @@ layer_info.ggplot <- function(p, keep = TRUE, ...) {
       ),
       "geom_tile" = if (inherits(layer$stat, "StatBin2d")) "geom_bin2d" else "geom_tile",
       "geom_bar" = if (inherits(layer$stat, "StatBin")) "geom_histogram" else "geom_bar",
+      "geom_path" = if (inherits(layer$stat, "StatBin")) "geom_freqpoly" else "geom_path",
       "geom_rug" = {
         rug_sides <- strsplit(layer$geom_params$sides, "")[[1]]
         rug_axes <- c("t" = "x", "b" = "x", "r" = "y", "l" = "y")[rug_sides]

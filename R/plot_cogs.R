@@ -20,10 +20,12 @@ NULL
 #'   "bivariate_counts", c("x", "y"), "_n"
 #' )
 cog_group_df <- function(...) {
-  tibble::tribble(
+  ret <- tibble::tribble(
     ~ cog_group, ~ cols, ~ name,
     ...
   )
+  ret$cols <- as.list(ret$cols)
+  ret
 }
 
 #   geom_bar geom_col stat_count
@@ -245,6 +247,17 @@ add_layer_cogs(
   # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); plot_cogs(p)
   "geom_histogram",
   "histogram of continuous data",
+  cog_group_df(
+    "univariate_continuous", "x", "_x",
+    "density_continuous", c("x"), "_density_x",
+    "histogram_counts", c("x"), "_hist_x",
+    "univariate_counts", c("x"), "_n"
+  )
+)
+add_layer_cogs(
+  # load_all(); p <- qplot(Sepal.Length, data = iris, geom = "histogram"); plot_cogs(p)
+  "freqpoly",
+  "frequency line of continuous data",
   cog_group_df(
     "univariate_continuous", "x", "_x",
     "density_continuous", c("x"), "_density_x",

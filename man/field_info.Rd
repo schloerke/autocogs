@@ -2,16 +2,16 @@
 % Please edit documentation in R/known.R
 \name{field_info}
 \alias{field_info}
-\title{Field Type info}
+\title{Field Type Information}
 \usage{
 field_info(dimension = c("x", "y", "z", "group", "any"),
   type = c("continuous", "discrete", "date", "any"))
 }
 \arguments{
-\item{dimension}{field name. (use one of the listed options provided)}
+\item{dimension}{field name. Use one of the listed options provided}
 
-\item{type}{field type. (use one of the listed options provided)}
+\item{type}{field type. Use one of the listed options provided}
 }
 \description{
-Field Type info
+Field Type Information
 }

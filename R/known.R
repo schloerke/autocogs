@@ -14,6 +14,8 @@ cog_desc <- function(x, desc = NULL) {
   attr(x, "desc") <- desc
   x
 }
+
+
 # type CogGroupRequirements {
 #   name: String!
 #   description: String
@@ -47,10 +49,10 @@ cog_desc <- function(x, desc = NULL) {
 #' @import tibble dplyr checkmate
 NULL
 
-#' Field Type info
+#' Field Type Information
 #'
-#' @param dimension field name. (use one of the listed options provided)
-#' @param type field type. (use one of the listed options provided)
+#' @param dimension field name. Use one of the listed options provided
+#' @param type field type. Use one of the listed options provided
 #' @export
 #' @import dplyr
 field_info <- function(

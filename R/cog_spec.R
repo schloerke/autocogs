@@ -1,5 +1,20 @@
 
 
+#' Cognostic Specification
+#'
+#' @param bivariate_continuous,bivariate_counts,bivariate_step,boxplot,density_2d_continuous,density_continuous,grouped_counts,grouped_testing,hex_counts,histogram_counts,linear_model,loess_model,pairwise_counts,quantile_quantile,scagnostics,smooth_line,square_counts,univariate_continuous,univariate_counts,univariate_discrete names of cognostic groups to calculate.  The boolean value (TRUE) supplied to each argument determines if the value should be displayed if possible or removed if possible.
+#' @param ... ignored.  Will cause error if any are supplied
+#' @param .keep_layer boolean (TRUE) that determines if the layer should be kept at all
+#' @export
+#' @rdname cog_spec
+#' @return cognostic specification that determines which cogs are added or removed if possible
+#' @examples
+#' # display like normal
+#' cog_spec()
+#' # remove scagnostics
+#' cog_spec(scagnostics = FALSE)
+#' # remove layer
+#' cog_spec(.keep_layer = FALSE)
 cog_spec <- function(
   bivariate_continuous = TRUE,
   bivariate_counts = TRUE,
@@ -26,6 +41,7 @@ cog_spec <- function(
 ) {
 
   dots <- list(...)
+  # check for unnamed args
   if (length(dots) > 0) {
     dot_names <- names(dots)
     if (is.null(dot_names) || any(dot_names == "")) {
@@ -68,7 +84,10 @@ cog_spec <- function(
 }
 
 
-
+#' @export
+#' @rdname cog_spec
+#' @param p plot object in question
+#' @param specs list of cog_spec outputs for each layer of the plot object
 as_cog_specs <- function(p, specs) {
   if (inherits(specs, "cog_spec")) {
     specs <- list(specs)

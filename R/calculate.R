@@ -36,7 +36,7 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
       if (verbose) {
-        message("no cog group found for layer: ", plot_class_val, "::", layer_item$name)
+        message("no cog group found for layer: ", plot_class_val, ", ", layer_item$name)
       }
       return(NULL)
     }

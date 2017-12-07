@@ -27,7 +27,7 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
   # for every layer
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
-    layer_cog_group <- known_plot_cogs %>%
+    layer_cog_group <- layer_cogs() %>%
       filter_(
         ~ kind == plot_class_val,
         ~ name == layer_item$name
@@ -45,10 +45,10 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
     layer_cog_group <- as.list(layer_cog_group)
 
     # for every layer info row found, look at the auto_cog data frame
-    lapply(seq_along(layer_cog_group$layer_cogs), function(layer_cog_i) {
+    lapply(seq_along(layer_cog_group$cog_groups), function(layer_cog_i) {
 
       layer_cog_spec <- layer_cog_specs[[layer_cog_i]]
-      layer_cog_dt <- layer_cog_group$layer_cogs[[layer_cog_i]]
+      layer_cog_dt <- layer_cog_group$cog_groups[[layer_cog_i]]
 
       # remove unwanted cogs in layer
       layer_cog_dt <- layer_cog_dt[

@@ -18,7 +18,7 @@ NULL
 #   cognostics: [String!]! # list of all cognostics names. ex: univariate_counts, univariate_continuous
 # }
 
-known_plot_cogs <- data_frame(
+layer_cogs_ <- data_frame(
   # plot mechanism (ggplot2, rbokeh, plotly, etc.)
   kind = character(0),
 
@@ -27,7 +27,7 @@ known_plot_cogs <- data_frame(
 
 
   # Automatic cognostics to calculate
-  layer_cogs = list(),
+  cog_groups = list(),
 
   # Plot type description
   description = character(0)
@@ -36,12 +36,21 @@ known_plot_cogs <- data_frame(
   # fn = list()
 )
 
+#' Layer Cognostic groups
+#'
+#' Display all layer cognostic information to be paired with information from \code{\link{cog_groups}()}.
+#'
+#' @export
+layer_cogs <- function() {
+  layer_cogs_
+}
+
 #' Add plot layer cognostics
 #'
 #' Add a new set of cognostic groups for a given plot layer. If the plot layer is found, the corresponding cognostic groups will be calculated.
 #' @param name Name of plot layer. This should match the output of the \code{"name"} values of \code{\link{layer_info}}
 #' @param description Description of cognostic group
-#' @param layer_cogs A \code{data.frame} (or \code{tibble}) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by \code{\link{layer_info}} during calculations. "name" should contain the final storage name of the cognostic group.
+#' @param cog_groups A \code{data.frame} (or \code{tibble}) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by \code{\link{layer_info}} during calculations. "name" should contain the final storage name of the cognostic group.
 #' @param kind String value that will match the output of \code{\link{plot_class}} of the desired plot object
 #' @param ... ignored
 #' @export
@@ -64,7 +73,7 @@ known_plot_cogs <- data_frame(
 add_layer_cogs <- function(
   name,
   description,
-  layer_cogs,
+  cog_groups,
   # setup_data = NULL,
   kind = "ggplot",
   ...
@@ -75,12 +84,12 @@ add_layer_cogs <- function(
   assert_character(description, any.missing = FALSE)
 
   assert_data_frame(
-    layer_cogs,
+    cog_groups,
     c("character", "list"), ncols = 3, min.rows = 1,
     any.missing = FALSE
   )
-  assert_names(names(layer_cogs), identical.to = c("cog_group", "cols", "name"))
-  # assert_list(layer_cogs, any.missing = FALSE, unique = TRUE)
+  assert_names(names(cog_groups), identical.to = c("cog_group", "cols", "name"))
+  # assert_list(cog_groups, any.missing = FALSE, unique = TRUE)
 
   # if (!is.null(setup_data)) assert_function(setup_data)
 
@@ -89,7 +98,7 @@ add_layer_cogs <- function(
   # assert_logical(verbose, len = 1, any.missing = FALSE)
 
 
-  # cog_info_list <- lapply(layer_cogs, function(auto_cog) {
+  # cog_info_list <- lapply(cog_groups, function(auto_cog) {
   #   if (is.list(auto_cog)) {
   #
   #     assert_character(auto_cog$cog_name, len = 1, any.missing = FALSE)
@@ -114,16 +123,16 @@ add_layer_cogs <- function(
       # return(cog_info$fn)
     # }
 
-  #   stop("layer_cogs item needs to be a list of two characters (auto_cog name, columns used)")
+  #   stop("cog_groups item needs to be a list of two characters (auto_cog name, columns used)")
   # })
 
 
-  known_plot_cogs <<- bind_rows(
-    known_plot_cogs,
+  layer_cogs_ <<- bind_rows(
+    layer_cogs_,
     data_frame(
       kind,
       name,
-      layer_cogs = list(layer_cogs),
+      cog_groups = list(cog_groups),
       # fn = list(fn),
       description
     )

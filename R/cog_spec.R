@@ -22,7 +22,7 @@ cog_spec <- function(
   univariate_counts = TRUE,
   univariate_discrete = TRUE,
   ...,
-  keep = TRUE
+  .keep_layer = TRUE
 ) {
 
   dots <- list(...)
@@ -34,7 +34,7 @@ cog_spec <- function(
   }
 
   args <- as.list(sys.call())[-1]
-  args$keep <- NULL
+  args$.keep_layer <- NULL # do not match the keep_layer argument
 
   known_vals <- character(0)
 
@@ -58,7 +58,7 @@ cog_spec <- function(
   }
 
   ret <- list(
-    keep = keep,
+    keep_layer = .keep_layer,
     remove = known_vals
   )
   class(ret) <- "cog_spec"
@@ -94,8 +94,14 @@ as_cog_specs <- function(p, specs) {
       stop("`spec` values should either by logical or created from `cog_spec()`. Found: ", paste(class(spec), collapse = ", "))
     }
     # only true of false values
-    cog_spec(keep = spec)
+    cog_spec(.keep_layer = spec)
   })
 
   specs
+}
+
+
+
+cog_specs_keep_layer <- function(cog_specs) {
+  lapply(cog_specs, `[[`, "keep_layer") %>% unlist()
 }

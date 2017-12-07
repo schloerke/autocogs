@@ -20,7 +20,7 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
   plot_class_val <- plot_class(p)
   cog_specs <- as_cog_specs(p, spec)
-  keep_layers <- lapply(cog_specs, `[[`, "keep") %>% unlist()
+  keep_layers <- cog_specs_keep_layer(cog_specs)
   layer_info <- get_layer_info(p, keep = keep_layers, ...)
   layer_cog_specs <- cog_specs[keep_layers]
 

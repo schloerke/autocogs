@@ -34,7 +34,7 @@ test_that("ggplot2 layers", {
   check_plot_count(list(cog_spec(), TRUE), 2)
   check_plot_count(list(cog_spec(), FALSE), 1)
   check_plot_count(list(cog_spec(scagnostics = FALSE), TRUE), 2)
-  check_plot_count(list(cog_spec(keep = FALSE), TRUE), 1)
+  check_plot_count(list(cog_spec(.keep_layer = FALSE), TRUE), 1)
 
   expect_equal(
     cog_spec()$remove,

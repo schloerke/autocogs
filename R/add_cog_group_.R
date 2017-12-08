@@ -80,6 +80,9 @@ add_cog_group(
   "continuous bivariate metrics",
   function(x, y, ...) {
     if (is.null(x)) return(NULL)
+    if (is.null(y)) return(NULL)
+    x <- as.numeric(x)
+    y <- as.numeric(y)
 
     list(
       "covariance" = cog_desc(cov(x, y, use = "na.or.complete"), "covariance of non na pairs"),

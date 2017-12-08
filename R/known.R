@@ -1,4 +1,4 @@
-
+#' @include auto_cog.R
 
 #' Cognostic
 #'
@@ -94,6 +94,8 @@ known_cog_groups_name <- function() {
   known_cog_groups_$name
 }
 
+autocog_env <- environment()
+
 #' Add a cognostic group
 #'
 #' Add a new cognostic to be used when calculating automatic cognostics.
@@ -146,6 +148,12 @@ add_cog_group <- function(
   )
 
   known_cog_groups_ <<- bind_rows(known_cog_groups_, cog_group)
+
+  assign(
+    paste("autocog_", name, sep = ""),
+    autocog(name, .fn_only = TRUE),
+    envir = autocog_env
+  )
 
   invisible(cog_group)
 }

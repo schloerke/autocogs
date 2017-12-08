@@ -103,6 +103,8 @@ add_cog_group(
   function(x, y, ...) {
     if (is.null(x)) return(NULL)
     if (is.null(y)) return(NULL)
+    if (!is.numeric(x)) return(NULL)
+    if (!is.numeric(y)) return(NULL)
 
     info <- as.list(scagnostics(x, y))
     list(

@@ -1,4 +1,4 @@
-#' @include known.R
+#' @include add_cog_group.R field_info.R
 NULL
 
 

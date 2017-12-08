@@ -25,11 +25,15 @@ Imports: dplyr,
     progress
 RoxygenNote: 6.0.1
 Collate: 
-    'auto_cog.R'
-    'known.R'
-    'add_auto_cogs.R'
-    'plot_fn.R'
-    'calculate.R'
+    'autocog.R'
+    'known_cog_groups.R'
+    'add_cog_group.R'
+    'field_info.R'
+    'add_cog_group_.R'
+    'known_layer_cogs.R'
+    'add_layer_cogs.R'
+    'add_layer_cogs_.R'
+    'cog_desc.R'
     'cog_spec.R'
     'layer_count.R'
     'layer_info.R'

@@ -69,7 +69,7 @@ field_info <- function(
 }
 
 
-cog_groups_ <- data_frame(
+known_cog_groups_ <- data_frame(
   # Name of autocog
   name = character(0),
   # Fields required
@@ -86,12 +86,12 @@ cog_groups_ <- data_frame(
 #'
 #' @export
 #' @examples
-#' cog_groups()
-cog_groups <- function() {
-  cog_groups_
+#' known_cog_groups()
+known_cog_groups <- function() {
+  known_cog_groups_
 }
-cog_groups_name <- function() {
-  cog_groups_$name
+known_cog_groups_name <- function() {
+  known_cog_groups_$name
 }
 
 #' Add a cognostic group
@@ -145,7 +145,7 @@ add_cog_group <- function(
     fn = list(fn)
   )
 
-  cog_groups_ <<- bind_rows(cog_groups_, cog_group)
+  known_cog_groups_ <<- bind_rows(known_cog_groups_, cog_group)
 
   invisible(cog_group)
 }

@@ -9,12 +9,28 @@
 #' @rdname cog_spec
 #' @return cognostic specification that determines which cogs are added or removed if possible
 #' @examples
+#' # example cog specifications
 #' # display like normal
-#' cog_spec()
+#' cog_spec(); TRUE
 #' # remove scagnostics
 #' cog_spec(scagnostics = FALSE)
 #' # remove layer
-#' cog_spec(.keep_layer = FALSE)
+#' cog_spec(.keep_layer = FALSE); FALSE
+#'
+#' # set up data
+#' p <- ggplot2::qplot(Sepal.Length, Sepal.Width, data = iris, geom = c("point", "smooth"))
+#' dt <- tibble::data_frame(panel = list(p))
+#'
+#' # compute cognostics like normal
+#' add_panel_cogs(dt)
+#'
+#' # do not compute scagnostics for geom_point cognostics
+#' # compute geom_smooth cognostics
+#' add_panel_cogs(dt, spec = list(cog_spec(scagnostics = FALSE), TRUE))
+#'
+#' # do not compute scagnostics for geom_point cognostics
+#' # do not compute geom_smooth cognostics
+#' add_panel_cogs(dt, spec = list(cog_spec(scagnostics = FALSE), FALSE))
 cog_spec <- function(
   bivariate_continuous = TRUE,
   bivariate_counts = TRUE,
@@ -59,14 +75,14 @@ cog_spec <- function(
     args <- lapply(args, eval, envir = parent.frame())
     assert_list(args, min.len = 1, types = "logical", any.missing = FALSE)
 
-    known_vals <- cog_groups_name()
+    known_vals <- known_cog_groups_name()
 
-    matched_arg_pos <- pmatch(names(args), cog_groups_name(), duplicates.ok = FALSE)
+    matched_arg_pos <- pmatch(names(args), known_cog_groups_name(), duplicates.ok = FALSE)
     if (any(is.na(matched_arg_pos))) {
       stop(
         "all arguments supplied to `cog_spec()` must be able to be matched to known cognostic groups.\n",
         "unmatched arguments: \n\t", paste(names(args)[is.na(matched_arg_pos)], collapse = "\n\t"), "\n",
-        "known cognostic groups: \n\t", paste(cog_groups_name(), collapse = "\n\t"), "\n",
+        "known cognostic groups: \n\t", paste(known_cog_groups_name(), collapse = "\n\t"), "\n",
         "extra arguments: \n\t",
         ".keep_layer", "\n"
       )

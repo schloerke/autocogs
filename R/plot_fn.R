@@ -18,7 +18,7 @@ NULL
 #   cognostics: [String!]! # list of all cognostics names. ex: univariate_counts, univariate_continuous
 # }
 
-layer_cogs_ <- data_frame(
+known_layer_cogs_ <- data_frame(
   # plot mechanism (ggplot2, rbokeh, plotly, etc.)
   kind = character(0),
 
@@ -41,8 +41,10 @@ layer_cogs_ <- data_frame(
 #' Display all layer cognostic information to be paired with information from \code{\link{cog_groups}()}.
 #'
 #' @export
-layer_cogs <- function() {
-  layer_cogs_
+#' @examples
+#' known_layer_cogs()
+known_layer_cogs <- function() {
+  known_layer_cogs_
 }
 
 #' Add plot layer cognostics
@@ -127,8 +129,8 @@ add_layer_cogs <- function(
   # })
 
 
-  layer_cogs_ <<- bind_rows(
-    layer_cogs_,
+  known_layer_cogs_ <<- bind_rows(
+    known_layer_cogs_,
     data_frame(
       kind,
       name,

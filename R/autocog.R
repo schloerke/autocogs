@@ -93,7 +93,7 @@ format.autocog <- function(x, ...) {
     "Automatic Cognostic Function:\n\t",
       name, "\n",
     "Description:\n\t",
-      if(is.null(desc)) "(none)" else desc,
+      if (is.null(desc)) "(none)" else desc,
       "\n",
     "\n",
     "autocog_", name, " <- ",

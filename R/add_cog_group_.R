@@ -53,7 +53,7 @@ add_cog_group(
   function(x, ...) {
     if (is.null(x)) return(NULL)
 
-    boxplot_info <- StatBoxplot$compute_group(
+    boxplot_info <- ggplot2::StatBoxplot$compute_group(
       data.frame(x = 1, y = x), scales = NULL, width = 1, na.rm = FALSE, coef = 1.5
     )
     median <- boxplot_info$middle[[1]]
@@ -169,7 +169,7 @@ add_cog_group(
       diff(range(x, na.rm = TRUE)) / bins,
       diff(range(y, na.rm = TRUE)) / bins
     )
-    hex_info <- StatBinhex$compute_group(dt, NULL, binwidth)
+    hex_info <- ggplot2::StatBinhex$compute_group(dt, NULL, binwidth)
     counts <- hex_info$count
     list(
       count_min = cog_desc(min(counts), "minimum count"),
@@ -193,12 +193,12 @@ add_cog_group(
     x_is_na <- is.na(x)
     dt <- data.frame(x = x, y = y, weight = 1, PANEL = 1)
     scales <- list(
-      x = ScaleContinuous$clone(),
-      y = ScaleContinuous$clone()
+      x = ggplot2::ScaleContinuous$clone(),
+      y = ggplot2::ScaleContinuous$clone()
     )
     scales$x$train(dt$x)
     scales$y$train(dt$y)
-    bin_dt <- StatBin2d$compute_group(dt, scales,
+    bin_dt <- ggplot2::StatBin2d$compute_group(dt, scales,
       binwidth = binwidth, bins = bins,
       breaks = breaks, origin = origin, drop = drop
     )
@@ -237,11 +237,11 @@ add_cog_group(
     }
 
     scales <- list(
-      x = ScaleContinuous$clone()
+      x = ggplot2::ScaleContinuous$clone()
     )
     scales$x$train(dt$x)
 
-    ret <- StatDensity$compute_group(
+    ret <- ggplot2::StatDensity$compute_group(
       dt, scales,
       bw = bw, adjust = adjust, kernel = kernel, n = n, trim = trim, na.rm = na.rm
     )
@@ -303,13 +303,13 @@ add_cog_group(
     dt <- data.frame(x = x, y = y, group = 1, PANEL = 1)
 
     scales <- list(
-      x = ScaleContinuous$clone(),
-      y = ScaleContinuous$clone()
+      x = ggplot2::ScaleContinuous$clone(),
+      y = ggplot2::ScaleContinuous$clone()
     )
     scales$x$train(dt$x)
     scales$y$train(dt$y)
 
-    ret <- StatDensity2d$compute_group(
+    ret <- ggplot2::StatDensity2d$compute_group(
       dt, scales,
       na.rm = na.rm, h = h, contour = FALSE, n = n, bins = bins, binwidth = binwidth
     )
@@ -357,7 +357,7 @@ add_cog_group(
     dt <- data.frame(x = x, PANEL = 1)
 
     scales <- list(
-      x = ScaleContinuous$clone()
+      x = ggplot2::ScaleContinuous$clone()
     )
     scales$x$train(dt$x)
 
@@ -366,8 +366,8 @@ add_cog_group(
       boundary = boundary, closed = closed, pad = pad,
       breaks = breaks
     )
-    params <- StatBin$setup_params(dt, params)
-    ret <- do.call(StatBin$compute_group, append(list(dt, scales), params))
+    params <- ggplot2::StatBin$setup_params(dt, params)
+    ret <- do.call(ggplot2::StatBin$compute_group, append(list(dt, scales), params))
 
     counts <- ret$count
 
@@ -501,7 +501,7 @@ add_cog_group(
   ) {
 
     dt <- data.frame(sample = x)
-    ret <- StatQq$compute_group(
+    ret <- ggplot2::StatQq$compute_group(
       dt, NULL,
       distribution = distribution,
       dparams = dparams,
@@ -568,8 +568,8 @@ add_cog_group(
     )
 
     scales <- list(
-      x = ScaleContinuous$clone(),
-      y = ScaleContinuous$clone()
+      x = ggplot2::ScaleContinuous$clone(),
+      y = ggplot2::ScaleContinuous$clone()
     )
     scales$x$train(dt$x)
     scales$y$train(dt$y)
@@ -578,9 +578,9 @@ add_cog_group(
     n = n, span = span, fullrange = fullrange, xseq = xseq, level = level,
     method.args = method_args, na.rm = na.rm)
 
-    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+    params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
 
-    ret <- do.call(StatSmooth$compute_group, append(list(dt, scales), params))
+    ret <- do.call(ggplot2::StatSmooth$compute_group, append(list(dt, scales), params))
 
     dt$y_fit <- approx(ret$x, ret$y, xout = dt$x)$y
     mse <- mean(
@@ -642,7 +642,7 @@ add_cog_group(
       method.args = method_args, na.rm = na.rm
     )
 
-    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+    params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weight = dt$weights)
 
     mod <- do.call(lm, c(core_params, params$method.args))
@@ -729,7 +729,7 @@ add_cog_group(
 
     dt <- data.frame(x = x, y = y, weights = weights)
 
-    params <- suppressMessages(StatSmooth$setup_params(dt, params))
+    params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weight = dt$weights, span = span)
 
     mod <- do.call(loess, c(core_params, params$method.args))

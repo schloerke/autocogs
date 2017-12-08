@@ -26,7 +26,7 @@ known_layer_cogs_ <- data_frame(
 
 #' Layer Cognostic groups
 #'
-#' Display all layer cognostic information to be paired with information from \code{\link{cog_groups}()}.
+#' Display all layer cognostic information to be paired with information from \code{\link{known_cog_groups}()}.
 #'
 #' @export
 #' @examples

@@ -1,4 +1,4 @@
 library(testthat)
-library(autocog)
+library(autocogs)
 
-test_check("autocog")
+test_check("autocogs")

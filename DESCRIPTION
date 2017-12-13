@@ -1,4 +1,4 @@
-Package: autocog
+Package: autocogs
 Title: Automatic Cognostic Summaries
 Version: 0.0.0.9000
 Authors@R: c(
@@ -24,7 +24,7 @@ Imports: dplyr,
     hexbin,
     progress
 RoxygenNote: 6.0.1
-Collate: 
+Collate:
     'autocog.R'
     'known_cog_groups.R'
     'add_cog_group.R'

@@ -79,7 +79,7 @@ test_that("ggplot2::geom_boxplot", {
   qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot") %>%
     expect_auto_cogs(
       c("_y", "_boxplot", "_n"),
-      c(5, 7, 2)
+      c(5, 7, 5)
     )
 })
 

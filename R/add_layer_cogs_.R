@@ -134,7 +134,7 @@ add_layer_cogs(
   cog_group(
     "univariate_continuous", "y", "_y",
     "boxplot", "y", "_boxplot",
-    "univariate_counts", "y", "_n"
+    "bivariate_counts", c("x", "y"), "_n"
   )
 )
 

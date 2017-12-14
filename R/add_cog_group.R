@@ -63,4 +63,5 @@ add_cog_group <- function(
   invisible(cog_group)
 }
 
+#' @exportPattern autocog_
 autocog_env <- environment()

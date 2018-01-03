@@ -30,8 +30,6 @@
 
 \item{...}{ignored}
 
-\item{...}{ignored}
-
 \item{direction}{step direction. Defaults to \code{"hv"}}
 
 \item{na.rm}{should \code{NA} points be removed when performing calculations}
@@ -42,6 +40,30 @@
 These set of functions comprise the default cognostic groups.  Each function produces it's own cognostic information given the required pieces of data.
 
 The functions' print method will display the description.  \code{autocog_*} functions will take the \code{\link{known_cog_groups}()} functions and format the output into a single row tibble.  Any new known cognostic group function, NAME,  will create a function called autocog_NAME, which may be called.
+
+Default Cognostic Group Functions:
+\itemize{
+\item{autocog_bivariate_continuous}
+\item{autocog_bivariate_counts}
+\item{autocog_bivariate_step}
+\item{autocog_boxplot}
+\item{autocog_density_2d_continuous}
+\item{autocog_density_continuous}
+\item{autocog_grouped_counts}
+\item{autocog_grouped_testing}
+\item{autocog_hex_counts}
+\item{autocog_histogram_counts}
+\item{autocog_linear_model}
+\item{autocog_loess_model}
+\item{autocog_pairwise_counts}
+\item{autocog_quantile_quantile}
+\item{autocog_scagnostics}
+\item{autocog_smooth_line}
+\item{autocog_square_counts}
+\item{autocog_univariate_continuous}
+\item{autocog_univariate_counts}
+\item{autocog_univariate_discrete}
+}
 }
 \examples{
 autocog_bivariate_continuous

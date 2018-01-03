@@ -76,7 +76,6 @@ autocogs_env <- environment()
 #' @param x data that should appear on an x axis
 #' @param y data that should appear on an y axis
 #' @param ... ignored
-#' @param ... ignored
 #' @param direction step direction. Defaults to \code{"hv"}
 #' @param na.rm should \code{NA} points be removed when performing calculations
 #' @param h,n,bins,binwidth,clusters,bw,adjust,kernel,trim,group,groups,center,boundary,closed,pad,breaks,weights,formula,method_args,span,distribution,dparams,method,se,fullrange,xseq,level,origin,drop parameters usually set by corresponding geoms to be used within ggplot2 Stat* methods

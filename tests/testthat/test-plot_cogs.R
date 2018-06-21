@@ -71,7 +71,7 @@ test_that("ggplot2::geom_point", {
   qplot(Sepal.Length, Sepal.Width, data = iris, geom = "point") %>%
     expect_auto_cogs(
       c("_x", "_y", "_bivar", "_scagnostic", "_n"),
-      c(5, 5, 2, 9, 5)
+      c(5, 5, 2, 1, 5)
     )
 })
 
@@ -87,7 +87,7 @@ test_that("ggplot2::geom_count", {
   qplot(cty, hwy, data = mpg, geom = "count") %>%
     expect_auto_cogs(
       c("_x", "_y", "_x_counts", "_y_counts", "_bivar", "_xy_counts", "_scagnostic", "_n"),
-      c(5, 5, 5, 5, 2, 6, 9, 5)
+      c(5, 5, 5, 5, 2, 6, 1, 5)
     )
 })
 

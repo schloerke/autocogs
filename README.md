@@ -35,13 +35,13 @@ library(tidyverse)
 #> Loading tidyverse: purrr
 #> Loading tidyverse: dplyr
 #> Loading required package: magrittr
-#> 
+#>
 #> Attaching package: 'magrittr'
 #> The following object is masked from 'package:purrr':
-#> 
+#>
 #>     set_names
 #> The following object is masked from 'package:tidyr':
-#> 
+#>
 #>     extract
 #> Conflicts with tidy packages ----------------------------------------------
 #> filter():     dplyr, stats
@@ -65,7 +65,7 @@ p <-
 p
 ```
 
-![](readme-figs/explore-1.png)
+![](man/figures/explore-1.png)
 
 Looking at the plot above, most countries follow a linear trend: As the year increases, life expectancy goes up. A few countries do not follow a linear trend.
 
@@ -91,7 +91,7 @@ ggplot(gapminder, aes(year, lifeExp)) +
 #> using data from the first layer
 ```
 
-![](readme-figs/facet_trelliscope-1.png)
+![](man/figures/facet_trelliscope-1.png)
 
 ``` r
 # (screen shot of trelliscopejs widget)
@@ -143,7 +143,7 @@ gap_data
 gap_data$panel[[1]]
 ```
 
-![](readme-figs/gapminder-1.png)
+![](man/figures/gapminder-1.png)
 
 ``` r
 
@@ -189,7 +189,7 @@ trelliscopejs::trelliscope(
 #> Warning: Removed 8 rows containing missing values (geom_smooth).
 ```
 
-![](readme-figs/gapminder-2.png)
+![](man/figures/gapminder-2.png)
 
 ``` r
 # (screen shot of trelliscopejs widget)

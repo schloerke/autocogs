@@ -6,14 +6,14 @@
 \title{Cognostic Specification}
 \usage{
 cog_spec(bivariate_continuous = TRUE, bivariate_counts = TRUE,
-  bivariate_step = TRUE, boxplot = TRUE, density_2d_continuous = TRUE,
-  density_continuous = TRUE, grouped_counts = TRUE,
-  grouped_testing = TRUE, hex_counts = TRUE, histogram_counts = TRUE,
-  linear_model = TRUE, loess_model = TRUE, pairwise_counts = TRUE,
-  quantile_quantile = TRUE, scagnostics = TRUE, smooth_line = TRUE,
-  square_counts = TRUE, univariate_continuous = TRUE,
-  univariate_counts = TRUE, univariate_discrete = TRUE, ...,
-  .keep_layer = TRUE)
+  bivariate_step = TRUE, boxplot = TRUE,
+  density_2d_continuous = TRUE, density_continuous = TRUE,
+  grouped_counts = TRUE, grouped_testing = TRUE, hex_counts = TRUE,
+  histogram_counts = TRUE, linear_model = TRUE, loess_model = TRUE,
+  pairwise_counts = TRUE, quantile_quantile = TRUE,
+  scagnostics = TRUE, smooth_line = TRUE, square_counts = TRUE,
+  univariate_continuous = TRUE, univariate_counts = TRUE,
+  univariate_discrete = TRUE, ..., .keep_layer = TRUE)
 
 as_cog_specs(p, specs)
 }

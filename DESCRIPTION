@@ -2,8 +2,8 @@ Package: autocogs
 Title: Automatic Cognostic Summaries
 Version: 0.0.1
 Authors@R: c(
-    person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut","cre")),
-    person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths"))
+    person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut")),
+    person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths", "cre"))
   )
 Description: Automatically calculates cognostic groups for plot objects and list column plot objects.  Results are returned in a nested data frame.
 Depends: R (>= 3.4.0)
@@ -22,7 +22,7 @@ Imports: dplyr,
     utils,
     hexbin,
     progress
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Collate:
     'autocog.R'
     'known_cog_groups.R'

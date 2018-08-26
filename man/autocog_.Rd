@@ -34,7 +34,7 @@
 
 \item{na.rm}{should \code{NA} points be removed when performing calculations}
 
-\item{h, n, bins, binwidth, clusters, bw, adjust, kernel, trim, group, groups, center, boundary, closed, pad, breaks, weights, formula, method_args, span, distribution, dparams, method, se, fullrange, xseq, level, origin, drop}{parameters usually set by corresponding geoms to be used within ggplot2 Stat* methods}
+\item{h, n, bins, binwidth, clusters, bw, adjust, kernel, trim, group, groups, center, boundary, closed, pad, breaks, weights, formula, method_args, span, distribution, dparams, method, se, fullrange, xseq, level, origin, drop}{parameters usually set by corresponding "geoms" to be used within ggplot2 Stat* methods}
 }
 \description{
 These set of functions comprise the default cognostic groups.  Each function produces it's own cognostic information given the required pieces of data.

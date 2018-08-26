@@ -102,7 +102,7 @@ autocogs_env <- environment()
 #' @param ... ignored
 #' @param direction step direction. Defaults to \code{"hv"}
 #' @param na.rm should \code{NA} points be removed when performing calculations
-#' @param h,n,bins,binwidth,clusters,bw,adjust,kernel,trim,group,groups,center,boundary,closed,pad,breaks,weights,formula,method_args,span,distribution,dparams,method,se,fullrange,xseq,level,origin,drop parameters usually set by corresponding geoms to be used within ggplot2 Stat* methods
+#' @param h,n,bins,binwidth,clusters,bw,adjust,kernel,trim,group,groups,center,boundary,closed,pad,breaks,weights,formula,method_args,span,distribution,dparams,method,se,fullrange,xseq,level,origin,drop parameters usually set by corresponding "geoms" to be used within ggplot2 Stat* methods
 #' @exportPattern autocog_
 #' @name autocog_
 #' @seealso \code{\link{known_cog_groups}()}

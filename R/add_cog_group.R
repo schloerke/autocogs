@@ -10,24 +10,6 @@
 #' @param fn function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog_desc}}
 #' @param ... ignored
 #' @export
-#' @examples
-#' \dontrun{
-#' add_cog_group(
-#'   "univariate_continuous",
-#'   field_info("x", "continuous"),
-#'   "univariate metrics for continuous data",
-#'   function(x, ...) {
-#'     x_range <- range(x, na.rm = TRUE)
-#'     list(
-#'       min = cog_desc(x_range[1], "minimum of non NA data"),
-#'       max = cog_desc(x_range[2], "maximum of non NA data"),
-#'       mean = cog_desc(mean(x, na.rm = TRUE), "mean of non NA data"),
-#'       median = cog_desc(median(x, na.rm = TRUE), "median of non NA data"),
-#'       var = cog_desc(var(x, na.rm = TRUE), "variance of non NA data")
-#'     )
-#'   }
-#' )
-#' }
 add_cog_group <- function(
   name,
   fields,

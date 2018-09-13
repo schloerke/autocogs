@@ -10,22 +10,6 @@ NULL
 #' @param kind String value that will match the output of \code{\link{plot_class}} of the desired plot object
 #' @param ... ignored
 #' @export
-#' @examples
-#' \dontrun{
-#' add_layer_cogs(
-#'   "geom_point",
-#'   kind = "ggplot",
-#'   "scatter plot points",
-#'   tibble::tribble(
-#'     ~ cog_group, ~ cols, ~ name,
-#'     "univariate_continuous", "x", "_x",
-#'     "univariate_continuous", "y", "_y",
-#'     "bivariate_continuous", c("x", "y"), "_bivar",
-#'     "scagnostics", c("x", "y"), "_scagnostic",
-#'     "bivariate_counts", c("x", "y"), "_n"
-#'   )
-#' )
-#' }
 add_layer_cogs <- function(
   name,
   description,

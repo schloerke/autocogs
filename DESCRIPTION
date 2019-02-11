@@ -1,6 +1,6 @@
 Package: autocogs
 Title: Automatic Cognostic Summaries
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut")),
     person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths", "cre"))
@@ -22,7 +22,7 @@ Imports: dplyr,
     utils,
     hexbin,
     progress
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Collate:
     'autocog.R'
     'known_cog_groups.R'

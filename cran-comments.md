@@ -1,17 +1,16 @@
-This is a resubmission of a new package release to address comments about `\dontrun{}` in the examples.
+This submission simply updates the copyright holder in the LICENSE file (previously it was 'Your name goes here').
 
 ## Test environments
 
-* local OS X install, R 3.5.1
-* ubuntu 14.04 (on travis-ci), R 3.5.0
+* local OS X install, R 3.5.2
+* ubuntu 14.04 (on travis-ci), R 3.5.2
 * win-builder (devel and release)
+* r-hub
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+There are no issues with the 1 reverse dependency (trelliscopejs).

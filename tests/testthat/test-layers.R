@@ -8,7 +8,7 @@ test_that("ggplot2 layers", {
 
   p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
     geom_point() +
-    geom_smooth(method = "auto")
+    geom_smooth(method = "auto", formula = y ~ x)
 
   check_plot_count <- function(spec, count) {
     expect_silent({

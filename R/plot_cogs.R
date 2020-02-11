@@ -25,9 +25,9 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
     layer_cog_group <- known_layer_cogs() %>%
-      filter_(
-        ~ kind == plot_class_val,
-        ~ name == layer_item$name
+      filter(
+        .data[["kind"]] == plot_class_val,
+        .data[["name"]] == layer_item$name
       )
 
     # if the layer isnt registered, message and return early

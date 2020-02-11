@@ -414,7 +414,7 @@ add_cog_group(
 
     if (any(is_na_xy)) {
       na_count <- counts$n[is_na_xy]
-      counts <- counts %>% filter_(!is_na_xy)
+      counts <- counts %>% filter(!is_na_xy)
     } else {
       na_count <- 0
     }
@@ -449,7 +449,7 @@ add_cog_group(
     na_group <- is.na(counts$group)
     if (any(na_group)) {
       na_count <- counts$n[na_group]
-      counts <- counts %>% filter_(!na_group)
+      counts <- counts %>% filter(!na_group)
     } else {
       na_count <- 0
     }

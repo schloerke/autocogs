@@ -9,7 +9,7 @@
 # perform all `<<-` actions within a local environment to avoid
 # a locked package environment if another package wants to add cognostic info
 known_layer_info <- local({
-  known_layer_cogs_ <- data_frame(
+  known_layer_cogs_ <- tibble(
     # plot mechanism (ggplot2, rbokeh, plotly, etc.)
     kind = character(0),
 

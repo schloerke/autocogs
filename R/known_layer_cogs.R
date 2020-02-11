@@ -6,7 +6,7 @@
 #   cognostics: [String!]! # list of all cognostics names. ex: univariate_counts, univariate_continuous
 # }
 
-known_layer_cogs_ <- data_frame(
+known_layer_cogs_ <- tibble::tibble(
   # plot mechanism (ggplot2, rbokeh, plotly, etc.)
   kind = character(0),
 

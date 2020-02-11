@@ -406,7 +406,7 @@ add_cog_group(
   ),
   "count information for grouped data",
   function(x, y, ...) {
-    dt <- data_frame(x, y)
+    dt <- tibble(x, y)
 
     counts <- dt %>% group_by(x, y) %>% count()
 
@@ -441,7 +441,7 @@ add_cog_group(
   ),
   "count information for grouped data",
   function(x, group, ...) {
-    data_frame(x, group) %>%
+    tibble(x, group) %>%
       group_by(group) %>%
       count() ->
     counts
@@ -650,7 +650,7 @@ add_cog_group(
     )
 
     params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
-    core_params <- list(formula, data = dt, weight = dt$weights)
+    core_params <- list(formula, data = dt, weights = dt$weights)
 
     mod <- do.call(lm, c(core_params, params$method.args))
 
@@ -737,7 +737,7 @@ add_cog_group(
     dt <- data.frame(x = x, y = y, weights = weights)
 
     params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
-    core_params <- list(formula, data = dt, weight = dt$weights, span = span)
+    core_params <- list(formula, data = dt, weights = dt$weights, span = span)
 
     mod <- do.call(loess, c(core_params, params$method.args))
     infos <- mod[c(
@@ -797,7 +797,7 @@ add_cog_group(
     }
 
     group_counts <- step_path %>%
-      group_by_("x") %>%
+      group_by(x) %>%
       count() %>%
       filter(n > 1)
 
@@ -805,7 +805,7 @@ add_cog_group(
       multi_groups <- group_counts$x
       grouped_step_path <- step_path[step_path$x %in% multi_groups, ]
       heights <- grouped_step_path %>%
-        group_by_("x") %>%
+        group_by(x) %>%
         summarise(
           min = min(y),
           max = max(y),

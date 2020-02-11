@@ -7,7 +7,7 @@ simplify_cogs <- function(cog_list) {
   not_duplicated <- !duplicated(cogs, fromLast = TRUE)
   cogs[not_duplicated] %>%
     lapply(list) %>%
-    as_data_frame()
+    as_tibble()
 }
 
 

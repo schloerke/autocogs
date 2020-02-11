@@ -6,23 +6,46 @@
 #   cognostics: [String!]! # list of all cognostics names. ex: univariate_counts, univariate_continuous
 # }
 
-known_layer_cogs_ <- data_frame(
-  # plot mechanism (ggplot2, rbokeh, plotly, etc.)
-  kind = character(0),
+# perform all `<<-` actions within a local environment to avoid
+# a locked package environment if another package wants to add cognostic info
+known_layer_info <- local({
+  known_layer_cogs_ <- data_frame(
+    # plot mechanism (ggplot2, rbokeh, plotly, etc.)
+    kind = character(0),
 
-  # Name of plot type (boxplot, histogram, density)
-  name = character(0),
+    # Name of plot type (boxplot, histogram, density)
+    name = character(0),
 
 
-  # Automatic cognostics to calculate
-  cog_groups = list(),
+    # Automatic cognostics to calculate
+    cog_groups = list(),
 
-  # Plot type description
-  description = character(0)
+    # Plot type description
+    description = character(0)
 
-  # Creates nested data.frames of every auto_cog provided
-  # fn = list()
-)
+    # Creates nested data.frames of every auto_cog provided
+    # fn = list()
+  )
+
+  known_layer_cogs <- function() {
+    known_layer_cogs_
+  }
+  known_layer_cogs_add <- function(new_layer_cogs) {
+    known_layer_cogs_ <<- bind_rows(
+      known_layer_cogs_,
+      new_layer_cogs
+    )
+    invisible(known_layer_cogs())
+  }
+
+  list(
+    known_layer_cogs = known_layer_cogs,
+    known_layer_cogs_add = known_layer_cogs_add
+  )
+})
+
+known_layer_cogs_fn <- known_layer_info$known_layer_cogs
+known_layer_cogs_add <- known_layer_info$known_layer_cogs_add
 
 #' Layer Cognostic groups
 #'
@@ -32,5 +55,5 @@ known_layer_cogs_ <- data_frame(
 #' @examples
 #' known_layer_cogs()
 known_layer_cogs <- function() {
-  known_layer_cogs_
+  known_layer_cogs_fn()
 }

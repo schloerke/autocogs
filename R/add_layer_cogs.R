@@ -67,8 +67,7 @@ add_layer_cogs <- function(
   # })
 
 
-  known_layer_cogs_ <<- bind_rows(
-    known_layer_cogs_,
+  known_layer_cogs_add(
     data_frame(
       kind,
       name,

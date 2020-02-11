@@ -4,8 +4,10 @@
 \alias{field_info}
 \title{Field Type Information}
 \usage{
-field_info(dimension = c("x", "y", "z", "group", "any"),
-  type = c("continuous", "discrete", "date", "any"))
+field_info(
+  dimension = c("x", "y", "z", "group", "any"),
+  type = c("continuous", "discrete", "date", "any")
+)
 }
 \arguments{
 \item{dimension}{field name. Use one of the listed options provided}

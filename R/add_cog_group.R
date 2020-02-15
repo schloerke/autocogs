@@ -27,7 +27,7 @@ add_cog_group <- function(
   assert_function(fn)
   # assert_logical(verbose, len = 1, any.missing = FALSE)
 
-  cog_group <- data_frame(
+  cog_group <- tibble(
     name,
     fields = list(fields),
     description = description,

@@ -50,5 +50,5 @@ field_info <- function(
   assert_choice(dimension, c("x", "y", "z", "group", "any"))
   assert_choice(type, c("continuous", "discrete", "date", "any"))
 
-  data_frame(dimension, type)
+  tibble(dimension, type)
 }

@@ -1,7 +1,7 @@
 
 
 
-known_cog_groups_ <- data_frame(
+known_cog_groups_ <- tibble::tibble(
   # Name of autocog
   name = character(0),
   # Fields required

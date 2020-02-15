@@ -25,9 +25,9 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
   lapply(layer_info, function(layer_item) {
     # get the layer cog info
     layer_cog_group <- known_layer_cogs() %>%
-      filter_(
-        ~ kind == plot_class_val,
-        ~ name == layer_item$name
+      filter(
+        .data[["kind"]] == plot_class_val,
+        .data[["name"]] == layer_item$name
       )
 
     # if the layer isnt registered, message and return early
@@ -94,7 +94,7 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
         args <- append(dt_i_list, layer_item$params)
         ans <- do.call(fn, args)
         if (is.null(ans)) return(ans)
-        as_data_frame(ans)
+        as_tibble(ans)
       })
 
       # store values by name store_name
@@ -136,7 +136,7 @@ get_layer_info <- function(p, keep = TRUE, ...) {
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)
     assert_numeric(item$layer_num, len = 1, any.missing = FALSE)
-    item$data <- as_data_frame(item$data)
+    item$data <- as_tibble(item$data)
     item
   })
 

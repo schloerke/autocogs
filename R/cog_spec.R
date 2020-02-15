@@ -19,7 +19,7 @@
 #'
 #' # set up data
 #' p <- ggplot2::qplot(Sepal.Length, Sepal.Width, data = iris, geom = c("point", "smooth"))
-#' dt <- tibble::data_frame(panel = list(p))
+#' dt <- tibble::tibble(panel = list(p))
 #'
 #' # compute cognostics like normal
 #' add_panel_cogs(dt)

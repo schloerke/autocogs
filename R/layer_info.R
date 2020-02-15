@@ -48,17 +48,22 @@ layer_info.ggplot <- function(p, keep = TRUE, ...) {
 
     layer_name <- snake_class(layer$geom)
 
+    val_or_empty <- function(x) {
+      ret <- c(x, "")
+      ret[1]
+    }
+
     ret_name <- switch(layer_name,
-      "geom_point" = switch(snake_class(layer$position),
+      "geom_point" = switch(val_or_empty(snake_class(layer$position)),
         # "position_jitter" = "geom_jitter",
         switch(
-          snake_class(layer$stat),
+          val_or_empty(snake_class(layer$stat)),
           "stat_qq" = "geom_qq",
           "stat_sum" = "geom_count",
           "geom_point"
         )
       ),
-      "geom_smooth" = switch(as.character(layer$stat_params$method),
+      "geom_smooth" = switch(val_or_empty(as.character(layer$stat_params$method)),
         "loess" = "geom_smooth_loess",
         "lm" = "geom_smooth_lm",
         "geom_smooth"

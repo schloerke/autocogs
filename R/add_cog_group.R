@@ -34,7 +34,7 @@ add_cog_group <- function(
     fn = list(fn)
   )
 
-  known_cog_groups_ <<- bind_rows(known_cog_groups_, cog_group)
+  known_cog_groups_add(cog_group)
 
   assign(
     paste("autocog_", name, sep = ""),

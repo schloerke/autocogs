@@ -67,9 +67,8 @@ add_layer_cogs <- function(
   # })
 
 
-  known_layer_cogs_ <<- bind_rows(
-    known_layer_cogs_,
-    tibble(
+  known_layer_cogs_add(
+    tibble::tibble(
       kind,
       name,
       cog_groups = list(cog_groups),

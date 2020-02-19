@@ -68,7 +68,7 @@ add_layer_cogs <- function(
 
 
   known_layer_cogs_add(
-    data_frame(
+    tibble(
       kind,
       name,
       cog_groups = list(cog_groups),

@@ -3,7 +3,7 @@
 # perform all `<<-` actions within a local environment to avoid
 # a locked package environment if another package wants to add cognostic info
 known_cog_info <- local({
-  known_cog_groups_ <- tibble(
+  known_cog_groups_ <- tibble::tibble(
     # Name of autocog
     name = character(0),
     # Fields required

@@ -2,7 +2,14 @@
 
 #### 2020-04-02
 
-Test errors have been addressed.  Thank you for your patience!
+> Result: NOTE
+>     Namespaces in Imports field not imported from:
+>      ‘MASS’ ‘broom’ ‘diptest’ ‘ggplot2’ ‘hexbin’ ‘moments’
+>      All declared Imports should be used.
+
+All of these packages are used to create functions (all but `hexbin`) or are underlying packages used in testing (`hexbin`). Except for `hexbin`, all packages are accessed directly using `::`.
+
+Remaining errors have been addressed.  Thank you for your patience!
 
 Best,
 Ryan

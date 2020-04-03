@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 
 <!-- rmarkdown::render("README.Rmd") -->
@@ -10,7 +12,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = file.path("man", "figures"),
+  fig.path = file.path("man", "figures", ""),
   fig.height = 8,
   fig.width = 12
 )
@@ -22,7 +24,7 @@ knitr::opts_chunk$set(
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/autocogs)](https://cran.r-project.org/package=autocogs)
 
 
-Cognostics are univariate statistics (or metrics) for a subset of data.  When paired with the underlying data of visualizations, cognostics are a powerful tool for ordering and filtering the visualizations.  `add_panel_cogs()` will automatically append cognostics for each plot player in a given panel column.  The newly appended data can be fed into a [trelliscopejs](github.com/hafen/trelliscopejs) widget for easy viewing.
+Cognostics are univariate statistics (or metrics) for a subset of data.  When paired with the underlying data of visualizations, cognostics are a powerful tool for ordering and filtering the visualizations.  `add_panel_cogs()` will automatically append cognostics for each plot player in a given panel column.  The newly appended data can be fed into a [trelliscopejs](http://github.com/hafen/trelliscopejs) widget for easy viewing.
 
 ## Installation
 

@@ -1,6 +1,7 @@
 on:
   push:
     paths:
+      - '.github/workflows/readme.yaml'
       - '**.Rmd'
 
 name: Build README.md

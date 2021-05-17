@@ -3,10 +3,10 @@ on:
     paths:
       - '**.Rmd'
 
-name: test-coverage
+name: Build README.md
 
 jobs:
-  test-coverage:
+  build-readme:
     runs-on: ubuntu-18.04
     env:
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest

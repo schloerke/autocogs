@@ -29,8 +29,7 @@ Cognostics are univariate statistics (or metrics) for a subset of data.  When pa
 You can install autocogs from github with:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("schloerke/autocogs")
+remotes::install_github("schloerke/autocogs")
 ```
 
 ## Examples
@@ -41,8 +40,8 @@ devtools::install_github("schloerke/autocogs")
 library(autocogs)
 library(tidyverse)
 library(gapminder)
-# devtools::install_github("hafen/trelliscopejs")
-# devtools::install_github("schloerke/trelliscopejs@autocogs")
+# remotes::install_github("hafen/trelliscopejs")
+# remotes::install_github("schloerke/trelliscopejs@autocogs")
 library(trelliscopejs)
 
 # Explore

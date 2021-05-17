@@ -10,5 +10,6 @@
 ^_ignore$
 ^appfiles$
 ^cran-comments\.md$
-^revdep$
 ^\.github$
+^revdep
+^tjs

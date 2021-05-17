@@ -13,3 +13,6 @@
 ^\.github$
 ^revdep
 ^tjs
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

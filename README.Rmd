@@ -50,7 +50,7 @@ library(trelliscopejs)
 p <-
   ggplot(gapminder, aes(year, lifeExp)) +
   geom_line(aes(group = country)) +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm", formula = y ~ x)
 p
 ```
 
@@ -62,7 +62,7 @@ In the examples below, we will extract cognostics to aid in exploring the countr
 
 ```{r facet_trelliscope}
 ggplot(gapminder, aes(year, lifeExp)) +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", formula = y ~ x) +
   geom_line() +
   trelliscopejs::facet_trelliscope(
     ~ country + continent,
@@ -99,7 +99,7 @@ gapminder %>%
     # * linear model
     panel = lapply(data, function(dt) {
       ggplot(dt, aes(year, lifeExp)) +
-        geom_smooth(method = "lm") +
+        geom_smooth(method = "lm", formula = y ~ x) +
         geom_line() +
         ylim(y_range[1], y_range[2])
     })

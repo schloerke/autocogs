@@ -11,3 +11,4 @@
 ^appfiles$
 ^cran-comments\.md$
 ^revdep$
+^\.github$

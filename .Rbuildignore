@@ -10,3 +10,4 @@
 ^_ignore$
 ^appfiles$
 ^cran-comments\.md$
+^revdep$

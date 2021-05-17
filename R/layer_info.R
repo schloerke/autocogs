@@ -35,8 +35,10 @@ layer_info.ggplot <- function(p, keep = TRUE, ...) {
 
   lapply(seq_along(layer_list), function(layer_i) {
     layer <- layer_list[[layer_i]]
-    layer_data <- layer$layer_data(p$data) %>% mutate(PANEL = -2L)
-
+    layer_data <-
+      layer$layer_data(p$data) %>%
+      mutate(PANEL = -2L) %>%
+      layer$setup_layer(p)
     ret_data <- layer$compute_aesthetics(layer_data, p)
 
     if (

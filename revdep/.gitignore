@@ -1,3 +1,6 @@
-*.noindex*
+checks
+library
 data.sqlite
+*.html
+*.noindex*
 failures.md

@@ -10,5 +10,9 @@
 ^_ignore$
 ^appfiles$
 ^cran-comments\.md$
+^\.github$
 ^revdep
 ^tjs
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

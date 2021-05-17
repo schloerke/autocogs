@@ -31,8 +31,7 @@ Cognostics are univariate statistics (or metrics) for a subset of data.  When pa
 You can install autocogs from github with:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("schloerke/autocogs")
+remotes::install_github("schloerke/autocogs")
 ```
 
 ## Examples
@@ -43,8 +42,8 @@ devtools::install_github("schloerke/autocogs")
 library(autocogs)
 library(tidyverse)
 library(gapminder)
-# devtools::install_github("hafen/trelliscopejs")
-# devtools::install_github("schloerke/trelliscopejs@autocogs")
+# remotes::install_github("hafen/trelliscopejs")
+# remotes::install_github("schloerke/trelliscopejs@autocogs")
 library(trelliscopejs)
 
 # Explore
@@ -69,12 +68,14 @@ ggplot(gapminder, aes(year, lifeExp)) +
     ~ country + continent,
     nrow = 3, ncol = 6,
     self_contained = TRUE,
+    auto_cog = TRUE,
     state = list(
       # set the state to display the country, continent, and R^2 value
       #   sorted by ascending R^2 value
-      sort = list(trelliscopejs::sort_spec("r2")),
-      labels = c("country", "continent", "r2")
-    )
+      sort = list(trelliscopejs::sort_spec("_lm_r2")),
+      labels = c("country", "continent", "_lm_r2")
+    ),
+    path = "readme-figs/facet"
   )
 # (screen shot of trelliscopejs widget)
 ```
@@ -115,6 +116,7 @@ gap_data$panel[[1]]
 #!!!!!!!!!!
 gap_data %>%
   autocogs::add_panel_cogs() %>%
+  ungroup() %>%
   # double check it was added
   print(width = 100) ->
 full_gap_data
@@ -128,10 +130,11 @@ trelliscopejs::trelliscope(
   self_contained = TRUE,
   state = list(
     # sort by ascending R^2 value (percent explained by linear model)
-    sort = list(trelliscopejs::sort_spec("r2")),
+    sort = list(trelliscopejs::sort_spec("_lm_r2")),
     # display the country, continent, and R^2 value
-    labels = c("country", "continent", "r2")
-  )
+    labels = c("country", "continent", "_lm_r2")
+  ),
+  path = "readme-figs/manually"
 )
 # (screen shot of trelliscopejs widget)
 ```

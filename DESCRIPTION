@@ -22,7 +22,7 @@ Imports: dplyr,
     utils,
     hexbin,
     progress
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Collate:
     'autocog.R'
     'known_cog_groups.R'

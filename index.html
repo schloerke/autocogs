@@ -79,8 +79,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install autocogs from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"schloerke/autocogs"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"schloerke/autocogs"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -90,45 +89,28 @@
 <a href="#gapminder" class="anchor"></a>Gapminder</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/schloerke/autocogs">autocogs</a></span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: tidyverse</span>
-<span class="co">#&gt; Loading tidyverse: ggplot2</span>
-<span class="co">#&gt; Loading tidyverse: tibble</span>
-<span class="co">#&gt; Loading tidyverse: tidyr</span>
-<span class="co">#&gt; Loading tidyverse: readr</span>
-<span class="co">#&gt; Loading tidyverse: purrr</span>
-<span class="co">#&gt; Loading tidyverse: dplyr</span>
-<span class="co">#&gt; Loading required package: magrittr</span>
-<span class="co">#&gt;</span>
-<span class="co">#&gt; Attaching package: 'magrittr'</span>
-<span class="co">#&gt; The following object is masked from 'package:purrr':</span>
-<span class="co">#&gt;</span>
-<span class="co">#&gt;     set_names</span>
-<span class="co">#&gt; The following object is masked from 'package:tidyr':</span>
-<span class="co">#&gt;</span>
-<span class="co">#&gt;     extract</span>
-<span class="co">#&gt; Conflicts with tidy packages ----------------------------------------------</span>
-<span class="co">#&gt; filter():     dplyr, stats</span>
-<span class="co">#&gt; is_numeric(): purrr, autocogs</span>
-<span class="co">#&gt; lag():        dplyr, stats</span>
-<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
+<span class="co">#&gt; ✔ ggplot2 3.3.3.9000     ✔ purrr   0.3.4     </span>
+<span class="co">#&gt; ✔ tibble  3.1.1          ✔ dplyr   1.0.5     </span>
+<span class="co">#&gt; ✔ tidyr   1.1.3          ✔ stringr 1.4.0     </span>
+<span class="co">#&gt; ✔ readr   1.4.0          ✔ forcats 0.5.1</span>
+<span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span>
+<span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gapminder</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: gapminder</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co"># devtools::install_github("hafen/trelliscopejs")</span>
-<span class="co"># devtools::install_github("schloerke/trelliscopejs@autocogs")</span>
+<span class="co"># remotes::install_github("hafen/trelliscopejs")</span>
+<span class="co"># remotes::install_github("schloerke/trelliscopejs@autocogs")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">trelliscopejs</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: trelliscopejs</span>
-<span class="co">#&gt; [1] TRUE</span>
 
 <span class="co"># Explore</span>
 <span class="va">p</span> <span class="op">&lt;-</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">year</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>group <span class="op">=</span> <span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span>
-<span class="va">p</span></code></pre></div>
-<p><img src="reference/figures/explore-1.png"></p>
+<span class="va">p</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
+<p><img src="reference/figures/explore-1.png"><!-- --></p>
 <p>Looking at the plot above, most countries follow a linear trend: As the year increases, life expectancy goes up. A few countries do not follow a linear trend.</p>
 <p>In the examples below, we will extract cognostics to aid in exploring the countries whose life expectancy is not linear.</p>
 <div id="trelliscopejsfacet_trelliscope" class="section level4">
@@ -143,15 +125,161 @@
     <span class="op">~</span> <span class="va">country</span> <span class="op">+</span> <span class="va">continent</span>,
     nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">6</span>,
     self_contained <span class="op">=</span> <span class="cn">TRUE</span>,
+    auto_cog <span class="op">=</span> <span class="cn">TRUE</span>,
     state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
       <span class="co"># set the state to display the country, continent, and R^2 value</span>
       <span class="co">#   sorted by ascending R^2 value</span>
-      sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">trelliscopejs</span><span class="fu">::</span><span class="fu">sort_spec</span><span class="op">(</span><span class="st">"r2"</span><span class="op">)</span><span class="op">)</span>,
-      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"country"</span>, <span class="st">"continent"</span>, <span class="st">"r2"</span><span class="op">)</span>
-    <span class="op">)</span>
+      sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">trelliscopejs</span><span class="fu">::</span><span class="fu">sort_spec</span><span class="op">(</span><span class="st">"_lm_r2"</span><span class="op">)</span><span class="op">)</span>,
+      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"country"</span>, <span class="st">"continent"</span>, <span class="st">"_lm_r2"</span><span class="op">)</span>
+    <span class="op">)</span>,
+    path <span class="op">=</span> <span class="st">"readme-figs/facet"</span>
   <span class="op">)</span>
-<span class="co">#&gt; using data from the first layer</span></code></pre></div>
-<p><img src="reference/figures/facet_trelliscope-1.png"></p>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; using data from the first layer</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
+<p><img src="reference/figures/facet_trelliscope-1.png"><!-- --></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># (screen shot of trelliscopejs widget)</span></code></pre></div>
 </div>
@@ -183,24 +311,26 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span>
 <span class="va">gap_data</span>
 <span class="co">#&gt; # A tibble: 142 x 4</span>
-<span class="co">#&gt;        country continent              data    panel</span>
-<span class="co">#&gt;         &lt;fctr&gt;    &lt;fctr&gt;            &lt;list&gt;   &lt;list&gt;</span>
-<span class="co">#&gt;  1 Afghanistan      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  2     Albania    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  3     Algeria    Africa &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  4      Angola    Africa &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  5   Argentina  Americas &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  6   Australia   Oceania &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  7     Austria    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  8     Bahrain      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt;  9  Bangladesh      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt; 10     Belgium    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt;</span>
-<span class="co">#&gt; # ... with 132 more rows</span>
+<span class="co">#&gt; # Groups:   country, continent [142]</span>
+<span class="co">#&gt;    country     continent data                  panel </span>
+<span class="co">#&gt;    &lt;fct&gt;       &lt;fct&gt;     &lt;list&gt;                &lt;list&gt;</span>
+<span class="co">#&gt;  1 Afghanistan Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  2 Albania     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  3 Algeria     Africa    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  4 Angola      Africa    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  5 Argentina   Americas  &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  6 Australia   Oceania   &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  7 Austria     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  8 Bahrain     Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt;  9 Bangladesh  Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt; 10 Belgium     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;  </span>
+<span class="co">#&gt; # … with 132 more rows</span>
 
 <span class="co"># Double check the plot worked...</span>
 <span class="co"># Look at the first panel (ggplot2 plot) of Afghanistan</span>
-<span class="va">gap_data</span><span class="op">$</span><span class="va">panel</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<p><img src="reference/figures/gapminder-1.png"></p>
+<span class="va">gap_data</span><span class="op">$</span><span class="va">panel</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
+<p><img src="reference/figures/gapminder-1.png"><!-- --></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">#!!!!!!!!!!</span>
@@ -208,24 +338,36 @@
 <span class="co">#!!!!!!!!!!</span>
 <span class="va">gap_data</span> <span class="op">%&gt;%</span>
   <span class="fu">autocogs</span><span class="fu">::</span><span class="fu"><a href="reference/panel_cogs.html">add_panel_cogs</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># double check it was added</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">-&gt;</span>
 <span class="va">full_gap_data</span>
 <span class="co">#&gt; # A tibble: 142 x 10</span>
-<span class="co">#&gt;        country continent              data    panel        `_smooth`             `_lm`</span>
-<span class="co">#&gt;         &lt;fctr&gt;    &lt;fctr&gt;            &lt;list&gt;   &lt;list&gt;           &lt;list&gt;            &lt;list&gt;</span>
-<span class="co">#&gt;  1 Afghanistan      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  2     Albania    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  3     Algeria    Africa &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  4      Angola    Africa &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  5   Argentina  Americas &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  6   Australia   Oceania &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  7     Austria    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  8     Bahrain      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt;  9  Bangladesh      Asia &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt; 10     Belgium    Europe &lt;tibble [12 x 4]&gt; &lt;S3: gg&gt; &lt;tibble [1 x 2]&gt; &lt;tibble [1 x 19]&gt;</span>
-<span class="co">#&gt; # ... with 132 more rows, and 4 more variables: `_x` &lt;list&gt;, `_y` &lt;list&gt;,</span>
-<span class="co">#&gt; #   `_bivar` &lt;list&gt;, `_n` &lt;list&gt;</span>
+<span class="co">#&gt;    country     continent data                  panel  `_smooth`           </span>
+<span class="co">#&gt;    &lt;fct&gt;       &lt;fct&gt;     &lt;list&gt;                &lt;list&gt; &lt;list&gt;              </span>
+<span class="co">#&gt;  1 Afghanistan Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  2 Albania     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  3 Algeria     Africa    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  4 Angola      Africa    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  5 Argentina   Americas  &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  6 Australia   Oceania   &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  7 Austria     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  8 Bahrain     Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;  9 Bangladesh  Asia      &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt; 10 Belgium     Europe    &lt;tibble[,4] [12 × 4]&gt; &lt;gg&gt;   &lt;tibble[,3] [1 × 3]&gt;</span>
+<span class="co">#&gt;    `_lm`            `_x`           `_y`           `_bivar`        `_n`          </span>
+<span class="co">#&gt;    &lt;list&gt;           &lt;list&gt;         &lt;list&gt;         &lt;list&gt;          &lt;list&gt;        </span>
+<span class="co">#&gt;  1 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  2 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  3 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  4 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  5 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  6 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  7 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  8 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt;  9 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt; 10 &lt;tibble[,19] [1… &lt;tibble[,5] [… &lt;tibble[,5] [… &lt;tibble[,2] [1… &lt;tibble[,5] […</span>
+<span class="co">#&gt; # … with 132 more rows</span>
 
 <span class="co"># Display the panel and cognostics in a trelliscopejs widget</span>
 <span class="fu">trelliscopejs</span><span class="fu">::</span><span class="fu">trelliscope</span><span class="op">(</span>
@@ -236,14 +378,164 @@
   self_contained <span class="op">=</span> <span class="cn">TRUE</span>,
   state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
     <span class="co"># sort by ascending R^2 value (percent explained by linear model)</span>
-    sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">trelliscopejs</span><span class="fu">::</span><span class="fu">sort_spec</span><span class="op">(</span><span class="st">"r2"</span><span class="op">)</span><span class="op">)</span>,
+    sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">trelliscopejs</span><span class="fu">::</span><span class="fu">sort_spec</span><span class="op">(</span><span class="st">"_lm_r2"</span><span class="op">)</span><span class="op">)</span>,
     <span class="co"># display the country, continent, and R^2 value</span>
-    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"country"</span>, <span class="st">"continent"</span>, <span class="st">"r2"</span><span class="op">)</span>
-  <span class="op">)</span>
+    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"country"</span>, <span class="st">"continent"</span>, <span class="st">"_lm_r2"</span><span class="op">)</span>
+  <span class="op">)</span>,
+  path <span class="op">=</span> <span class="st">"readme-figs/manually"</span>
 <span class="op">)</span>
+<span class="co">#&gt; New names:</span>
+<span class="co">#&gt; * min -&gt; min...26</span>
+<span class="co">#&gt; * max -&gt; max...27</span>
+<span class="co">#&gt; * mean -&gt; mean...28</span>
+<span class="co">#&gt; * median -&gt; median...29</span>
+<span class="co">#&gt; * var -&gt; var...30</span>
+<span class="co">#&gt; * ...</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_smooth).</span>
-<span class="co">#&gt; Warning: Removed 8 rows containing missing values (geom_smooth).</span></code></pre></div>
-<p><img src="reference/figures/gapminder-2.png"></p>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; Warning: Removed 8 rows containing missing values (geom_smooth).</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
+<p><img src="reference/figures/gapminder-2.png"><!-- --></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># (screen shot of trelliscopejs widget)</span></code></pre></div>
 </div>
@@ -275,16 +567,17 @@
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
 <p>We can then call the <code>'univariate_continuous'</code> cognostics group whenever a <code>geom_rug</code> layer is added in a ggplot2 plot object using the code below.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">add_layer_cogs</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="st">"geom_rug"</span>, <span class="dt">kind =</span> <span class="st">"ggplot"</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="st">"Rug plots in the margins"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="kw">tribble</span>(</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    <span class="op">~</span><span class="st"> </span>cog_group, <span class="op">~</span><span class="st"> </span>cols, <span class="op">~</span><span class="st"> </span>name,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="st">"univariate_continuous"</span>, <span class="st">"x"</span>, <span class="st">"_x"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>    <span class="st">"density_continuous"</span>, <span class="kw">c</span>(<span class="st">"x"</span>), <span class="st">"_density_x"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    <span class="st">"univariate_counts"</span>, <span class="kw">c</span>(<span class="st">"x"</span>), <span class="st">"_n"</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>  )</span>
-<span id="cb9-10"><a href="#cb9-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/add_layer_cogs.html">add_layer_cogs</a></span><span class="op">(</span>
+  <span class="co"># load_all(); p &lt;- qplot(x = 1, y = Sepal.Length, data = iris, geom = "boxplot"); plot_cogs(p)</span>
+  <span class="st">"geom_boxplot"</span>,
+  <span class="st">"boxplot plot"</span>,
+  <span class="fu">cog_group_df</span><span class="op">(</span>
+    <span class="st">"univariate_continuous"</span>, <span class="st">"y"</span>, <span class="st">"_y"</span>,
+    <span class="st">"boxplot"</span>, <span class="st">"y"</span>, <span class="st">"_boxplot"</span>,
+    <span class="st">"univariate_counts"</span>, <span class="st">"y"</span>, <span class="st">"_n"</span>
+  <span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <!-- ## Connecting other plot objects
 
 There are  -->

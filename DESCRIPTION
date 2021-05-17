@@ -1,6 +1,6 @@
 Package: autocogs
 Title: Automatic Cognostic Summaries
-Version: 0.1.3
+Version: 0.1.3.9000
 Authors@R: c(
     person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut")),
     person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths", "cre"))

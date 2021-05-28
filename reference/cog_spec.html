@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">autocogs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -212,24 +212,24 @@
 
 <span class='co'># compute cognostics like normal</span>
 <span class='fu'><a href='panel_cogs.html'>add_panel_cogs</a></span><span class='op'>(</span><span class='va'>dt</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span>
 #&gt;   panel  `_scagnostic`   `_x`       `_y`       `_bivar`    `_smooth`   `_n`     
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;gg&gt;</span><span>   </span><span style='color: #949494;'>&lt;tibble [1 × 1</span><span>… </span><span style='color: #949494;'>&lt;tibble [</span><span>… </span><span style='color: #949494;'>&lt;tibble [</span><span>… </span><span style='color: #949494;'>&lt;tibble [1</span><span>… </span><span style='color: #949494;'>&lt;tibble [1</span><span>… </span><span style='color: #949494;'>&lt;tibble </span><span>…</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>   
+#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;gg&gt;</span>   <span style='color: #949494;'>&lt;tibble [1 × 1</span>… <span style='color: #949494;'>&lt;tibble [</span>… <span style='color: #949494;'>&lt;tibble [</span>… <span style='color: #949494;'>&lt;tibble [1</span>… <span style='color: #949494;'>&lt;tibble [1</span>… <span style='color: #949494;'>&lt;tibble </span>…</div><div class='input'>
 <span class='co'># do not compute scagnostics for geom_point cognostics</span>
 <span class='co'># compute geom_smooth cognostics</span>
 <span class='fu'><a href='panel_cogs.html'>add_panel_cogs</a></span><span class='op'>(</span><span class='va'>dt</span>, spec <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>cog_spec</span><span class='op'>(</span>scagnostics <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 6</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 6</span>
 #&gt;   panel  `_x`           `_y`          `_bivar`      `_smooth`      `_n`         
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;gg&gt;</span><span>   </span><span style='color: #949494;'>&lt;tibble [1 × </span><span>… </span><span style='color: #949494;'>&lt;tibble [1 ×</span><span>… </span><span style='color: #949494;'>&lt;tibble [1 ×</span><span>… </span><span style='color: #949494;'>&lt;tibble [1 × </span><span>… </span><span style='color: #949494;'>&lt;tibble [1 ×</span><span>…</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>       
+#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;gg&gt;</span>   <span style='color: #949494;'>&lt;tibble [1 × </span>… <span style='color: #949494;'>&lt;tibble [1 ×</span>… <span style='color: #949494;'>&lt;tibble [1 ×</span>… <span style='color: #949494;'>&lt;tibble [1 × </span>… <span style='color: #949494;'>&lt;tibble [1 ×</span>…</div><div class='input'>
 <span class='co'># do not compute scagnostics for geom_point cognostics</span>
 <span class='co'># do not compute geom_smooth cognostics</span>
 <span class='fu'><a href='panel_cogs.html'>add_panel_cogs</a></span><span class='op'>(</span><span class='va'>dt</span>, spec <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>cog_spec</span><span class='op'>(</span>scagnostics <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
 #&gt;   panel  `_x`             `_y`             `_bivar`         `_n`            
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;gg&gt;</span><span>   </span><span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span><span> </span><span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span><span> </span><span style='color: #949494;'>&lt;tibble [1 × 2]&gt;</span><span> </span><span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span><span></div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;gg&gt;</span>   <span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span> <span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span> <span style='color: #949494;'>&lt;tibble [1 × 2]&gt;</span> <span style='color: #949494;'>&lt;tibble [1 × 5]&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

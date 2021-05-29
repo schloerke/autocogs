@@ -16,7 +16,7 @@ When paired with the underlying data of visualizations, cognostics are a
 powerful tool for ordering and filtering the visualizations.
 `add_panel_cogs()` will automatically append cognostics for each plot
 player in a given panel column. The newly appended data can be fed into
-a [trelliscopejs](http://github.com/hafen/trelliscopejs) widget for easy
+a [trelliscopejs](https://github.com/hafen/trelliscopejs) widget for easy
 viewing.
 
 ## Installation

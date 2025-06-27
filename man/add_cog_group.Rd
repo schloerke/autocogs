@@ -9,11 +9,11 @@ add_cog_group(name, fields, description = NA, fn, ...)
 \arguments{
 \item{name}{Name of cognostic group}
 
-\item{fields}{\code{data.frame} of \code{'dimension'} and \code{'type'} columns. \code{dplyr::\link[dplyr]{bind_rows}()} of \code{\link{field_info}} outputs for convenience}
+\item{fields}{\code{data.frame} of \code{'dimension'} and \code{'type'} columns. \verb{dplyr::[bind_rows][dplyr::bind_rows]()} of \code{\link[=field_info]{field_info()}} outputs for convenience}
 
 \item{description}{Description of cognostic group}
 
-\item{fn}{function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link{cog_desc}}}
+\item{fn}{function to calculate a cognostic group.  May return a named list or a single row tibble.  Each value of the return data should be the output of \code{\link[=cog_desc]{cog_desc()}}}
 
 \item{...}{ignored}
 }

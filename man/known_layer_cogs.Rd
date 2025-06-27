@@ -7,7 +7,7 @@
 known_layer_cogs()
 }
 \description{
-Display all layer cognostic information to be paired with information from \code{\link{known_cog_groups}()}.
+Display all layer cognostic information to be paired with information from \code{\link[=known_cog_groups]{known_cog_groups()}}.
 }
 \examples{
 known_layer_cogs()

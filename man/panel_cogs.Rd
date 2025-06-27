@@ -14,8 +14,8 @@ add_panel_cogs(dt, panel_col = "panel", ...)
 
 \item{panel_col}{panel column to be used in \code{dt}}
 
-\item{...}{parameters passed to \code{\link{layer_info}}}
+\item{...}{parameters passed to \code{\link[=layer_info]{layer_info()}}}
 }
 \description{
-Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.
+Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble:tibble]{tibble::tibble()}}.
 }

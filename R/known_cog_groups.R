@@ -38,7 +38,7 @@ known_cog_groups_add <- known_cog_info$known_cog_groups_add
 
 #' Cognostic Group information
 #'
-#' To add more cognostic groups, please see \code{\link{add_cog_group}()}
+#' To add more cognostic groups, please see [add_cog_group()]
 #'
 #' @export
 #' @examples

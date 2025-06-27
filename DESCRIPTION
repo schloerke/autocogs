@@ -42,3 +42,4 @@ Suggests: testthat,
     covr
 URL: https://github.com/schloerke/autocogs
 BugReports: https://github.com/schloerke/autocogs/issues
+Roxygen: list(markdown = TRUE)

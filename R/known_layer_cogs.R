@@ -47,7 +47,7 @@ known_layer_cogs_add <- known_layer_info$known_layer_cogs_add
 
 #' Layer Cognostic groups
 #'
-#' Display all layer cognostic information to be paired with information from \code{\link{known_cog_groups}()}.
+#' Display all layer cognostic information to be paired with information from [known_cog_groups()].
 #'
 #' @export
 #' @examples

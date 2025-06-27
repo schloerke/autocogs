@@ -10,10 +10,10 @@ simplify_cogs <- function(cog_list) {
 
 #' Panel cognostics
 #'
-#' Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.
+#' Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested [tibble::tibble()].
 #' @param dt data to be used
-#' @param panel_col panel column to be used in \code{dt}
-#' @param ... parameters passed to \code{\link{layer_info}}
+#' @param panel_col panel column to be used in `dt`
+#' @param ... parameters passed to [layer_info()]
 #' @rdname panel_cogs
 #' @export
 panel_cogs <- function(dt, panel_col = "panel", ...) {

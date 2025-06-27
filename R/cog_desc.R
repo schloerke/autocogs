@@ -2,7 +2,7 @@
 #'
 #' Add a description to a cognostic (subset metric)
 #' @param x univariate scalar
-#' @param desc description of \code{x}
+#' @param desc description of `x`
 #' @export
 #' @examples
 #' cog_desc(mean(1:10), "mean of 10 numbers")

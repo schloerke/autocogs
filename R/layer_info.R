@@ -2,7 +2,7 @@
 #'
 #' @param p plot object
 #' @param keep boolean vector (size = 1 or length(plot$layers)). Determines if that layer should have cognostics calculated
-#' @param ... parameters passed on to corresponding \code{layer_info}
+#' @param ... parameters passed on to corresponding `layer_info`
 #' @export
 #' @rdname layer_info
 #' @examples

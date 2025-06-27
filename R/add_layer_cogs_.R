@@ -4,7 +4,7 @@ NULL
 
 #' Cog group data frame
 #'
-#' Make a cog group data frame to be passed into \code{\link{add_layer_cogs}}
+#' Make a cog group data frame to be passed into [add_layer_cogs()]
 #' @param ... sets of three values to fill in 'cog_group', 'cols', and 'name'
 #' @export
 #' @examples

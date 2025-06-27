@@ -123,8 +123,6 @@ add_cog_group(
 )
 
 
-# #' @import scagnostics
-#' @importFrom stats cor
 add_cog_group(
   "scagnostics",
   bind_rows(
@@ -291,7 +289,6 @@ add_cog_group(
 
 
 # need to import the BIC function as it's called internally in Mclust()
-#' @importFrom mclust Mclust mclustBIC
 add_cog_group(
   "density_continuous",
   field_info("x", "continuous"),

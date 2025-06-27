@@ -43,6 +43,7 @@ Collate:
     'known_layer_cogs.R'
     'add_layer_cogs.R'
     'add_layer_cogs_.R'
+    'autocogs-package.R'
     'cog_desc.R'
     'cog_spec.R'
     'layer_count.R'

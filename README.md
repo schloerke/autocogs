@@ -8,7 +8,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/schloerke/autocogs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schloerke/autocogs/actions/workflows/R-CMD-check.yaml)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/schloerke/autocogs/master.svg)](https://codecov.io/github/schloerke/autocogs?branch=master)
+Status](https://img.shields.io/codecov/c/github/schloerke/autocogs/master.svg)](https://app.codecov.io/github/schloerke/autocogs?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/autocogs)](https://cran.r-project.org/package=autocogs)
 <!-- badges: end -->
 
@@ -25,7 +25,7 @@ viewing.
 You can install autocogs from github with:
 
 ``` r
-remotes::install_github("schloerke/autocogs")
+pak::pak("schloerke/autocogs")
 ```
 
 ## Examples

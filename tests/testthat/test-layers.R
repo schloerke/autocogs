@@ -1,5 +1,3 @@
-context("layers")
-
 suppressPackageStartupMessages(library(ggplot2))
 
 

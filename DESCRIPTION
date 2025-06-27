@@ -52,3 +52,4 @@ Collate:
     'plot_class.R'
     'plot_cogs.R'
 Config/testthat/edition: 3
+Config/usethis/last-upkeep: 2025-06-27

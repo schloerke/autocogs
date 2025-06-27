@@ -21,7 +21,9 @@ NULL
 #' )
 cog_group <- function(...) {
   ret <- tibble::tribble(
-    ~ cog_group, ~ cols, ~ name,
+    ~cog_group,
+    ~cols,
+    ~name,
     ...
   )
   ret$cols <- as.list(ret$cols)
@@ -38,8 +40,12 @@ add_layer_cogs(
   "geom_bar",
   "bar plot. (height is calculated)",
   cog_group(
-    "univariate_discrete", "x", "_x",
-    "univariate_counts", "x", "_n"
+    "univariate_discrete",
+    "x",
+    "_x",
+    "univariate_counts",
+    "x",
+    "_n"
   )
 )
 add_layer_cogs(
@@ -47,9 +53,15 @@ add_layer_cogs(
   "geom_col",
   "bar plot with known height",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -63,11 +75,21 @@ add_layer_cogs(
   "geom_hex",
   "hexegon density plot",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "hex_counts", c("x", "y"), "_hex_bins",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "hex_counts",
+    c("x", "y"),
+    "_hex_bins",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 #   geom_bin2d stat_bin_2d
@@ -79,8 +101,12 @@ add_layer_cogs(
   "geom_bin2d",
   "hexegon density plot",
   cog_group(
-    "square_counts", c("x", "y"), "_square_bins",
-    "bivariate_counts", c("x", "y"), "_n"
+    "square_counts",
+    c("x", "y"),
+    "_square_bins",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -107,11 +133,21 @@ add_layer_cogs(
   "geom_point",
   "scatter plot points",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "scagnostics", c("x", "y"), "_scagnostic",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "scagnostics",
+    c("x", "y"),
+    "_scagnostic",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -132,9 +168,15 @@ add_layer_cogs(
   "geom_boxplot",
   "boxplot plot",
   cog_group(
-    "univariate_continuous", "y", "_y",
-    "boxplot", "y", "_boxplot",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "y",
+    "_y",
+    "boxplot",
+    "y",
+    "_boxplot",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -149,14 +191,30 @@ add_layer_cogs(
   "geom_count",
   "count of discrete scatter plot points",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "univariate_discrete", "x", "_x_counts",
-    "univariate_discrete", "y", "_y_counts",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "pairwise_counts", c("x", "y"), "_xy_counts",
-    "scagnostics", c("x", "y"), "_scagnostic",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "univariate_discrete",
+    "x",
+    "_x_counts",
+    "univariate_discrete",
+    "y",
+    "_y_counts",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "pairwise_counts",
+    c("x", "y"),
+    "_xy_counts",
+    "scagnostics",
+    c("x", "y"),
+    "_scagnostic",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -172,9 +230,15 @@ add_layer_cogs(
   "geom_density",
   "density of a single variable",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", "x", "_density",
-    "univariate_counts", "x", "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    "x",
+    "_density",
+    "univariate_counts",
+    "x",
+    "_n"
   )
 )
 #   geom_violin stat_ydensity
@@ -188,9 +252,15 @@ add_layer_cogs(
   "geom_violin",
   "density of a single y variable",
   cog_group(
-    "univariate_continuous", "y", "_y",
-    "density_continuous", "y", "_violin",
-    "univariate_counts", "y", "_n"
+    "univariate_continuous",
+    "y",
+    "_y",
+    "density_continuous",
+    "y",
+    "_violin",
+    "univariate_counts",
+    "y",
+    "_n"
   )
 )
 
@@ -205,16 +275,29 @@ add_layer_cogs(
   "geom_density2d",
   "Contours of a 2d density estimate. Similar to a topographical map",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "density_continuous", c("x"), "_density_x",
-    "density_continuous", c("y"), "_density_y",
-    "density_2d_continuous", c("x", "y"), "_density2d",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "density_continuous",
+    c("y"),
+    "_density_y",
+    "density_2d_continuous",
+    c("x", "y"),
+    "_density2d",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
-
 
 
 #   geom_dotplot
@@ -229,9 +312,15 @@ add_layer_cogs(
   "geom_dotplot",
   "stacked dots where each dot represents an observation.  The width of the dot represents the bin width.",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "univariate_counts", c("x"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "univariate_counts",
+    c("x"),
+    "_n"
   )
 )
 
@@ -248,10 +337,18 @@ add_layer_cogs(
   "geom_histogram",
   "histogram of continuous data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "histogram_counts", c("x"), "_hist_x",
-    "univariate_counts", c("x"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "histogram_counts",
+    c("x"),
+    "_hist_x",
+    "univariate_counts",
+    c("x"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -259,10 +356,18 @@ add_layer_cogs(
   "freqpoly",
   "frequency line of continuous data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "histogram_counts", c("x"), "_hist_x",
-    "univariate_counts", c("x"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "histogram_counts",
+    c("x"),
+    "_hist_x",
+    "univariate_counts",
+    c("x"),
+    "_n"
   )
 )
 
@@ -278,9 +383,15 @@ add_layer_cogs(
   "geom_rug_x",
   "Rug plots in the margins",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "univariate_counts", c("x"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "univariate_counts",
+    c("x"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -288,9 +399,15 @@ add_layer_cogs(
   "geom_rug_y",
   "Rug plots in the margins",
   cog_group(
-    "univariate_continuous", "y", "_y",
-    "density_continuous", c("y"), "_density_y",
-    "univariate_counts", c("y"), "_n"
+    "univariate_continuous",
+    "y",
+    "_y",
+    "density_continuous",
+    c("y"),
+    "_density_y",
+    "univariate_counts",
+    c("y"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -298,15 +415,26 @@ add_layer_cogs(
   "geom_rug_xy",
   "Rug plots in the margins",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "density_continuous", c("x"), "_density_x",
-    "density_continuous", c("y"), "_density_y",
-    "univariate_counts", c("x"), "_n_x",
-    "univariate_counts", c("y"), "_n_y"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "density_continuous",
+    c("y"),
+    "_density_y",
+    "univariate_counts",
+    c("x"),
+    "_n_x",
+    "univariate_counts",
+    c("y"),
+    "_n_y"
   )
 )
-
 
 
 #   geom_spoke
@@ -321,16 +449,36 @@ add_layer_cogs(
   "geom_spoke",
   "Spoke plot of continuous data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "density_continuous", c("x"), "_density_x",
-    "univariate_continuous", "y", "_y",
-    "density_continuous", c("y"), "_density_y",
-    "univariate_continuous", "angle", "_angle",
-    "density_continuous", c("angle"), "_density_angle",
-    "univariate_continuous", "radius", "_radius",
-    "density_continuous", c("radius"), "_density_radius",
-    "bivariate_counts", c("x", "y"), "_n_xy",
-    "bivariate_counts", c("angle", "radius"), "_n_angle_radius"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "density_continuous",
+    c("x"),
+    "_density_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "density_continuous",
+    c("y"),
+    "_density_y",
+    "univariate_continuous",
+    "angle",
+    "_angle",
+    "density_continuous",
+    c("angle"),
+    "_density_angle",
+    "univariate_continuous",
+    "radius",
+    "_radius",
+    "density_continuous",
+    c("radius"),
+    "_density_radius",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n_xy",
+    "bivariate_counts",
+    c("angle", "radius"),
+    "_n_angle_radius"
   )
 )
 
@@ -346,12 +494,14 @@ add_layer_cogs(
   "geom_qq",
   "Quantile-Quantile plot of continuous data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "quantile_quantile", "x", "_qq"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "quantile_quantile",
+    "x",
+    "_qq"
   )
 )
-
-
 
 
 #   geom_smooth stat_smooth
@@ -367,11 +517,21 @@ add_layer_cogs(
   "geom_smooth",
   "Smooth line plot of continuous x-y data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "smooth_line", c("x", "y"), "_smooth",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "smooth_line",
+    c("x", "y"),
+    "_smooth",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -379,12 +539,24 @@ add_layer_cogs(
   "geom_smooth_loess",
   "Loess plot of continuous x-y data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "smooth_line", c("x", "y"), "_smooth",
-    "loess_model", c("x", "y"), "_loess",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "smooth_line",
+    c("x", "y"),
+    "_smooth",
+    "loess_model",
+    c("x", "y"),
+    "_loess",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -393,12 +565,24 @@ add_layer_cogs(
   "geom_smooth_lm",
   "Smooth line plot of continuous x-y data",
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "smooth_line", c("x", "y"), "_smooth",
-    "linear_model", c("x", "y"), "_lm",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "smooth_line",
+    c("x", "y"),
+    "_smooth",
+    "linear_model",
+    c("x", "y"),
+    "_lm",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 
@@ -409,10 +593,18 @@ add_layer_cogs(
   "Line plot (with data sorted by x) of continuous data",
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "line"); plot_cogs(p)
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -420,10 +612,18 @@ add_layer_cogs(
   "Line Path plot of continuous data",
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "path"); plot_cogs(p)
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
 add_layer_cogs(
@@ -431,14 +631,23 @@ add_layer_cogs(
   "Line Step plot of continuous data",
   # load_all(); p <- qplot(cty, hwy, data = mpg, geom = "step"); plot_cogs(p)
   cog_group(
-    "univariate_continuous", "x", "_x",
-    "univariate_continuous", "y", "_y",
-    "bivariate_step", c("x", "y"), "_step",
-    "bivariate_continuous", c("x", "y"), "_bivar",
-    "bivariate_counts", c("x", "y"), "_n"
+    "univariate_continuous",
+    "x",
+    "_x",
+    "univariate_continuous",
+    "y",
+    "_y",
+    "bivariate_step",
+    c("x", "y"),
+    "_step",
+    "bivariate_continuous",
+    c("x", "y"),
+    "_bivar",
+    "bivariate_counts",
+    c("x", "y"),
+    "_n"
   )
 )
-
 
 # Maybe Nothing?
 #   geom_contour stat_contour
@@ -469,7 +678,6 @@ add_layer_cogs(
 #     - Text
 #   stat_sf geom_sf coord_sf
 #     - Visualise sf objects
-
 
 ## NONE
 #   geom_quantile stat_quantile

@@ -1,5 +1,3 @@
-
-
 #' Plot layer count
 #'
 #' Retrieves the number of layers in a given plot

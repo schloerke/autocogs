@@ -1,4 +1,3 @@
-
 #' Cognostic
 #'
 #' Add a description to a cognostic (subset metric)

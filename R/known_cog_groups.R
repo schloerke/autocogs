@@ -1,5 +1,3 @@
-
-
 # perform all `<<-` actions within a local environment to avoid
 # a locked package environment if another package wants to add cognostic info
 known_cog_info <- local({

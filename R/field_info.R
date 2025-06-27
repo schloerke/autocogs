@@ -1,6 +1,3 @@
-
-
-
 # type CogGroupRequirements {
 #   name: String!
 #   description: String

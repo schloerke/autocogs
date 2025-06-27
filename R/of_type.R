@@ -1,9 +1,7 @@
-
-
 is_date <- function(x) {
   inherits(x, "Date") ||
-  inherits(x, "Time") ||
-  inherits(x, "Datetime")
+    inherits(x, "Time") ||
+    inherits(x, "Datetime")
 }
 
 is_numeric <- function(x) {

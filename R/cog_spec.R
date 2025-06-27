@@ -1,5 +1,3 @@
-
-
 #' Cognostic Specification
 #'
 #' @param bivariate_continuous,bivariate_counts,bivariate_step,boxplot,density_2d_continuous,density_continuous,grouped_counts,grouped_testing,hex_counts,histogram_counts,linear_model,loess_model,pairwise_counts,quantile_quantile,scagnostics,smooth_line,square_counts,univariate_continuous,univariate_counts,univariate_discrete names of cognostic groups to calculate.  The boolean value (TRUE) supplied to each argument determines if the value should be displayed if possible or removed if possible.
@@ -55,7 +53,6 @@ cog_spec <- function(
   ...,
   .keep_layer = TRUE
 ) {
-
   dots <- list(...)
   # check for unnamed args
   if (length(dots) > 0) {
@@ -77,14 +74,23 @@ cog_spec <- function(
 
     known_vals <- known_cog_groups_name()
 
-    matched_arg_pos <- pmatch(names(args), known_cog_groups_name(), duplicates.ok = FALSE)
+    matched_arg_pos <- pmatch(
+      names(args),
+      known_cog_groups_name(),
+      duplicates.ok = FALSE
+    )
     if (any(is.na(matched_arg_pos))) {
       stop(
         "all arguments supplied to `cog_spec()` must be able to be matched to known cognostic groups.\n",
-        "unmatched arguments: \n\t", paste(names(args)[is.na(matched_arg_pos)], collapse = "\n\t"), "\n",
-        "known cognostic groups: \n\t", paste(known_cog_groups_name(), collapse = "\n\t"), "\n",
+        "unmatched arguments: \n\t",
+        paste(names(args)[is.na(matched_arg_pos)], collapse = "\n\t"),
+        "\n",
+        "known cognostic groups: \n\t",
+        paste(known_cog_groups_name(), collapse = "\n\t"),
+        "\n",
         "extra arguments: \n\t",
-        ".keep_layer", "\n"
+        ".keep_layer",
+        "\n"
       )
     }
 
@@ -120,7 +126,12 @@ as_cog_specs <- function(p, specs) {
   specs <- as.list(specs)
 
   if (length(specs) != layer_count(p)) {
-    stop("`specs` should have a length equal to the numer of layers in the plot (", layer_count(p), ") or 1, not ", length(specs))
+    stop(
+      "`specs` should have a length equal to the numer of layers in the plot (",
+      layer_count(p),
+      ") or 1, not ",
+      length(specs)
+    )
   }
 
   specs <- lapply(specs, function(spec) {
@@ -128,7 +139,10 @@ as_cog_specs <- function(p, specs) {
       return(spec)
     }
     if (!test_logical(spec, any.missing = FALSE)) {
-      stop("`spec` values should either by logical or created from `cog_spec()`. Found: ", paste(class(spec), collapse = ", "))
+      stop(
+        "`spec` values should either by logical or created from `cog_spec()`. Found: ",
+        paste(class(spec), collapse = ", ")
+      )
     }
     # only true of false values
     cog_spec(.keep_layer = spec)
@@ -136,7 +150,6 @@ as_cog_specs <- function(p, specs) {
 
   specs
 }
-
 
 
 cog_specs_keep_layer <- function(cog_specs) {

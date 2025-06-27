@@ -1,4 +1,3 @@
-
 context("plot_cogs")
 
 library(ggplot2)
@@ -31,7 +30,6 @@ expect_auto_cogs <- function(
 
   TRUE
 }
-
 
 
 test_that("ggplot2::geom_bar", {
@@ -86,7 +84,16 @@ test_that("ggplot2::geom_boxplot", {
 test_that("ggplot2::geom_count", {
   qplot(cty, hwy, data = mpg, geom = "count") %>%
     expect_auto_cogs(
-      c("_x", "_y", "_x_counts", "_y_counts", "_bivar", "_xy_counts", "_scagnostic", "_n"),
+      c(
+        "_x",
+        "_y",
+        "_x_counts",
+        "_y_counts",
+        "_bivar",
+        "_xy_counts",
+        "_scagnostic",
+        "_n"
+      ),
       c(5, 5, 5, 5, 2, 6, 1, 5)
     )
 })
@@ -163,71 +170,103 @@ test_that("ggplot2::geom_rug", {
 
 test_that("ggplot2::geom_spoke", {
   qplot(
-    Sepal.Length, Sepal.Width,
-    radius = Petal.Length, angle = Petal.Width,
+    Sepal.Length,
+    Sepal.Width,
+    radius = Petal.Length,
+    angle = Petal.Width,
     data = iris,
     geom = "spoke"
   ) %>%
     expect_auto_cogs(
       c(
-        "_x", "_density_x",
-        "_y", "_density_y",
-        "_angle", "_density_angle",
-        "_radius", "_density_radius",
-        "_n_xy", "_n_angle_radius"
-      ),
-      c(
-        5, 6,
-        5, 6,
-        5, 6,
-        5, 6,
-        5, 5
-      )
-    )
-
-  qplot(
-    Sepal.Length, Sepal.Width,
-    radius = 1, angle = Petal.Width,
-    data = iris,
-    geom = "spoke"
-  ) %>%
-    expect_auto_cogs(
-      c(
-        "_x", "_density_x",
-        "_y", "_density_y",
-        "_angle", "_density_angle",
-        "_radius",
-        "_n_xy", "_n_angle_radius"
-      ),
-      c(
-        5, 6,
-        5, 6,
-        5, 6,
-        5,
-        5, 5
-      )
-    )
-
-  qplot(
-    Sepal.Length, Sepal.Width,
-    radius = Petal.Length, angle = 1,
-    data = iris,
-    geom = "spoke"
-  ) %>%
-    expect_auto_cogs(
-      c(
-        "_x", "_density_x",
-        "_y", "_density_y",
+        "_x",
+        "_density_x",
+        "_y",
+        "_density_y",
         "_angle",
-        "_radius", "_density_radius",
-        "_n_xy", "_n_angle_radius"
+        "_density_angle",
+        "_radius",
+        "_density_radius",
+        "_n_xy",
+        "_n_angle_radius"
       ),
       c(
-        5, 6,
-        5, 6,
         5,
-        5, 6,
-        5, 5
+        6,
+        5,
+        6,
+        5,
+        6,
+        5,
+        6,
+        5,
+        5
+      )
+    )
+
+  qplot(
+    Sepal.Length,
+    Sepal.Width,
+    radius = 1,
+    angle = Petal.Width,
+    data = iris,
+    geom = "spoke"
+  ) %>%
+    expect_auto_cogs(
+      c(
+        "_x",
+        "_density_x",
+        "_y",
+        "_density_y",
+        "_angle",
+        "_density_angle",
+        "_radius",
+        "_n_xy",
+        "_n_angle_radius"
+      ),
+      c(
+        5,
+        6,
+        5,
+        6,
+        5,
+        6,
+        5,
+        5,
+        5
+      )
+    )
+
+  qplot(
+    Sepal.Length,
+    Sepal.Width,
+    radius = Petal.Length,
+    angle = 1,
+    data = iris,
+    geom = "spoke"
+  ) %>%
+    expect_auto_cogs(
+      c(
+        "_x",
+        "_density_x",
+        "_y",
+        "_density_y",
+        "_angle",
+        "_radius",
+        "_density_radius",
+        "_n_xy",
+        "_n_angle_radius"
+      ),
+      c(
+        5,
+        6,
+        5,
+        6,
+        5,
+        5,
+        6,
+        5,
+        5
       )
     )
 })
@@ -251,7 +290,6 @@ test_that("ggplot2::geom_smooth", {
 })
 
 
-
 test_that("ggplot2::geom_smooth_loess", {
   p <- qplot(cty, hwy, data = mpg, geom = "smooth", method = "loess")
   p %>%
@@ -264,9 +302,13 @@ test_that("ggplot2::geom_smooth_loess", {
   expect_equal(cogs[[1]]$"_loess"$degree[1], 2)
 
   p <- qplot(
-    cty, hwy, data = mpg,
-    geom = "smooth", method = "loess",
-    span = 0.9, method.args = list(degree = 1)
+    cty,
+    hwy,
+    data = mpg,
+    geom = "smooth",
+    method = "loess",
+    span = 0.9,
+    method.args = list(degree = 1)
   )
   p %>%
     expect_auto_cogs(
@@ -287,7 +329,6 @@ test_that("ggplot2::geom_smooth_lm", {
       c(5, 5, 2, 3, 19, 5)
     )
 })
-
 
 
 test_that("ggplot2::geom_line", {

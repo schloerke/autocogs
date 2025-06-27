@@ -1,9 +1,6 @@
-
-
 simplify_cogs <- function(cog_list) {
   cog_list %>%
-    unlist(recursive = FALSE) ->
-  cogs
+    unlist(recursive = FALSE) -> cogs
   not_duplicated <- !duplicated(cogs, fromLast = TRUE)
   cogs[not_duplicated] %>%
     lapply(list) %>%
@@ -33,8 +30,7 @@ panel_cogs <- function(dt, panel_col = "panel", ...) {
       plot_cogs(x, ...)
     }) %>%
     lapply(simplify_cogs) %>%
-    bind_rows() ->
-  cog_dt
+    bind_rows() -> cog_dt
 
   cog_dt
 }
@@ -91,12 +87,15 @@ format.autocog <- function(x, ...) {
 
   paste(
     "Automatic Cognostic Function:\n\t",
-      name, "\n",
-    "Description:\n\t",
-      if (is.null(desc)) "(none)" else desc,
-      "\n",
+    name,
     "\n",
-    "autocog_", name, " <- ",
+    "Description:\n\t",
+    if (is.null(desc)) "(none)" else desc,
+    "\n",
+    "\n",
+    "autocog_",
+    name,
+    " <- ",
     paste(format(fn), collapse = "\n"),
     sep = ""
   )
@@ -104,7 +103,6 @@ format.autocog <- function(x, ...) {
 print.autocog <- function(x, ...) {
   cat(format(x, ...), "\n")
 }
-
 
 # autocog_univariate_continuous <- autocog("univariate_continuous", .fn_only = TRUE)
 # autocog_univariate_discrete <- autocog("univariate_discrete", .fn_only = TRUE)

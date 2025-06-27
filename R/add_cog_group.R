@@ -19,7 +19,6 @@ add_cog_group <- function(
   # ,
   # verbose = TRUE
 ) {
-
   assert_character(name, len = 1, any.missing = FALSE)
   assert_data_frame(fields, c("character", "character"), min.rows = 1)
   assert_names(names(fields), identical.to = c("dimension", "type"))
@@ -46,7 +45,6 @@ add_cog_group <- function(
 }
 
 autocogs_env <- environment()
-
 
 
 #' @title Default Cognostic Group Functions

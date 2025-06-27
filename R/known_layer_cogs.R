@@ -1,4 +1,3 @@
-
 # type PlotAutoCogs {
 #   name: String!
 #   description: String
@@ -15,7 +14,6 @@ known_layer_info <- local({
 
     # Name of plot type (boxplot, histogram, density)
     name = character(0),
-
 
     # Automatic cognostics to calculate
     cog_groups = list(),

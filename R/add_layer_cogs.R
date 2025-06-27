@@ -25,7 +25,9 @@ add_layer_cogs <- function(
 
   assert_data_frame(
     cog_groups,
-    c("character", "list"), ncols = 3, min.rows = 1,
+    c("character", "list"),
+    ncols = 3,
+    min.rows = 1,
     any.missing = FALSE
   )
   assert_names(names(cog_groups), identical.to = c("cog_group", "cols", "name"))
@@ -37,7 +39,6 @@ add_layer_cogs <- function(
   # verbose <- isTRUE(verbose)
   # assert_logical(verbose, len = 1, any.missing = FALSE)
 
-
   # cog_info_list <- lapply(cog_groups, function(auto_cog) {
   #   if (is.list(auto_cog)) {
   #
@@ -46,26 +47,25 @@ add_layer_cogs <- function(
   #     assert_character(auto_cog$store_name, len = 1, any.missing = FALSE)
   #     return(auto_cog)
 
-      #
-      # cog_info <- cog_groups()[cog_groups_name() == auto_cog[[1]], ]
-      # if (nrow(cog_info) == 0) {
-      #   browser()
-      #   stop("could not find auto_cog information for name: '", auto_cog, "'")
-      # }
-      #
-      # cog_info <- as.list(cog_info)
-      # inner_cog_fn <- cog_info$fn
-      #
-      # cog_fn <- function(data, ...) {
-      #   inner_cog_fn(data[[]])
-      # }
-      #
-      # return(cog_info$fn)
-    # }
+  #
+  # cog_info <- cog_groups()[cog_groups_name() == auto_cog[[1]], ]
+  # if (nrow(cog_info) == 0) {
+  #   browser()
+  #   stop("could not find auto_cog information for name: '", auto_cog, "'")
+  # }
+  #
+  # cog_info <- as.list(cog_info)
+  # inner_cog_fn <- cog_info$fn
+  #
+  # cog_fn <- function(data, ...) {
+  #   inner_cog_fn(data[[]])
+  # }
+  #
+  # return(cog_info$fn)
+  # }
 
   #   stop("cog_groups item needs to be a list of two characters (auto_cog name, columns used)")
   # })
-
 
   known_layer_cogs_add(
     tibble::tibble(

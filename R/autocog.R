@@ -79,6 +79,7 @@ autocog <- function(.name, ..., .fn_only = FALSE) {
   as_tibble(do.call(fn, args))
 }
 
+#' @export
 format.autocog <- function(x, ...) {
   env <- environment(x)
   fn <- get("fn", envir = env)
@@ -100,6 +101,7 @@ format.autocog <- function(x, ...) {
     sep = ""
   )
 }
+#' @export
 print.autocog <- function(x, ...) {
   cat(format(x, ...), "\n")
 }

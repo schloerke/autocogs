@@ -2,25 +2,37 @@ Package: autocogs
 Title: Automatic Cognostic Summaries
 Version: 0.1.4
 Authors@R: c(
-    person("Barret", "Schloerke", email = "schloerke@gmail.com", role = c("aut")),
-    person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("ths", "cre"))
+    person("Barret", "Schloerke", , "schloerke@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0001-9986-114X")),
+    person("Ryan", "Hafen", , "rhafen@gmail.com", role = c("ths", "cre"),
+           comment = c(ORCID = "0000-0002-5516-8367"))
   )
-Description: Automatically calculates cognostic groups for plot objects and list column plot objects.  Results are returned in a nested data frame.
-Depends: R (>= 3.4.0)
+Description: Automatically calculates cognostic groups for plot objects
+    and list column plot objects.  Results are returned in a nested data
+    frame.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Imports: dplyr,
-    checkmate,
-    MASS,
+URL: https://github.com/schloerke/autocogs
+BugReports: https://github.com/schloerke/autocogs/issues
+Depends:
+    R (>= 3.4.0)
+Imports:
     broom,
-    moments,
+    checkmate,
     diptest,
-    mclust,
+    dplyr,
     ggplot2,
-    tibble,
-    utils,
     hexbin,
-    progress
+    MASS,
+    mclust,
+    moments,
+    progress,
+    tibble,
+    utils
+Suggests:
+    covr,
+    testthat
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
     'autocog.R'
@@ -38,8 +50,3 @@ Collate:
     'of_type.R'
     'plot_class.R'
     'plot_cogs.R'
-Suggests: testthat,
-    covr
-URL: https://github.com/schloerke/autocogs
-BugReports: https://github.com/schloerke/autocogs/issues
-Roxygen: list(markdown = TRUE)

@@ -4,10 +4,10 @@ NULL
 #' Add plot layer cognostics
 #'
 #' Add a new set of cognostic groups for a given plot layer. If the plot layer is found, the corresponding cognostic groups will be calculated.
-#' @param name Name of plot layer. This should match the output of the \code{"name"} values of \code{\link{layer_info}}
+#' @param name Name of plot layer. This should match the output of the `"name"` values of [layer_info()]
 #' @param description Description of cognostic group
-#' @param cog_groups A \code{data.frame} (or \code{tibble}) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by \code{\link{layer_info}} during calculations. "name" should contain the final storage name of the cognostic group.
-#' @param kind String value that will match the output of \code{\link{plot_class}} of the desired plot object
+#' @param cog_groups A `data.frame` (or `tibble`) containing the columns: "cog_group", "cols", "name".  "cog_group" column should contain a string value of a known cognostic group.  "cols" should be a single value or vector of column names to use from the data supplied by [layer_info()] during calculations. "name" should contain the final storage name of the cognostic group.
+#' @param kind String value that will match the output of [plot_class()] of the desired plot object
 #' @param ... ignored
 #' @export
 add_layer_cogs <- function(
@@ -25,7 +25,9 @@ add_layer_cogs <- function(
 
   assert_data_frame(
     cog_groups,
-    c("character", "list"), ncols = 3, min.rows = 1,
+    c("character", "list"),
+    ncols = 3,
+    min.rows = 1,
     any.missing = FALSE
   )
   assert_names(names(cog_groups), identical.to = c("cog_group", "cols", "name"))
@@ -37,7 +39,6 @@ add_layer_cogs <- function(
   # verbose <- isTRUE(verbose)
   # assert_logical(verbose, len = 1, any.missing = FALSE)
 
-
   # cog_info_list <- lapply(cog_groups, function(auto_cog) {
   #   if (is.list(auto_cog)) {
   #
@@ -46,26 +47,25 @@ add_layer_cogs <- function(
   #     assert_character(auto_cog$store_name, len = 1, any.missing = FALSE)
   #     return(auto_cog)
 
-      #
-      # cog_info <- cog_groups()[cog_groups_name() == auto_cog[[1]], ]
-      # if (nrow(cog_info) == 0) {
-      #   browser()
-      #   stop("could not find auto_cog information for name: '", auto_cog, "'")
-      # }
-      #
-      # cog_info <- as.list(cog_info)
-      # inner_cog_fn <- cog_info$fn
-      #
-      # cog_fn <- function(data, ...) {
-      #   inner_cog_fn(data[[]])
-      # }
-      #
-      # return(cog_info$fn)
-    # }
+  #
+  # cog_info <- cog_groups()[cog_groups_name() == auto_cog[[1]], ]
+  # if (nrow(cog_info) == 0) {
+  #   browser()
+  #   stop("could not find auto_cog information for name: '", auto_cog, "'")
+  # }
+  #
+  # cog_info <- as.list(cog_info)
+  # inner_cog_fn <- cog_info$fn
+  #
+  # cog_fn <- function(data, ...) {
+  #   inner_cog_fn(data[[]])
+  # }
+  #
+  # return(cog_info$fn)
+  # }
 
   #   stop("cog_groups item needs to be a list of two characters (auto_cog name, columns used)")
   # })
-
 
   known_layer_cogs_add(
     tibble::tibble(

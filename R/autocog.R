@@ -1,9 +1,6 @@
-
-
 simplify_cogs <- function(cog_list) {
   cog_list %>%
-    unlist(recursive = FALSE) ->
-  cogs
+    unlist(recursive = FALSE) -> cogs
   not_duplicated <- !duplicated(cogs, fromLast = TRUE)
   cogs[not_duplicated] %>%
     lapply(list) %>%
@@ -13,10 +10,10 @@ simplify_cogs <- function(cog_list) {
 
 #' Panel cognostics
 #'
-#' Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested \code{\link[tibble]{tibble}}.
+#' Return or concatenate panel cognostics.  For each panel (plot) in the panel column, cognostics will be calculated for each panel. The result will be returned in a nested [tibble::tibble()].
 #' @param dt data to be used
-#' @param panel_col panel column to be used in \code{dt}
-#' @param ... parameters passed to \code{\link{layer_info}}
+#' @param panel_col panel column to be used in `dt`
+#' @param ... parameters passed to [layer_info()]
 #' @rdname panel_cogs
 #' @export
 panel_cogs <- function(dt, panel_col = "panel", ...) {
@@ -33,8 +30,7 @@ panel_cogs <- function(dt, panel_col = "panel", ...) {
       plot_cogs(x, ...)
     }) %>%
     lapply(simplify_cogs) %>%
-    bind_rows() ->
-  cog_dt
+    bind_rows() -> cog_dt
 
   cog_dt
 }
@@ -83,6 +79,7 @@ autocog <- function(.name, ..., .fn_only = FALSE) {
   as_tibble(do.call(fn, args))
 }
 
+#' @export
 format.autocog <- function(x, ...) {
   env <- environment(x)
   fn <- get("fn", envir = env)
@@ -91,20 +88,23 @@ format.autocog <- function(x, ...) {
 
   paste(
     "Automatic Cognostic Function:\n\t",
-      name, "\n",
-    "Description:\n\t",
-      if (is.null(desc)) "(none)" else desc,
-      "\n",
+    name,
     "\n",
-    "autocog_", name, " <- ",
+    "Description:\n\t",
+    if (is.null(desc)) "(none)" else desc,
+    "\n",
+    "\n",
+    "autocog_",
+    name,
+    " <- ",
     paste(format(fn), collapse = "\n"),
     sep = ""
   )
 }
+#' @export
 print.autocog <- function(x, ...) {
   cat(format(x, ...), "\n")
 }
-
 
 # autocog_univariate_continuous <- autocog("univariate_continuous", .fn_only = TRUE)
 # autocog_univariate_discrete <- autocog("univariate_discrete", .fn_only = TRUE)

@@ -1,6 +1,3 @@
-
-
-
 # type CogGroupRequirements {
 #   name: String!
 #   description: String
@@ -31,15 +28,11 @@
 #   ANY
 # }
 
-#' @import tibble dplyr checkmate
-NULL
-
 #' Field Type Information
 #'
 #' @param dimension field name. Use one of the listed options provided
 #' @param type field type. Use one of the listed options provided
 #' @export
-#' @import dplyr
 field_info <- function(
   dimension = c("x", "y", "z", "group", "any"),
   type = c("continuous", "discrete", "date", "any")

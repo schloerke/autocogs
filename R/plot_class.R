@@ -1,4 +1,3 @@
-
 #' Plot class
 #'
 #' First class of the plot object. Exception is ggplot2 as many objects are of class 'gg'

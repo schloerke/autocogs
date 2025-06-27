@@ -1,5 +1,3 @@
-
-
 snakeize <- function(x) {
   x <- gsub("([A-Za-z])([A-Z])([a-z])", "\\1_\\2\\3", x)
   x <- gsub(".", "_", x, fixed = TRUE)
@@ -12,9 +10,7 @@ snake_class <- function(x) {
 }
 
 
-
 plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
-
   plot_class_val <- plot_class(p)
   cog_specs <- as_cog_specs(p, spec)
   keep_layers <- cog_specs_keep_layer(cog_specs)
@@ -33,7 +29,12 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
     # if the layer isnt registered, message and return early
     if (nrow(layer_cog_group) == 0) {
       if (verbose) {
-        message("no cog group found for layer: ", plot_class_val, ", ", layer_item$name)
+        message(
+          "no cog group found for layer: ",
+          plot_class_val,
+          ", ",
+          layer_item$name
+        )
       }
       return(NULL)
     }
@@ -43,7 +44,6 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
     # for every layer info row found, look at the auto_cog data frame
     lapply(seq_along(layer_cog_group$cog_groups), function(layer_cog_i) {
-
       layer_cog_spec <- layer_cog_specs[[layer_cog_i]]
       layer_cog_dt <- layer_cog_group$cog_groups[[layer_cog_i]]
 
@@ -55,13 +55,20 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
       # produce a join of the request auto cogs and known auto cogs
       # (as the known cogs could have updated since last execution)
       item_cog_dt <- inner_join(
-        layer_cog_dt, known_cog_groups(),
+        layer_cog_dt,
+        known_cog_groups(),
         c("cog_group" = "name")
       )
 
       if (nrow(item_cog_dt) != nrow(layer_cog_dt)) {
         if (verbose) {
-          message("missing cog groups found for auto cogs: ", paste(setdiff(layer_cog_dt$auto_cog, known_cog_groups_name()), sep = ", "))
+          message(
+            "missing cog groups found for auto cogs: ",
+            paste(
+              setdiff(layer_cog_dt$auto_cog, known_cog_groups_name()),
+              sep = ", "
+            )
+          )
           print(layer_cog_dt)
         }
       }
@@ -73,7 +80,6 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
       # for every auto cog
       cog_ans <- lapply(seq_len(nrow(item_cog_dt)), function(i) {
-
         # make a data list for fn execution
         dt_i_list <- list()
 
@@ -89,11 +95,13 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
         # dt_i_list$plot <- p
         # dt_i_list$layer_data <- layer_item
-# TODO listen to field type here
+        # TODO listen to field type here
         fn <- item_cog_dt$fn[[i]]
         args <- append(dt_i_list, layer_item$params)
         ans <- do.call(fn, args)
-        if (is.null(ans)) return(ans)
+        if (is.null(ans)) {
+          return(ans)
+        }
         as_tibble(ans)
       })
 
@@ -109,20 +117,15 @@ plot_cogs <- function(p, ..., spec = TRUE, verbose = FALSE) {
 
       # return layer group info
       ret
-    }) ->
-    layer_info
+    }) -> layer_info
 
     # return for each layer
     layer_info
-  }) ->
-  ret
+  }) -> ret
 
   # return all extra columns to be produced
   unlist(ret, recursive = FALSE)
 }
-
-
-
 
 
 get_layer_info <- function(p, keep = TRUE, ...) {
@@ -131,7 +134,10 @@ get_layer_info <- function(p, keep = TRUE, ...) {
 
   ans <- lapply(ret, function(item) {
     assert_list(item, max.len = 4, unique = TRUE)
-    assert_names(names(item), subset.of = c("name", "data", "params", "layer_num"))
+    assert_names(
+      names(item),
+      subset.of = c("name", "data", "params", "layer_num")
+    )
     assert_list(item$params, null.ok = TRUE)
     assert_character(item$name, len = 1, any.missing = FALSE)
     assert_data_frame(item$data)

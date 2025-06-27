@@ -1,11 +1,7 @@
-
-context("layers")
-
 suppressPackageStartupMessages(library(ggplot2))
 
 
 test_that("ggplot2 layers", {
-
   p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
     geom_point() +
     geom_smooth(method = "auto", formula = y ~ x)
@@ -29,7 +25,6 @@ test_that("ggplot2 layers", {
     plot_cogs(p, spec = c(TRUE, TRUE, TRUE))
   })
 
-
   check_plot_count(list(cog_spec(), cog_spec()), 2)
   check_plot_count(list(cog_spec(), TRUE), 2)
   check_plot_count(list(cog_spec(), FALSE), 1)
@@ -48,5 +43,4 @@ test_that("ggplot2 layers", {
     cog_spec(scagnostics = TRUE)$remove,
     character(0)
   )
-
 })

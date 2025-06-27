@@ -1,5 +1,3 @@
-
-
 # perform all `<<-` actions within a local environment to avoid
 # a locked package environment if another package wants to add cognostic info
 known_cog_info <- local({
@@ -40,7 +38,7 @@ known_cog_groups_add <- known_cog_info$known_cog_groups_add
 
 #' Cognostic Group information
 #'
-#' To add more cognostic groups, please see \code{\link{add_cog_group}()}
+#' To add more cognostic groups, please see [add_cog_group()]
 #'
 #' @export
 #' @examples

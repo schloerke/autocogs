@@ -39,7 +39,7 @@
 \description{
 These set of functions comprise the default cognostic groups.  Each function produces it's own cognostic information given the required pieces of data.
 
-The functions' print method will display the description.  \code{autocog_*} functions will take the \code{\link{known_cog_groups}()} functions and format the output into a single row tibble.  Any new known cognostic group function, NAME,  will create a function called autocog_NAME, which may be called.
+The functions' print method will display the description.  \verb{autocog_*} functions will take the \code{\link[=known_cog_groups]{known_cog_groups()}} functions and format the output into a single row tibble.  Any new known cognostic group function, NAME,  will create a function called autocog_NAME, which may be called.
 
 Default Cognostic Group Functions:
 \itemize{
@@ -70,5 +70,5 @@ autocog_bivariate_continuous
 autocog_bivariate_continuous(iris$Sepal.Length, iris$Sepal.Width)
 }
 \seealso{
-\code{\link{known_cog_groups}()}
+\code{\link[=known_cog_groups]{known_cog_groups()}}
 }

@@ -7,7 +7,7 @@
 known_cog_groups()
 }
 \description{
-To add more cognostic groups, please see \code{\link{add_cog_group}()}
+To add more cognostic groups, please see \code{\link[=add_cog_group]{add_cog_group()}}
 }
 \examples{
 known_cog_groups()

@@ -5,11 +5,12 @@
 
 # autocogs
 
-[![Travis-CI Build
-Status](https://travis-ci.org/schloerke/autocogs.svg?branch=master)](https://travis-ci.org/schloerke/autocogs)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/schloerke/autocogs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schloerke/autocogs/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/schloerke/autocogs/master.svg)](https://codecov.io/github/schloerke/autocogs?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/autocogs)](https://cran.r-project.org/package=autocogs)
+<!-- badges: end -->
 
 Cognostics are univariate statistics (or metrics) for a subset of data.
 When paired with the underlying data of visualizations, cognostics are a
@@ -35,9 +36,9 @@ remotes::install_github("schloerke/autocogs")
 library(autocogs)
 library(tidyverse)
 #> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
-#> ✔ ggplot2 3.3.3.9000     ✔ purrr   0.3.4     
-#> ✔ tibble  3.1.1          ✔ dplyr   1.0.5     
-#> ✔ tidyr   1.1.3          ✔ stringr 1.4.0     
+#> ✔ ggplot2 3.3.3.9000     ✔ purrr   0.3.4
+#> ✔ tibble  3.1.1          ✔ dplyr   1.0.5
+#> ✔ tidyr   1.1.3          ✔ stringr 1.4.0
 #> ✔ readr   1.4.0          ✔ forcats 0.5.1
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> ✖ dplyr::filter() masks stats::filter()
@@ -121,18 +122,18 @@ gapminder %>%
 gap_data
 #> # A tibble: 142 x 4
 #> # Groups:   country, continent [142]
-#>    country     continent data                  panel 
+#>    country     continent data                  panel
 #>    <fct>       <fct>     <list>                <list>
-#>  1 Afghanistan Asia      <tibble[,4] [12 × 4]> <gg>  
-#>  2 Albania     Europe    <tibble[,4] [12 × 4]> <gg>  
-#>  3 Algeria     Africa    <tibble[,4] [12 × 4]> <gg>  
-#>  4 Angola      Africa    <tibble[,4] [12 × 4]> <gg>  
-#>  5 Argentina   Americas  <tibble[,4] [12 × 4]> <gg>  
-#>  6 Australia   Oceania   <tibble[,4] [12 × 4]> <gg>  
-#>  7 Austria     Europe    <tibble[,4] [12 × 4]> <gg>  
-#>  8 Bahrain     Asia      <tibble[,4] [12 × 4]> <gg>  
-#>  9 Bangladesh  Asia      <tibble[,4] [12 × 4]> <gg>  
-#> 10 Belgium     Europe    <tibble[,4] [12 × 4]> <gg>  
+#>  1 Afghanistan Asia      <tibble[,4] [12 × 4]> <gg>
+#>  2 Albania     Europe    <tibble[,4] [12 × 4]> <gg>
+#>  3 Algeria     Africa    <tibble[,4] [12 × 4]> <gg>
+#>  4 Angola      Africa    <tibble[,4] [12 × 4]> <gg>
+#>  5 Argentina   Americas  <tibble[,4] [12 × 4]> <gg>
+#>  6 Australia   Oceania   <tibble[,4] [12 × 4]> <gg>
+#>  7 Austria     Europe    <tibble[,4] [12 × 4]> <gg>
+#>  8 Bahrain     Asia      <tibble[,4] [12 × 4]> <gg>
+#>  9 Bangladesh  Asia      <tibble[,4] [12 × 4]> <gg>
+#> 10 Belgium     Europe    <tibble[,4] [12 × 4]> <gg>
 #> # … with 132 more rows
 
 # Double check the plot worked...
@@ -154,8 +155,8 @@ gap_data %>%
   print(width = 100) ->
 full_gap_data
 #> # A tibble: 142 x 10
-#>    country     continent data                  panel  `_smooth`           
-#>    <fct>       <fct>     <list>                <list> <list>              
+#>    country     continent data                  panel  `_smooth`
+#>    <fct>       <fct>     <list>                <list> <list>
 #>  1 Afghanistan Asia      <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
 #>  2 Albania     Europe    <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
 #>  3 Algeria     Africa    <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
@@ -166,8 +167,8 @@ full_gap_data
 #>  8 Bahrain     Asia      <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
 #>  9 Bangladesh  Asia      <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
 #> 10 Belgium     Europe    <tibble[,4] [12 × 4]> <gg>   <tibble[,3] [1 × 3]>
-#>    `_lm`            `_x`           `_y`           `_bivar`        `_n`          
-#>    <list>           <list>         <list>         <list>          <list>        
+#>    `_lm`            `_x`           `_y`           `_bivar`        `_n`
+#>    <list>           <list>         <list>         <list>          <list>
 #>  1 <tibble[,19] [1… <tibble[,5] [… <tibble[,5] [… <tibble[,2] [1… <tibble[,5] […
 #>  2 <tibble[,19] [1… <tibble[,5] [… <tibble[,5] [… <tibble[,2] [1… <tibble[,5] […
 #>  3 <tibble[,19] [1… <tibble[,5] [… <tibble[,5] [… <tibble[,2] [1… <tibble[,5] […

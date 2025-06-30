@@ -237,6 +237,8 @@ add_cog_group(
     )
   }
 )
+
+
 add_cog_group(
   "square_counts",
   bind_rows(
@@ -249,7 +251,6 @@ add_cog_group(
     y,
     ...,
     breaks = NULL,
-    origin = NULL,
     binwidth = NULL,
     bins = 30,
     drop = TRUE
@@ -263,15 +264,25 @@ add_cog_group(
     )
     scales$x$train(dt$x)
     scales$y$train(dt$y)
-    bin_dt <- ggplot2::StatBin2d$compute_group(
+
+    params <- suppressMessages(ggplot2::StatBin2d$setup_params(
       dt,
-      scales,
-      binwidth = binwidth,
-      bins = bins,
-      breaks = breaks,
-      origin = origin,
-      drop = drop
+      list(..., breaks = breaks, binwidth = binwidth, bins = bins, drop = drop)
+    ))
+    ggproto_formals <- getFromNamespace(
+      "ggproto_formals",
+      "ggplot2"
     )
+    proto_names <- names(ggproto_formals(ggplot2::StatBin2d$compute_group))
+
+    # Keep params that are in the ggproto formals; drop `origin` and `na.rm`
+    params <- params[names(params) %in% proto_names]
+
+    bin_dt <- do.call(
+      ggplot2::StatBin2d$compute_group,
+      append(list(dt, scales), params)
+    )
+
     counts <- bin_dt$count
     list(
       count_min = cog_desc(min(counts), "minimum count"),
@@ -481,7 +492,7 @@ add_cog_group(
       pad = pad,
       breaks = breaks
     )
-    params <- ggplot2::StatBin$setup_params(dt, params)
+    params <- suppressMessages(ggplot2::StatBin$setup_params(dt, params))
     ret <- do.call(
       ggplot2::StatBin$compute_group,
       append(list(dt, scales), params)
@@ -939,7 +950,11 @@ add_cog_group(
     params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weights = dt$weights, span = span)
 
-    mod <- do.call(loess, c(core_params, params$method.args))
+    # Set the core parameters using the supplied method arguments
+    # Works for both appending and overwriting
+    core_params[names(params$method.args)] <- params$method.args
+
+    mod <- do.call(loess, core_params)
     infos <- mod[c(
       "n",
       "enp",

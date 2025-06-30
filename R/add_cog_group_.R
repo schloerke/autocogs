@@ -950,7 +950,11 @@ add_cog_group(
     params <- suppressMessages(ggplot2::StatSmooth$setup_params(dt, params))
     core_params <- list(formula, data = dt, weights = dt$weights, span = span)
 
-    mod <- do.call(loess, c(core_params, params$method.args))
+    # Set the core parameters using the supplied method arguments
+    # Works for both appending and overwriting
+    core_params[names(params$method.args)] <- params$method.args
+
+    mod <- do.call(loess, core_params)
     infos <- mod[c(
       "n",
       "enp",
